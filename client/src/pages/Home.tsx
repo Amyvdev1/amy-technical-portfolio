@@ -35,10 +35,12 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: Code2, title: "Build the interface", text: "Responsive product surfaces that make complex work feel legible." },
-  { icon: GitBranch, title: "Make the workflow explicit", text: "States, approval points, ownership, and next actions are part of the design." },
-  { icon: Database, title: "Respect the system", text: "Data models, validation, access boundaries, and traceability matter." },
-  { icon: ShieldCheck, title: "Keep humans in the loop", text: "Automation is useful when it remains reviewable, controllable, and clear." },
+  { icon: Code2, title: "Product interfaces", text: "Responsive React and TypeScript surfaces that make complex work feel legible." },
+  { icon: GitBranch, title: "Workflow design", text: "States, approval points, ownership, and next actions are part of the product." },
+  { icon: Database, title: "API foundations", text: "Structured validation, data contracts, traceability, and predictable system behavior." },
+  { icon: Sparkles, title: "AI-assisted operations", text: "Practical automations designed around human review, clarity, and control." },
+  { icon: ShieldCheck, title: "Quality mindset", text: "Testable flows, documented boundaries, and interfaces built for confident handoffs." },
+  { icon: Layers3, title: "Bilingual delivery", text: "Native English and Spanish communication across technical and operational work." },
 ];
 
 export default function Home() {
@@ -65,6 +67,9 @@ export default function Home() {
             <p className="eyebrow"><span /> Independent developer portfolio</p>
             <h1>Software that makes the <i>next step</i> obvious.</h1>
             <p className="hero-copy">I build full-stack product concepts, workflow systems, and practical interfaces for teams that need a clearer way to move work forward.</p>
+            <div className="hero-signal-row" aria-label="Core specialties">
+              <span>React · TypeScript</span><span>Python · FastAPI</span><span>Workflow systems</span>
+            </div>
             <div className="hero-actions">
               <a className="button-primary" href="#work">See selected work <ArrowDownRight size={17} /></a>
               <a className="button-quiet" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={15} /></a>
@@ -120,15 +125,15 @@ export default function Home() {
         </section>
 
         <section className="evidence-section">
-          <div className="evidence-number">17</div>
+          <div className="evidence-mark"><span>AV</span><i /></div>
           <div>
-            <p className="eyebrow"><span /> In progress</p>
-            <h2>Early-career builder.<br /><i>Serious about the craft.</i></h2>
-            <p>Native English and Spanish speaker. Currently building a public portfolio while pursuing junior opportunities in software development, automation, implementation, and technical operations.</p>
+            <p className="eyebrow"><span /> Builder profile</p>
+            <h2>Build with intent.<br /><i>Ship with clarity.</i></h2>
+            <p>Systems-minded developer building public technical evidence while pursuing opportunities in software development, automation, implementation, and technical operations.</p>
           </div>
           <div className="evidence-checks">
             <p><CheckCircle2 size={17} /> Independent demos clearly labeled</p>
-            <p><CheckCircle2 size={17} /> Technical walkthrough available on request</p>
+            <p><CheckCircle2 size={17} /> Public code sample and automated tests</p>
             <p><CheckCircle2 size={17} /> U.S. work authorized; no sponsorship required</p>
           </div>
         </section>
@@ -139,7 +144,7 @@ export default function Home() {
             <h2>Bring the unfinished<br /><i>problem.</i></h2>
           </div>
           <div className="contact-right">
-            <p>I&apos;m open to early-career and junior opportunities in software development, AI automation, technical operations, and implementation.</p>
+            <p>I&apos;m open to opportunities in software development, AI automation, technical operations, and implementation.</p>
             <a className="contact-email" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={20} /></a>
             <a className="contact-linkedin" href="https://www.linkedin.com/in/amy-villa-5830aa433/" target="_blank" rel="noreferrer">LinkedIn profile <ArrowUpRight size={15} /></a>
           </div>
