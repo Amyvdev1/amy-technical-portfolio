@@ -19,7 +19,7 @@ const projects = [
     label: "Backend systems",
     description: "A role-aware task API concept built around input validation, audit-friendly events, and predictable handoffs.",
     stack: ["Python", "FastAPI", "Structured validation"],
-    outcome: "Sanitized code sample in progress",
+    outcome: "Public code sample on GitHub",
     slug: "clearrout-api",
     accent: "warm",
   },
