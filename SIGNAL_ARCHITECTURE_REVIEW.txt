@@ -37,3 +37,11 @@ Signal Lab visual validation: the interactive route was aligned to the same art 
 Mobile review — 2026-09-01
 
 At 390px wide, the Nocturne Gallery retains a strong initial composition. The headline, overview, technology tags, primary CTA, Signal Lab entry, email, and proof rail remain readable. The art-directed hero maintains its focal arch/blue-light object without covering core content.
+
+Cinematic motion validation — 2026-09-01
+
+The Nocturne Gallery entry now begins with the AV loader and gallery-curtain transition. A fresh browser load confirmed the visual entry state rather than presenting a static hero immediately. The hero source contains discrete text lines so its heading, supporting copy, capability tags, actions, and curator note can arrive with deliberate sequencing after the curtains open. The new scroll index, ticker, interactive perspective cards, hero frames, cursor-responsive light, and scroll-based parallax form an original motion system; none recreates unverifiable reel choreography.
+
+Motion review after selector correction — 2026-09-01
+
+The revised hero is visibly revealed after the entry sequence: the three-line title, supporting context, tags, actions, framed gallery overlays, cursor-responsive environment, and scroll index display together. The mobile view preserves the visual hierarchy while suppressing nonessential persistent interface elements. No text overlap, hidden CTA, or navigation issue was observed in the reviewed initial viewport.

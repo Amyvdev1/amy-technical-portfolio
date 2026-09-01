@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
 import { ArrowDownRight, ArrowUpRight, CheckCircle2, Code2, Compass, Database, GitBranch, Layers3, Orbit, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 
@@ -61,7 +61,12 @@ export default function Home() {
       root.style.setProperty("--tilt-y", `${((event.clientX / window.innerWidth) - 0.5)}`);
     };
 
-    const setScroll = () => root?.style.setProperty("--scroll-shift", `${Math.min(window.scrollY, 1600) * 0.05}px`);
+    const setScroll = () => {
+      if (!root) return;
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      root.style.setProperty("--scroll-shift", `${Math.min(window.scrollY, 1600) * 0.05}px`);
+      root.style.setProperty("--scroll-progress", `${Math.min((window.scrollY / maxScroll) * 100, 100)}%`);
+    };
     setScroll();
     window.addEventListener("pointermove", setPointer, { passive: true });
     window.addEventListener("scroll", setScroll, { passive: true });
@@ -79,14 +84,34 @@ export default function Home() {
     };
   }, []);
 
+  const tiltCard = (event: ReactPointerEvent<HTMLAnchorElement>) => {
+    if (event.pointerType === "touch") return;
+    const card = event.currentTarget;
+    const bounds = card.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+    card.style.setProperty("--card-rotate-x", `${-y * 4}deg`);
+    card.style.setProperty("--card-rotate-y", `${x * 5}deg`);
+    card.style.setProperty("--glow-x", `${((event.clientX - bounds.left) / bounds.width) * 100}%`);
+    card.style.setProperty("--glow-y", `${((event.clientY - bounds.top) / bounds.height) * 100}%`);
+  };
+
+  const resetCard = (event: ReactPointerEvent<HTMLAnchorElement>) => {
+    event.currentTarget.style.setProperty("--card-rotate-x", "0deg");
+    event.currentTarget.style.setProperty("--card-rotate-y", "0deg");
+  };
+
   return (
     <div ref={shellRef} className={`portfolio-shell signal-architecture nocturne-gallery ${booting ? "is-booting" : "is-live"}`}>
       <div className="signal-loader" aria-hidden="true">
         <div className="loader-core"><span>AV</span><i /></div>
         <div className="loader-copy"><p>INITIALIZING / SIGNAL ARCHITECTURE</p><div><span /><b>100%</b></div></div>
       </div>
+      <div className="gallery-curtain curtain-left" aria-hidden="true" />
+      <div className="gallery-curtain curtain-right" aria-hidden="true" />
       <div className="signal-cursor" aria-hidden="true" />
       <div className="signal-noise" aria-hidden="true" />
+      <div className="scroll-index" aria-hidden="true"><span>01</span><i><b /></i><span>06</span></div>
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Amy Villa home">
@@ -108,17 +133,18 @@ export default function Home() {
           <div className="hero-image" />
           <div className="hero-grid" />
           <div className="hero-beam" aria-hidden="true" />
+          <div className="hero-frame frame-one" aria-hidden="true" /><div className="hero-frame frame-two" aria-hidden="true" />
           <div className="signal-sphere" aria-hidden="true"><i /><i /><i /></div>
           <div className="signal-orbit" aria-hidden="true"><Orbit size={21} /><span>signal / 01</span></div>
           <div className="hero-content" data-reveal>
             <p className="eyebrow"><span /> The Nocturne Gallery · Miami / Remote</p>
-            <h1>Where systems become <i>clear.</i></h1>
+            <h1 aria-label="Where systems become clear."><span>Where</span><span>systems</span><span>become <i>clear.</i></span></h1>
             <p className="hero-copy">A portfolio of product surfaces, workflow systems, and practical automation foundations—made for teams that want to move from a fuzzy request to a confident next move.</p>
             <div className="hero-signal-row" aria-label="Core specialties">
               <span>React · TypeScript</span><span>Python · FastAPI</span><span>AI workflows</span>
             </div>
             <div className="hero-actions">
-              <a className="button-primary" href="#work">Explore the work <ArrowDownRight size={17} /></a>
+              <a className="button-primary" href="#work">Enter the gallery <ArrowDownRight size={17} /></a>
               <a className="hero-lab-link" href="/signal-lab"><Sparkles size={14} /> Try Signal Lab</a>
               <a className="button-quiet" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={15} /></a>
             </div>
@@ -138,6 +164,8 @@ export default function Home() {
           <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer">Inspect public GitHub <ArrowUpRight size={15} /></a>
         </section>
 
+        <div className="gallery-ticker" aria-label="Portfolio themes"><div><span>Clarity at the handoff</span><i>✦</i><span>Useful systems</span><i>✦</i><span>Human judgment stays visible</span><i>✦</i><span>Independent work, honestly labeled</span><i>✦</i><span>Clarity at the handoff</span><i>✦</i><span>Useful systems</span><i>✦</i></div></div>
+
         <section id="work" className="work-section">
           <div className="section-head" data-reveal>
             <div>
@@ -148,7 +176,7 @@ export default function Home() {
           </div>
           <div className="project-list">
             {projects.map((project, index) => (
-              <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`} data-reveal style={{ "--reveal-delay": `${index * 85}ms` } as CSSProperties}>
+              <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`} data-reveal onPointerMove={tiltCard} onPointerLeave={resetCard} style={{ "--reveal-delay": `${index * 85}ms` } as CSSProperties}>
                 <div className="project-card-top"><span>EXHIBIT / {project.number}</span><span className="status-dot">Independent demo</span></div>
                 <div className="project-visual" aria-hidden="true">
                   <span className="visual-orb orb-one" /><span className="visual-orb orb-two" /><span className="visual-line line-one" /><span className="visual-line line-two" />
