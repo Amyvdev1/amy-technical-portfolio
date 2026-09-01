@@ -44,9 +44,18 @@ const capabilities = [
   { icon: Layers3, title: "Bilingual delivery", text: "Native English and Spanish communication across technical, operational, and customer-facing work." },
 ];
 
+const galleryChapters = [
+  { number: "01", label: "Context", title: "Listen before you build.", detail: "A request is never just a list of features. It contains priorities, people, constraints, and a decision that needs to become visible.", note: "Read the signal." },
+  { number: "02", label: "System", title: "Give work a place to live.", detail: "Roles, state, and the next action should be easy to find. A useful interface turns operational noise into a path someone can follow.", note: "Shape the system." },
+  { number: "03", label: "Guardrails", title: "Keep judgment in the loop.", detail: "The best automation removes repetitive work without erasing the moments where human context changes the outcome.", note: "Place the guardrail." },
+  { number: "04", label: "Handoff", title: "Make the next move obvious.", detail: "The work is not finished when a screen is designed. It is finished when the next person can act with confidence and context.", note: "Deliver the handoff." },
+];
+
 export default function Home() {
   const shellRef = useRef<HTMLDivElement>(null);
+  const corridorRef = useRef<HTMLElement>(null);
   const [booting, setBooting] = useState(true);
+  const [activeChapter, setActiveChapter] = useState(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setBooting(false), 1450);
@@ -81,6 +90,24 @@ export default function Home() {
       window.removeEventListener("pointermove", setPointer);
       window.removeEventListener("scroll", setScroll);
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateChapter = () => {
+      const corridor = corridorRef.current;
+      if (!corridor) return;
+      const rect = corridor.getBoundingClientRect();
+      const travel = Math.max(corridor.offsetHeight - window.innerHeight, 1);
+      const progress = Math.min(Math.max(-rect.top / travel, 0), 0.9999);
+      setActiveChapter(Math.min(galleryChapters.length - 1, Math.floor(progress * galleryChapters.length)));
+    };
+    updateChapter();
+    window.addEventListener("scroll", updateChapter, { passive: true });
+    window.addEventListener("resize", updateChapter);
+    return () => {
+      window.removeEventListener("scroll", updateChapter);
+      window.removeEventListener("resize", updateChapter);
     };
   }, []);
 
@@ -119,7 +146,7 @@ export default function Home() {
           <span>Amy Villa <em>— the nocturne gallery</em></span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">The gallery</a>
+          <a href="#gallery">The gallery</a>
           <a href="/signal-lab">Signal Lab</a>
           <a href="#approach">Method</a>
           <a href="#evidence">Evidence</a>
@@ -144,7 +171,7 @@ export default function Home() {
               <span>React · TypeScript</span><span>Python · FastAPI</span><span>AI workflows</span>
             </div>
             <div className="hero-actions">
-              <a className="button-primary" href="#work">Enter the gallery <ArrowDownRight size={17} /></a>
+              <a className="button-primary" href="#gallery">Enter the gallery <ArrowDownRight size={17} /></a>
               <a className="hero-lab-link" href="/signal-lab"><Sparkles size={14} /> Try Signal Lab</a>
               <a className="button-quiet" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={15} /></a>
             </div>
@@ -154,7 +181,7 @@ export default function Home() {
             <p>Each piece is a public study in clarity: how work becomes visible, reviewable, and ready for the next person.</p>
             <div><b>US</b><small>work authorized</small><b>EN / ES</b><small>native communication</small></div>
           </div>
-          <a className="scroll-pulse" href="#work"><span /><small>Scroll to discover</small></a>
+          <a className="scroll-pulse" href="#gallery"><span /><small>Scroll to discover</small></a>
         </section>
 
         <section className="proof-rail" aria-label="Technical portfolio evidence" data-reveal>
@@ -162,6 +189,27 @@ export default function Home() {
           <div><strong>3 demos</strong><span>interactive product systems</span></div>
           <div><strong>3 tests</strong><span>automated API checks</span></div>
           <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer">Inspect public GitHub <ArrowUpRight size={15} /></a>
+        </section>
+
+        <section ref={corridorRef} id="gallery" className="gallery-corridor" aria-label="A guided product-thinking gallery">
+          <div className={`gallery-stage stage-${activeChapter + 1}`}>
+            <div className="corridor-backdrop" aria-hidden="true"><i className="corridor-sweep" /><i className="corridor-arch arch-a" /><i className="corridor-arch arch-b" /><i className="corridor-arch arch-c" /><i className="corridor-signal" /></div>
+            <div className="corridor-meta"><span>THE NOCTURNE GALLERY</span><span>CHAPTER {galleryChapters[activeChapter].number} / 04</span></div>
+            <div className="corridor-progress" aria-hidden="true">{galleryChapters.map((chapter, index) => <span key={chapter.number} className={index <= activeChapter ? "is-past" : ""}>{chapter.number}</span>)}</div>
+            <div className="chapter-stack">
+              {galleryChapters.map((chapter, index) => (
+                <article key={chapter.number} className={index === activeChapter ? "chapter-card is-active" : "chapter-card"} aria-hidden={index !== activeChapter}>
+                  <p><span>{chapter.number}</span> {chapter.label}</p>
+                  <h2>{chapter.title}</h2>
+                  <div className="chapter-rule" />
+                  <p className="chapter-detail">{chapter.detail}</p>
+                  <small>{chapter.note}</small>
+                </article>
+              ))}
+            </div>
+            <div className="corridor-side-note"><span>SCROLL TO WALK THE ROOM</span><i /><span>CONTEXT / SYSTEM / GUARDRAILS / HANDOFF</span></div>
+            <div className="corridor-signature"><span>AV</span><p>Independent work,<br />intentionally made.</p></div>
+          </div>
         </section>
 
         <div className="gallery-ticker" aria-label="Portfolio themes"><div><span>Clarity at the handoff</span><i>✦</i><span>Useful systems</span><i>✦</i><span>Human judgment stays visible</span><i>✦</i><span>Independent work, honestly labeled</span><i>✦</i><span>Clarity at the handoff</span><i>✦</i><span>Useful systems</span><i>✦</i></div></div>

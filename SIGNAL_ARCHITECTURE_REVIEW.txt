@@ -45,3 +45,15 @@ The Nocturne Gallery entry now begins with the AV loader and gallery-curtain tra
 Motion review after selector correction — 2026-09-01
 
 The revised hero is visibly revealed after the entry sequence: the three-line title, supporting context, tags, actions, framed gallery overlays, cursor-responsive environment, and scroll index display together. The mobile view preserves the visual hierarchy while suppressing nonessential persistent interface elements. No text overlap, hidden CTA, or navigation issue was observed in the reviewed initial viewport.
+
+Gallery Corridor validation — 2026-09-01
+
+The public-preview browser confirmed the new route into the pinned Gallery Corridor. At Chapter 01, the visual composition holds its own environment—a nocturnal hall with shifting arches, signal marker, blue-gold beam, small metadata, vertical navigation cue, and an editorial Context card. The corridor sits between the opening proof rail and project exhibits, so it adds a guided visual experience without obscuring Amy’s functional project evidence.
+
+Pinned Corridor correction and Chapter 02 validation — 2026-09-01
+
+The first scroll test exposed an implementation issue: an ancestor’s overflow setting prevented the sticky scene from remaining fixed. The constraint was removed by using non-scroll-container clipping, and the chapter stack was given a stable height. Browser inspection verified the stage at viewport position zero, with the active System chapter centered in the frame. The visual review then confirmed a clean Chapter 02 transition: the scene’s architectural rings, beam, signal point, content, progress markers, and metadata remain in view together.
+
+Chapter 03 and 04 validation — 2026-09-01
+
+The completed corridor was tested through Guardrails and Handoff. Both chapters correctly advance the visible content, chapter index, and ambient composition while keeping the environment pinned. The Stage 03 and Stage 04 screenshots confirmed legible hierarchy, retained contrast, and a differentiated spatial arrangement rather than a static content swap. The scroll narrative exits into the portfolio’s proof ticker and actual project case studies, connecting visual craft to technical evidence.
