@@ -78,6 +78,13 @@ export default function Home() {
           <div className="hero-note"><span>01—03</span><p>Personal portfolio demos. No client work or production outcomes are claimed.</p></div>
         </section>
 
+        <section className="proof-rail" aria-label="Technical portfolio evidence">
+          <div><strong>2+ years</strong><span>freelance digital workflow delivery</span></div>
+          <div><strong>3 demos</strong><span>interactive systems in the portfolio</span></div>
+          <div><strong>3 tests</strong><span>automated checks in ClearRoute API</span></div>
+          <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer">Public GitHub <ArrowUpRight size={15} /></a>
+        </section>
+
         <section id="work" className="work-section">
           <div className="section-head">
             <div>

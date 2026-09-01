@@ -1,0 +1,13 @@
+AAA portfolio visual review — 2026-09-01
+
+Desktop review:
+The updated portfolio maintains its dark editorial identity. The evidence rail creates a stronger recruiter-facing proof point immediately after the hero, and the 3-project sequence remains balanced. The six-capability matrix reads as a technical range rather than generic claims. The new mark replaces all prior age-derived material.
+
+Mobile review:
+The hero hierarchy remains legible. The proof rail adapts to a two-column summary plus a full-width GitHub action. Project cards stack without clipping; the capability section and contact area remain readable. No age or career-stage label is visible.
+
+Validation status:
+- TypeScript check passed.
+- Production build passed.
+- Desktop and mobile screenshots reviewed.
+- No age-derived portfolio wording found.
