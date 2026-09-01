@@ -7,3 +7,11 @@ Desktop review: the hero establishes a strong original visual identity with the 
 Mobile review: the hero, project cards, method panel, evidence section, and contact section stack cleanly at a narrow viewport. Text remains visible, links remain reachable, and the photo-free technical portfolio retains its intended editorial look.
 
 Build validation: TypeScript check and production build completed successfully before review.
+
+Kinetic review — 2026-09-01
+
+Reference analysis: the supplied portfolio’s strongest interaction cues are its short boot/loading moment, a visible 3D scene, and continuous discovery through scrolling. Its exact content, layout, phrases, and implementation were not reproduced.
+
+Amy’s original implementation adds a short Signal Architecture boot sequence; a subtle pointer-responsive ambient light, wireframe sphere, and beam in the existing hero visual; a deliberate scroll cue; staggered in-view reveals; orbit/floating motion inside original project graphics; image scanning; and progressive evidence-list reveals. Motion respects prefers-reduced-motion.
+
+Desktop visual check: the animated interface preserves the legible, original Signal Architecture identity and headline hierarchy. Mobile visual check (390px wide): the hero remains readable and the cinematic image anchors the composition without obscuring the headline, body copy, capability tags, action buttons, or evidence rail.

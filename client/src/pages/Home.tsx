@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowDownRight, ArrowUpRight, CheckCircle2, Code2, Compass, Database, GitBranch, Layers3, Orbit, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 
@@ -44,8 +45,45 @@ const capabilities = [
 ];
 
 export default function Home() {
+  const shellRef = useRef<HTMLDivElement>(null);
+  const [booting, setBooting] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setBooting(false), 1450);
+    const root = shellRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const setPointer = (event: PointerEvent) => {
+      if (!root || reduceMotion || event.pointerType === "touch") return;
+      root.style.setProperty("--mouse-x", `${(event.clientX / window.innerWidth) * 100}%`);
+      root.style.setProperty("--mouse-y", `${(event.clientY / window.innerHeight) * 100}%`);
+      root.style.setProperty("--tilt-x", `${((event.clientY / window.innerHeight) - 0.5) * -1}`);
+      root.style.setProperty("--tilt-y", `${((event.clientX / window.innerWidth) - 0.5)}`);
+    };
+
+    window.addEventListener("pointermove", setPointer, { passive: true });
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
+      { threshold: 0.12 },
+    );
+    document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("pointermove", setPointer);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="portfolio-shell signal-architecture">
+    <div ref={shellRef} className={`portfolio-shell signal-architecture ${booting ? "is-booting" : "is-live"}`}>
+      <div className="signal-loader" aria-hidden="true">
+        <div className="loader-core"><span>AV</span><i /></div>
+        <div className="loader-copy"><p>INITIALIZING / SIGNAL ARCHITECTURE</p><div><span /><b>100%</b></div></div>
+      </div>
+      <div className="signal-cursor" aria-hidden="true" />
+      <div className="signal-noise" aria-hidden="true" />
+
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Amy Villa home">
           <span className="brand-mark">AV</span>
@@ -64,8 +102,10 @@ export default function Home() {
         <section className="hero signal-hero">
           <div className="hero-image" />
           <div className="hero-grid" />
+          <div className="hero-beam" aria-hidden="true" />
+          <div className="signal-sphere" aria-hidden="true"><i /><i /><i /></div>
           <div className="signal-orbit" aria-hidden="true"><Orbit size={21} /><span>signal / 01</span></div>
-          <div className="hero-content">
+          <div className="hero-content" data-reveal>
             <p className="eyebrow"><span /> Independent software portfolio · Miami / Remote</p>
             <h1>Make the invisible work <i>visible.</i></h1>
             <p className="hero-copy">I design product surfaces, workflow systems, and practical automation foundations for teams that need a clearer path from a fuzzy request to a confident next move.</p>
@@ -77,14 +117,15 @@ export default function Home() {
               <a className="button-quiet" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={15} /></a>
             </div>
           </div>
-          <div className="hero-note hero-telemetry">
+          <div className="hero-note hero-telemetry" data-reveal>
             <span>LIVE SIGNAL</span>
             <p>Building public technical evidence for software, automation, implementation, and technical operations opportunities.</p>
             <div><b>US</b><small>work authorized</small><b>EN / ES</b><small>native communication</small></div>
           </div>
+          <a className="scroll-pulse" href="#work"><span /><small>Scroll to discover</small></a>
         </section>
 
-        <section className="proof-rail" aria-label="Technical portfolio evidence">
+        <section className="proof-rail" aria-label="Technical portfolio evidence" data-reveal>
           <div><strong>2+ years</strong><span>freelance workflow delivery</span></div>
           <div><strong>3 demos</strong><span>interactive product systems</span></div>
           <div><strong>3 tests</strong><span>automated API checks</span></div>
@@ -92,7 +133,7 @@ export default function Home() {
         </section>
 
         <section id="work" className="work-section">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <div>
               <p className="eyebrow"><span /> Selected independent work</p>
               <h2>Three systems.<br /><i>One design instinct.</i></h2>
@@ -100,8 +141,8 @@ export default function Home() {
             <p>Each case study makes the decision trail visible: a real product question, an intentional interface, and an honest boundary around what the demo proves.</p>
           </div>
           <div className="project-list">
-            {projects.map((project) => (
-              <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`}>
+            {projects.map((project, index) => (
+              <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`} data-reveal style={{ "--reveal-delay": `${index * 85}ms` } as CSSProperties}>
                 <div className="project-card-top"><span>{project.number}</span><span className="status-dot">Independent demo</span></div>
                 <div className="project-visual" aria-hidden="true">
                   <span className="visual-orb orb-one" /><span className="visual-orb orb-two" /><span className="visual-line line-one" /><span className="visual-line line-two" />
@@ -120,8 +161,8 @@ export default function Home() {
         </section>
 
         <section id="approach" className="approach-section signal-method">
-          <div className="approach-image"><div className="method-badge"><Compass size={16} /> From ambiguity to signal</div></div>
-          <div className="approach-copy">
+          <div className="approach-image" data-reveal><div className="method-badge"><Compass size={16} /> From ambiguity to signal</div><span className="image-scan" /></div>
+          <div className="approach-copy" data-reveal>
             <p className="eyebrow"><span /> The method</p>
             <h2>Design the decision,<br /><i>not just the screen.</i></h2>
             <p>A useful product does more than look polished. It makes responsibility, context, guardrails, and the next action easy to find—so the work can move without losing human judgment.</p>
@@ -137,7 +178,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="evidence" className="evidence-section">
+        <section id="evidence" className="evidence-section" data-reveal>
           <div className="evidence-mark"><span>AV</span><i /></div>
           <div>
             <p className="eyebrow"><span /> The proof layer</p>
@@ -151,7 +192,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="contact-section">
+        <section id="contact" className="contact-section" data-reveal>
           <div>
             <p className="eyebrow"><span /> Contact</p>
             <h2>The next useful<br /><i>signal starts here.</i></h2>
