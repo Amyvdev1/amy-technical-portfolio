@@ -1,6 +1,5 @@
 import { ArrowDownRight, ArrowUpRight, CheckCircle2, Code2, Database, GitBranch, Layers3, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "wouter";
-import ThreeHeroScene from "../components/ThreeHeroScene";
 
 const projects = [
   {
@@ -62,7 +61,6 @@ export default function Home() {
         <section className="hero">
           <div className="hero-image" />
           <div className="hero-grid" />
-          <ThreeHeroScene />
           <div className="hero-content">
             <p className="eyebrow"><span /> Independent developer portfolio</p>
             <h1>Software that makes the <i>next step</i> obvious.</h1>
