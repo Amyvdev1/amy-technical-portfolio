@@ -27,3 +27,13 @@ Functional validation — 2026-09-01
 The Signal Lab route loaded successfully in the browser. The three workflow selectors, Run the system control, dynamic PROCESSING/READY label, staged workflow state transitions, Handoff prepared outcome, and Reset control rendered as intended. The active state began at the first stage and progressed through the workflow. No runtime issue was observed.
 
 Mobile visual check: the introductory narrative, workflow selector rail, console heading, and active scenario hierarchy remain readable at a 390px viewport, with the selector rail available horizontally rather than forcing a cramped vertical layout.
+
+Nocturne Gallery review — 2026-09-01
+
+Desktop visual validation: the homepage now has a distinct art-directed gallery entry. The original generated hero uses an architectural arch and sculptural light rather than any reference creator’s assets. It makes the headline, primary action, Signal Lab entry point, curator note, work authorization, and bilingual detail clearly readable. The Nocturne Gallery palette maintains purposeful contrast: ivory text, black/umber architecture, restrained gold, and a cobalt signal accent.
+
+Signal Lab visual validation: the interactive route was aligned to the same art direction without losing its independent concept-demonstrator labeling. The warm gallery tone, typography, scenario controls, and staged workflow remain distinguishable and legible.
+
+Mobile review — 2026-09-01
+
+At 390px wide, the Nocturne Gallery retains a strong initial composition. The headline, overview, technology tags, primary CTA, Signal Lab entry, email, and proof rail remain readable. The art-directed hero maintains its focal arch/blue-light object without covering core content.

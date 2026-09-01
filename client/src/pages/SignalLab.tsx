@@ -46,11 +46,11 @@ export default function SignalLab() {
   };
 
   return (
-    <div className="lab-shell">
+    <div className="lab-shell nocturne-lab">
       <div className="lab-ambient ambient-one" aria-hidden="true" /><div className="lab-ambient ambient-two" aria-hidden="true" />
       <header className="lab-header">
         <Link href="/" className="lab-back"><ArrowLeft size={15} /> Back to portfolio</Link>
-        <div className="lab-title"><span>AV</span> Signal Lab <i>/ interactive concept</i></div>
+        <div className="lab-title"><span>AV</span> Signal Lab <i>/ nocturne gallery</i></div>
         <a href="mailto:amyv.dev@gmail.com" className="lab-mail"><Mail size={14} /> Contact Amy</a>
       </header>
 

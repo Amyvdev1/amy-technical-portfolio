@@ -61,7 +61,10 @@ export default function Home() {
       root.style.setProperty("--tilt-y", `${((event.clientX / window.innerWidth) - 0.5)}`);
     };
 
+    const setScroll = () => root?.style.setProperty("--scroll-shift", `${Math.min(window.scrollY, 1600) * 0.05}px`);
+    setScroll();
     window.addEventListener("pointermove", setPointer, { passive: true });
+    window.addEventListener("scroll", setScroll, { passive: true });
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
       { threshold: 0.12 },
@@ -71,12 +74,13 @@ export default function Home() {
     return () => {
       window.clearTimeout(timer);
       window.removeEventListener("pointermove", setPointer);
+      window.removeEventListener("scroll", setScroll);
       observer.disconnect();
     };
   }, []);
 
   return (
-    <div ref={shellRef} className={`portfolio-shell signal-architecture ${booting ? "is-booting" : "is-live"}`}>
+    <div ref={shellRef} className={`portfolio-shell signal-architecture nocturne-gallery ${booting ? "is-booting" : "is-live"}`}>
       <div className="signal-loader" aria-hidden="true">
         <div className="loader-core"><span>AV</span><i /></div>
         <div className="loader-copy"><p>INITIALIZING / SIGNAL ARCHITECTURE</p><div><span /><b>100%</b></div></div>
@@ -87,10 +91,10 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Amy Villa home">
           <span className="brand-mark">AV</span>
-          <span>Amy Villa <em>— signal architecture</em></span>
+          <span>Amy Villa <em>— the nocturne gallery</em></span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Case studies</a>
+          <a href="#work">The gallery</a>
           <a href="/signal-lab">Signal Lab</a>
           <a href="#approach">Method</a>
           <a href="#evidence">Evidence</a>
@@ -107,9 +111,9 @@ export default function Home() {
           <div className="signal-sphere" aria-hidden="true"><i /><i /><i /></div>
           <div className="signal-orbit" aria-hidden="true"><Orbit size={21} /><span>signal / 01</span></div>
           <div className="hero-content" data-reveal>
-            <p className="eyebrow"><span /> Independent software portfolio · Miami / Remote</p>
-            <h1>Make the invisible work <i>visible.</i></h1>
-            <p className="hero-copy">I design product surfaces, workflow systems, and practical automation foundations for teams that need a clearer path from a fuzzy request to a confident next move.</p>
+            <p className="eyebrow"><span /> The Nocturne Gallery · Miami / Remote</p>
+            <h1>Where systems become <i>clear.</i></h1>
+            <p className="hero-copy">A portfolio of product surfaces, workflow systems, and practical automation foundations—made for teams that want to move from a fuzzy request to a confident next move.</p>
             <div className="hero-signal-row" aria-label="Core specialties">
               <span>React · TypeScript</span><span>Python · FastAPI</span><span>AI workflows</span>
             </div>
@@ -120,8 +124,8 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-note hero-telemetry" data-reveal>
-            <span>LIVE SIGNAL</span>
-            <p>Building public technical evidence for software, automation, implementation, and technical operations opportunities.</p>
+            <span>CURATOR’S NOTE</span>
+            <p>Each piece is a public study in clarity: how work becomes visible, reviewable, and ready for the next person.</p>
             <div><b>US</b><small>work authorized</small><b>EN / ES</b><small>native communication</small></div>
           </div>
           <a className="scroll-pulse" href="#work"><span /><small>Scroll to discover</small></a>
@@ -138,14 +142,14 @@ export default function Home() {
           <div className="section-head" data-reveal>
             <div>
               <p className="eyebrow"><span /> Selected independent work</p>
-              <h2>Three systems.<br /><i>One design instinct.</i></h2>
+              <h2>A gallery of<br /><i>useful systems.</i></h2>
             </div>
-            <p>Each case study makes the decision trail visible: a real product question, an intentional interface, and an honest boundary around what the demo proves.</p>
+            <p>Each piece frames a product question, an intentional interface, and an honest boundary around what the independent demo proves.</p>
           </div>
           <div className="project-list">
             {projects.map((project, index) => (
               <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`} data-reveal style={{ "--reveal-delay": `${index * 85}ms` } as CSSProperties}>
-                <div className="project-card-top"><span>{project.number}</span><span className="status-dot">Independent demo</span></div>
+                <div className="project-card-top"><span>EXHIBIT / {project.number}</span><span className="status-dot">Independent demo</span></div>
                 <div className="project-visual" aria-hidden="true">
                   <span className="visual-orb orb-one" /><span className="visual-orb orb-two" /><span className="visual-line line-one" /><span className="visual-line line-two" />
                   <span className="visual-panel panel-a" /><span className="visual-panel panel-b" /><span className="visual-panel panel-c" />
@@ -165,7 +169,7 @@ export default function Home() {
         <section id="approach" className="approach-section signal-method">
           <div className="approach-image" data-reveal><div className="method-badge"><Compass size={16} /> From ambiguity to signal</div><span className="image-scan" /></div>
           <div className="approach-copy" data-reveal>
-            <p className="eyebrow"><span /> The method</p>
+            <p className="eyebrow"><span /> Behind the canvas</p>
             <h2>Design the decision,<br /><i>not just the screen.</i></h2>
             <p>A useful product does more than look polished. It makes responsibility, context, guardrails, and the next action easy to find—so the work can move without losing human judgment.</p>
             <div className="capability-grid">
@@ -184,7 +188,7 @@ export default function Home() {
           <div className="evidence-mark"><span>AV</span><i /></div>
           <div>
             <p className="eyebrow"><span /> The proof layer</p>
-            <h2>Evidence over<br /><i>adjectives.</i></h2>
+            <h2>Proof belongs<br /><i>in the margins.</i></h2>
             <p>Every project here is labeled honestly. The work shows how I think about interfaces, API contracts, state, validation, review points, and the human side of an operational system.</p>
           </div>
           <div className="evidence-checks">
@@ -207,7 +211,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer><span>© 2026 Amy Villa</span><span>Miami, Florida · Native English & Spanish</span><span>Signal architecture / personal portfolio</span></footer>
+      <footer><span>© 2026 Amy Villa</span><span>Miami, Florida · Native English & Spanish</span><span>The Nocturne Gallery / personal portfolio</span></footer>
     </div>
   );
 }
