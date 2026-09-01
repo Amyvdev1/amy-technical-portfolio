@@ -91,6 +91,7 @@ export default function Home() {
         </a>
         <nav aria-label="Primary navigation">
           <a href="#work">Case studies</a>
+          <a href="/signal-lab">Signal Lab</a>
           <a href="#approach">Method</a>
           <a href="#evidence">Evidence</a>
           <a href="#contact">Contact</a>
@@ -114,6 +115,7 @@ export default function Home() {
             </div>
             <div className="hero-actions">
               <a className="button-primary" href="#work">Explore the work <ArrowDownRight size={17} /></a>
+              <a className="hero-lab-link" href="/signal-lab"><Sparkles size={14} /> Try Signal Lab</a>
               <a className="button-quiet" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={15} /></a>
             </div>
           </div>

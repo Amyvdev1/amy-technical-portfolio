@@ -15,3 +15,15 @@ Reference analysis: the supplied portfolio’s strongest interaction cues are it
 Amy’s original implementation adds a short Signal Architecture boot sequence; a subtle pointer-responsive ambient light, wireframe sphere, and beam in the existing hero visual; a deliberate scroll cue; staggered in-view reveals; orbit/floating motion inside original project graphics; image scanning; and progressive evidence-list reveals. Motion respects prefers-reduced-motion.
 
 Desktop visual check: the animated interface preserves the legible, original Signal Architecture identity and headline hierarchy. Mobile visual check (390px wide): the hero remains readable and the cinematic image anchors the composition without obscuring the headline, body copy, capability tags, action buttons, or evidence rail.
+
+Signal Lab visual review — 2026-09-01
+
+Desktop review: the new Signal Lab reads as a distinct second experience rather than another generic portfolio section. It creates a focused, premium product-laboratory environment that visually supports Amy’s approach: a short framing statement, an operational console, workflow controls, and later an editorial portrait/decision-design narrative. The portfolio header now includes a clear Signal Lab access point and hero CTA.
+
+The original Signal Architecture visual system remains cohesive across both routes: midnight navy foundation, electric cobalt system cues, restrained warm-gold accents, expressive serif contrast, and highly legible body copy. The lab remains explicit that it is an independently built concept demonstrator, avoiding an unsupported production-software claim.
+
+Functional validation — 2026-09-01
+
+The Signal Lab route loaded successfully in the browser. The three workflow selectors, Run the system control, dynamic PROCESSING/READY label, staged workflow state transitions, Handoff prepared outcome, and Reset control rendered as intended. The active state began at the first stage and progressed through the workflow. No runtime issue was observed.
+
+Mobile visual check: the introductory narrative, workflow selector rail, console heading, and active scenario hierarchy remain readable at a 390px viewport, with the selector rail available horizontally rather than forcing a cramped vertical layout.
