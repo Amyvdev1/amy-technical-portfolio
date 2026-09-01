@@ -25,3 +25,55 @@ button { font:inherit; }
 .approach-image { position:relative; overflow:hidden; background:none; }
 .approach-image::before { content:""; position:absolute; inset:-4%; background:linear-gradient(90deg,rgba(8,18,38,.13),rgba(8,18,38,.55)),url('/manus-storage/amy_portfolio_systems_1b512a7d.jpg') center/cover; transform:scale(1.06); transform-origin:50% 48%; will-change:transform; }
 @media (prefers-reduced-motion:no-preference) { .hero-content { animation:enter .7s cubic-bezier(.23,1,.32,1) both; }.project-card { animation:enter .6s cubic-bezier(.23,1,.32,1) both; }.project-card:nth-child(2) { animation-delay:.08s; }.project-card:nth-child(3) { animation-delay:.16s; }.hero-image { animation:hero-image-drift 17s cubic-bezier(.45,0,.55,1) infinite alternate; }.approach-image::before { animation:approach-image-drift 21s cubic-bezier(.45,0,.55,1) infinite alternate; }@keyframes enter { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }@keyframes hero-image-drift { from { transform:scale(1.05) translate3d(-.35%,.2%,0); } to { transform:scale(1.1) translate3d(.45%,-.3%,0); } }@keyframes approach-image-drift { from { transform:scale(1.06) translate3d(-.3%,.15%,0); } to { transform:scale(1.11) translate3d(.35%,-.25%,0); } } }
+
+/* Signal Architecture — original editorial direction for Amy Villa */
+:root { --signal-blue:#58a8ff; --signal-deep:#050a16; --signal-gold:#f0bd71; --ease-out:cubic-bezier(.23,1,.32,1); }
+.signal-architecture { background:var(--signal-deep); }
+.signal-architecture .site-header { position:absolute; background:linear-gradient(180deg,rgba(2,7,18,.72),rgba(2,7,18,0)); border-bottom-color:rgba(156,195,255,.16); backdrop-filter:blur(12px); }
+.signal-architecture .brand-mark { border-color:rgba(160,204,255,.78); color:#d8ebff; box-shadow:inset 0 0 18px rgba(84,160,255,.14),0 0 22px rgba(55,132,255,.12); }
+.signal-architecture .hero { min-height:clamp(760px,100svh,960px); padding-bottom:clamp(72px,9vh,118px); }
+.signal-architecture .hero:after { background:radial-gradient(ellipse at 72% 47%,rgba(43,139,255,.19),transparent 28%),linear-gradient(90deg,rgba(3,8,20,.18),rgba(3,8,20,.04) 62%,rgba(3,8,20,.2)); mix-blend-mode:screen; }
+.signal-architecture .hero-image { background:linear-gradient(90deg,rgba(2,8,20,.98) 0%,rgba(2,8,20,.91) 32%,rgba(2,8,20,.48) 61%,rgba(2,8,20,.18) 100%),url('/manus-storage/signal-hero_c066e956.jpg') center/cover; }
+.signal-architecture .hero-grid { opacity:.18; background-size:64px 64px; mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.8) 48%,transparent 80%); }
+.signal-architecture .hero-content { max-width:740px; }
+.signal-architecture .hero h1 { max-width:720px; font-size:clamp(58px,7.8vw,116px); letter-spacing:-.075em; }
+.signal-architecture .hero h1 i { color:#dce9ff; }
+.signal-architecture .hero-copy { max-width:535px; font-size:16px; color:#c4d2e7; }
+.signal-architecture .hero-signal-row span { border-color:rgba(145,195,255,.32); background:linear-gradient(130deg,rgba(59,123,235,.18),rgba(12,22,50,.18)); color:#d0e2ff; }
+.signal-architecture .button-primary { background:linear-gradient(120deg,#d8e8ff,#f7fbff); box-shadow:0 10px 30px rgba(45,123,255,.17); }
+.signal-architecture .button-primary:hover { box-shadow:0 15px 38px rgba(56,137,255,.29); }
+.signal-orbit { position:absolute; top:106px; right:4.5vw; display:flex; align-items:center; gap:9px; color:#9dc6ff; font:500 9px var(--mono); letter-spacing:.12em; text-transform:uppercase; opacity:.9; }
+.signal-orbit svg { animation:signal-spin 10s linear infinite; }
+.hero-telemetry { border:1px solid rgba(163,199,252,.2); border-radius:2px; padding:14px; background:linear-gradient(135deg,rgba(15,34,73,.53),rgba(7,14,31,.18)); backdrop-filter:blur(12px); }
+.hero-telemetry>span { color:#a8c9ff; border:0; padding:0 0 8px; }
+.hero-telemetry p { font-size:10px; line-height:1.58; margin:10px 0 12px; }
+.hero-telemetry>div { display:grid; grid-template-columns:auto 1fr; gap:3px 8px; align-items:baseline; border-top:1px solid rgba(184,212,255,.18); padding-top:10px; }
+.hero-telemetry b { color:#eef5ff; font:500 8px var(--mono); }
+.hero-telemetry small { color:#91a8ca; font:400 8px var(--mono); }
+.signal-architecture .proof-rail { background:#1d3a67; border-color:rgba(130,180,255,.36); padding:1px 4.5vw; }
+.signal-architecture .proof-rail>div,.signal-architecture .proof-rail>a { background:linear-gradient(120deg,#0a1730,#0d2040); }
+.signal-architecture .proof-rail>a:hover { background:#17498d; }
+.signal-architecture .work-section { position:relative; background:#f1eee8; padding-top:150px; overflow:hidden; }
+.signal-architecture .work-section:before { content:'SIGNAL / CASE STUDIES'; position:absolute; top:55px; left:5vw; color:rgba(18,40,79,.09); font:600 clamp(38px,7vw,110px)/1 var(--mono); letter-spacing:-.08em; white-space:nowrap; pointer-events:none; }
+.signal-architecture .section-head { position:relative; }
+.signal-architecture .project-card { border-radius:2px; min-height:600px; box-shadow:0 14px 28px rgba(5,14,30,.1); }
+.signal-architecture .project-card:hover { transform:perspective(1000px) rotateX(2.5deg) rotateY(-2deg) translateY(-12px); box-shadow:0 35px 60px rgba(5,14,30,.32),0 0 0 1px rgba(158,191,255,.18); }
+.signal-architecture .project-card h3 { font-size:31px; }
+.signal-architecture .signal-method { position:relative; min-height:810px; }
+.signal-architecture .approach-image::before { background:linear-gradient(90deg,rgba(4,12,28,.12),rgba(4,12,28,.7)),url('/manus-storage/signal-system_13befead.jpg') center/cover; }
+.method-badge { position:absolute; z-index:3; bottom:42px; left:42px; display:flex; align-items:center; gap:9px; color:#d9e7fe; background:rgba(6,18,41,.66); border:1px solid rgba(182,211,255,.28); padding:11px 13px; backdrop-filter:blur(10px); font:500 9px var(--mono); letter-spacing:.07em; text-transform:uppercase; }
+.method-badge svg { color:#9cc3ff; }
+.signal-architecture .approach-copy { background:radial-gradient(circle at 85% 10%,rgba(45,111,229,.13),transparent 35%),#0c1730; }
+.signal-architecture .evidence-section { position:relative; background:linear-gradient(115deg,#c4d9ff,#9bbcf5 62%,#c9ddff); overflow:hidden; }
+.signal-architecture .evidence-section:after { content:''; position:absolute; right:-10%; bottom:-60%; width:70%; aspect-ratio:1; border:1px solid rgba(31,79,171,.16); border-radius:50%; box-shadow:0 0 0 55px rgba(31,79,171,.06),0 0 0 110px rgba(31,79,171,.04); pointer-events:none; }
+.signal-architecture .evidence-section>div { position:relative; z-index:1; }
+.signal-architecture .contact-section { position:relative; overflow:hidden; background:radial-gradient(circle at 85% 75%,rgba(30,89,190,.26),transparent 28%),#050b19; }
+.signal-architecture .contact-section:before { content:'AV'; position:absolute; right:6vw; bottom:-9vw; color:rgba(130,174,255,.05); font:600 42vw/1 var(--serif); letter-spacing:-.16em; pointer-events:none; }
+.signal-architecture .contact-section>div { position:relative; z-index:1; }
+.signal-architecture footer { background:#050b19; }
+@keyframes signal-spin { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:no-preference) { .signal-architecture .hero-image { animation:signal-hero-drift 20s cubic-bezier(.45,0,.55,1) infinite alternate; } .method-badge { animation:signal-badge-pulse 3.5s ease-in-out infinite alternate; } }
+@keyframes signal-hero-drift { from { transform:scale(1.05) translate3d(-.3%,.2%,0); } to { transform:scale(1.1) translate3d(.5%,-.35%,0); } }
+@keyframes signal-badge-pulse { from { box-shadow:0 0 0 rgba(91,164,255,0); } to { box-shadow:0 0 28px rgba(91,164,255,.22); } }
+@media (max-width:900px) { .signal-architecture .work-section { padding-top:112px; } .signal-architecture .work-section:before { top:36px; font-size:42px; } .signal-orbit { top:96px; right:22px; } .method-badge { left:24px; bottom:24px; } .signal-architecture .hero { min-height:720px; } }
+@media (max-width:520px) { .signal-architecture .hero { min-height:735px; padding-bottom:65px; } .signal-architecture .hero h1 { font-size:57px; } .signal-orbit { display:none; } .hero-telemetry { display:none; } .signal-architecture .work-section:before { font-size:29px; top:33px; } .signal-architecture .project-card { min-height:490px; } }

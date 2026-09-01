@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight, CheckCircle2, Code2, Database, GitBranch, Layers3, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, CheckCircle2, Code2, Compass, Database, GitBranch, Layers3, Orbit, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 
 const projects = [
@@ -35,68 +35,74 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: Code2, title: "Product interfaces", text: "Responsive React and TypeScript surfaces that make complex work feel legible." },
-  { icon: GitBranch, title: "Workflow design", text: "States, approval points, ownership, and next actions are part of the product." },
-  { icon: Database, title: "API foundations", text: "Structured validation, data contracts, traceability, and predictable system behavior." },
-  { icon: Sparkles, title: "AI-assisted operations", text: "Practical automations designed around human review, clarity, and control." },
-  { icon: ShieldCheck, title: "Quality mindset", text: "Testable flows, documented boundaries, and interfaces built for confident handoffs." },
-  { icon: Layers3, title: "Bilingual delivery", text: "Native English and Spanish communication across technical and operational work." },
+  { icon: Code2, title: "Product surfaces", text: "Responsive React and TypeScript interfaces that turn complex work into an understandable next move." },
+  { icon: GitBranch, title: "Workflow logic", text: "Ownership, state, approvals, and handoffs are designed into the product—not added after." },
+  { icon: Database, title: "API foundations", text: "Structured validation, explicit data contracts, traceability, and dependable system boundaries." },
+  { icon: Sparkles, title: "AI with guardrails", text: "Practical automations and prompt-driven work designed around review, clarity, and control." },
+  { icon: ShieldCheck, title: "Quality signals", text: "Testable flows, documented boundaries, and interfaces built for confident collaboration." },
+  { icon: Layers3, title: "Bilingual delivery", text: "Native English and Spanish communication across technical, operational, and customer-facing work." },
 ];
 
 export default function Home() {
   return (
-    <div className="portfolio-shell">
+    <div className="portfolio-shell signal-architecture">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Amy Villa home">
           <span className="brand-mark">AV</span>
-          <span>Amy Villa <em>— systems & software</em></span>
+          <span>Amy Villa <em>— signal architecture</em></span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Selected work</a>
-          <a href="#approach">Approach</a>
+          <a href="#work">Case studies</a>
+          <a href="#approach">Method</a>
+          <a href="#evidence">Evidence</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="header-link" href="mailto:amyv.dev@gmail.com">Let&apos;s talk <ArrowUpRight size={15} /></a>
+        <a className="header-link" href="mailto:amyv.dev@gmail.com">Start a conversation <ArrowUpRight size={15} /></a>
       </header>
 
       <main id="top">
-        <section className="hero">
+        <section className="hero signal-hero">
           <div className="hero-image" />
           <div className="hero-grid" />
+          <div className="signal-orbit" aria-hidden="true"><Orbit size={21} /><span>signal / 01</span></div>
           <div className="hero-content">
-            <p className="eyebrow"><span /> Independent developer portfolio</p>
-            <h1>Software that makes the <i>next step</i> obvious.</h1>
-            <p className="hero-copy">I build full-stack product concepts, workflow systems, and practical interfaces for teams that need a clearer way to move work forward.</p>
+            <p className="eyebrow"><span /> Independent software portfolio · Miami / Remote</p>
+            <h1>Make the invisible work <i>visible.</i></h1>
+            <p className="hero-copy">I design product surfaces, workflow systems, and practical automation foundations for teams that need a clearer path from a fuzzy request to a confident next move.</p>
             <div className="hero-signal-row" aria-label="Core specialties">
-              <span>React · TypeScript</span><span>Python · FastAPI</span><span>Workflow systems</span>
+              <span>React · TypeScript</span><span>Python · FastAPI</span><span>AI workflows</span>
             </div>
             <div className="hero-actions">
-              <a className="button-primary" href="#work">See selected work <ArrowDownRight size={17} /></a>
+              <a className="button-primary" href="#work">Explore the work <ArrowDownRight size={17} /></a>
               <a className="button-quiet" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={15} /></a>
             </div>
           </div>
-          <div className="hero-note"><span>01—03</span><p>Personal portfolio demos. No client work or production outcomes are claimed.</p></div>
+          <div className="hero-note hero-telemetry">
+            <span>LIVE SIGNAL</span>
+            <p>Building public technical evidence for software, automation, implementation, and technical operations opportunities.</p>
+            <div><b>US</b><small>work authorized</small><b>EN / ES</b><small>native communication</small></div>
+          </div>
         </section>
 
         <section className="proof-rail" aria-label="Technical portfolio evidence">
-          <div><strong>2+ years</strong><span>freelance digital workflow delivery</span></div>
-          <div><strong>3 demos</strong><span>interactive systems in the portfolio</span></div>
-          <div><strong>3 tests</strong><span>automated checks in ClearRoute API</span></div>
-          <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer">Public GitHub <ArrowUpRight size={15} /></a>
+          <div><strong>2+ years</strong><span>freelance workflow delivery</span></div>
+          <div><strong>3 demos</strong><span>interactive product systems</span></div>
+          <div><strong>3 tests</strong><span>automated API checks</span></div>
+          <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer">Inspect public GitHub <ArrowUpRight size={15} /></a>
         </section>
 
         <section id="work" className="work-section">
           <div className="section-head">
             <div>
               <p className="eyebrow"><span /> Selected independent work</p>
-              <h2>Three systems.<br /><i>One point of view.</i></h2>
+              <h2>Three systems.<br /><i>One design instinct.</i></h2>
             </div>
-            <p>Each project is intentionally scoped to show a product decision, a working interface, and the system thinking behind it.</p>
+            <p>Each case study makes the decision trail visible: a real product question, an intentional interface, and an honest boundary around what the demo proves.</p>
           </div>
           <div className="project-list">
             {projects.map((project) => (
               <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`}>
-                <div className="project-card-top"><span>{project.number}</span><span className="status-dot">Personal demo</span></div>
+                <div className="project-card-top"><span>{project.number}</span><span className="status-dot">Independent demo</span></div>
                 <div className="project-visual" aria-hidden="true">
                   <span className="visual-orb orb-one" /><span className="visual-orb orb-two" /><span className="visual-line line-one" /><span className="visual-line line-two" />
                   <span className="visual-panel panel-a" /><span className="visual-panel panel-b" /><span className="visual-panel panel-c" />
@@ -107,18 +113,18 @@ export default function Home() {
                   <p className="project-description">{project.description}</p>
                   <div className="chips">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
                 </div>
-                <div className="project-footer"><span>{project.outcome}</span><span>View project →</span></div>
+                <div className="project-footer"><span>{project.outcome}</span><span>Open case study →</span></div>
               </Link>
             ))}
           </div>
         </section>
 
-        <section id="approach" className="approach-section">
-          <div className="approach-image" />
+        <section id="approach" className="approach-section signal-method">
+          <div className="approach-image"><div className="method-badge"><Compass size={16} /> From ambiguity to signal</div></div>
           <div className="approach-copy">
-            <p className="eyebrow"><span /> How I work</p>
-            <h2>Build the system,<br /><i>not just the screen.</i></h2>
-            <p>Good software makes an important decision easy to understand. My work starts with the user&apos;s next action and follows the work through its handoff, guardrails, and feedback loop.</p>
+            <p className="eyebrow"><span /> The method</p>
+            <h2>Design the decision,<br /><i>not just the screen.</i></h2>
+            <p>A useful product does more than look polished. It makes responsibility, context, guardrails, and the next action easy to find—so the work can move without losing human judgment.</p>
             <div className="capability-grid">
               {capabilities.map(({ icon: Icon, title, text }) => (
                 <article key={title}>
@@ -131,34 +137,34 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="evidence-section">
+        <section id="evidence" className="evidence-section">
           <div className="evidence-mark"><span>AV</span><i /></div>
           <div>
-            <p className="eyebrow"><span /> Builder profile</p>
-            <h2>Build with intent.<br /><i>Ship with clarity.</i></h2>
-            <p>Systems-minded developer building public technical evidence while pursuing opportunities in software development, automation, implementation, and technical operations.</p>
+            <p className="eyebrow"><span /> The proof layer</p>
+            <h2>Evidence over<br /><i>adjectives.</i></h2>
+            <p>Every project here is labeled honestly. The work shows how I think about interfaces, API contracts, state, validation, review points, and the human side of an operational system.</p>
           </div>
           <div className="evidence-checks">
             <p><CheckCircle2 size={17} /> Independent demos clearly labeled</p>
             <p><CheckCircle2 size={17} /> Public code sample and automated tests</p>
-            <p><CheckCircle2 size={17} /> U.S. work authorized; no sponsorship required</p>
+            <p><CheckCircle2 size={17} /> Native English and Spanish delivery</p>
           </div>
         </section>
 
         <section id="contact" className="contact-section">
           <div>
             <p className="eyebrow"><span /> Contact</p>
-            <h2>Bring the unfinished<br /><i>problem.</i></h2>
+            <h2>The next useful<br /><i>signal starts here.</i></h2>
           </div>
           <div className="contact-right">
-            <p>I&apos;m open to opportunities in software development, AI automation, technical operations, and implementation.</p>
+            <p>Open to software development, AI automation, technical operations, implementation, and product-supporting opportunities.</p>
             <a className="contact-email" href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={20} /></a>
             <a className="contact-linkedin" href="https://www.linkedin.com/in/amy-villa-5830aa433/" target="_blank" rel="noreferrer">LinkedIn profile <ArrowUpRight size={15} /></a>
           </div>
         </section>
       </main>
 
-      <footer><span>© 2026 Amy Villa</span><span>Miami, Florida · Native English & Spanish</span><span>Designed as a personal portfolio</span></footer>
+      <footer><span>© 2026 Amy Villa</span><span>Miami, Florida · Native English & Spanish</span><span>Signal architecture / personal portfolio</span></footer>
     </div>
   );
 }

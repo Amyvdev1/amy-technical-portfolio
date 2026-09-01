@@ -1,0 +1,9 @@
+Signal Architecture portfolio review — 2026-09-01
+
+Original visual direction: a cinematic product-laboratory identity based on midnight navy, electric cobalt, warm gold accents, editorial serif contrast, and the new Signal Architecture concept. The design does not reproduce the reference portfolio's content, wording, structure, or visuals.
+
+Desktop review: the hero establishes a strong original visual identity with the generated observatory image, clear recruiter-facing headline, contact CTA, evidence telemetry card, and readable navigation. The case-study section is legible and product-focused. The vertical systems visual creates a strong transition into the method section. Evidence and contact sections preserve contrast and hierarchy.
+
+Mobile review: the hero, project cards, method panel, evidence section, and contact section stack cleanly at a narrow viewport. Text remains visible, links remain reachable, and the photo-free technical portfolio retains its intended editorial look.
+
+Build validation: TypeScript check and production build completed successfully before review.
