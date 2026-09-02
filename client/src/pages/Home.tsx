@@ -268,9 +268,9 @@ export default function Home() {
             </button>
           </div>
           <div className="hunt-stage" aria-hidden="true">
-            <div className="hunt-target"><img src="https://raw.githubusercontent.com/Amyvdev1/amy-technical-portfolio/main/public-assets/nocturne-panther-crest.png" alt="" /><span>cursor signal</span></div>
+            <div className="hunt-target"><img src="/manus-storage/nocturne-panther-crest_0afa36b3.png" alt="" /><span>cursor signal</span></div>
             <div className="hunt-path"><i /><i /><i /><i /></div>
-            <img className="hunt-panther" src="https://raw.githubusercontent.com/Amyvdev1/amy-technical-portfolio/main/public-assets/nocturne-panther-hunt.png" alt="" />
+            <img className="hunt-panther" src="/manus-storage/nocturne-panther-hunt_120785db.png" alt="" />
             <div className="hunt-flash" />
           </div>
           <p className="hunt-status" aria-live="polite"><span>{huntStage === "waiting" ? "01" : huntStage === "tracking" ? "02" : "03"}</span>{huntStage === "waiting" ? "Move the cursor to begin" : huntStage === "tracking" ? "Nocturne is tracking the signal" : "The exhibits are ready"}</p>
