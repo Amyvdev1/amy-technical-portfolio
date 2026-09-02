@@ -54,13 +54,17 @@ const galleryChapters = [
 export default function Home() {
   const shellRef = useRef<HTMLDivElement>(null);
   const corridorRef = useRef<HTMLElement>(null);
+  const huntTimerRef = useRef<number | null>(null);
+  const huntStartedRef = useRef(false);
   const [booting, setBooting] = useState(true);
   const [activeChapter, setActiveChapter] = useState(0);
+  const [huntStage, setHuntStage] = useState<"waiting" | "tracking" | "revealed">("waiting");
 
   useEffect(() => {
     const timer = window.setTimeout(() => setBooting(false), 1450);
     const root = shellRef.current;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) setHuntStage("revealed");
 
     const setPointer = (event: PointerEvent) => {
       if (!root || reduceMotion || event.pointerType === "touch") return;
@@ -90,6 +94,12 @@ export default function Home() {
       window.removeEventListener("pointermove", setPointer);
       window.removeEventListener("scroll", setScroll);
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (huntTimerRef.current) window.clearTimeout(huntTimerRef.current);
     };
   }, []);
 
@@ -126,6 +136,31 @@ export default function Home() {
   const resetCard = (event: ReactPointerEvent<HTMLAnchorElement>) => {
     event.currentTarget.style.setProperty("--card-rotate-x", "0deg");
     event.currentTarget.style.setProperty("--card-rotate-y", "0deg");
+  };
+
+  const releaseGallery = () => {
+    if (huntStage === "revealed") {
+      document.getElementById("work")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    if (huntStartedRef.current) return;
+    huntStartedRef.current = true;
+    setHuntStage("tracking");
+    huntTimerRef.current = window.setTimeout(() => {
+      setHuntStage("revealed");
+      window.setTimeout(() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth", block: "start" }), 420);
+    }, 2200);
+  };
+
+  const trackPanther = (event: ReactPointerEvent<HTMLElement>) => {
+    if (event.pointerType === "touch") return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = Math.min(Math.max(((event.clientX - bounds.left) / bounds.width) * 100, 5), 95);
+    const y = Math.min(Math.max(((event.clientY - bounds.top) / bounds.height) * 100, 13), 88);
+    event.currentTarget.style.setProperty("--hunt-x", `${x}%`);
+    event.currentTarget.style.setProperty("--hunt-y", `${y}%`);
+    event.currentTarget.style.setProperty("--panther-x", `${Math.max(x, 62)}%`);
+    releaseGallery();
   };
 
   return (
@@ -214,7 +249,34 @@ export default function Home() {
 
         <div className="gallery-ticker" aria-label="Portfolio themes"><div><span>Clarity at the handoff</span><i>✦</i><span>Useful systems</span><i>✦</i><span>Human judgment stays visible</span><i>✦</i><span>Independent work, honestly labeled</span><i>✦</i><span>Clarity at the handoff</span><i>✦</i><span>Useful systems</span><i>✦</i></div></div>
 
-        <section id="work" className="work-section">
+        <section
+          id="hunt"
+          className={`panther-hunt hunt-${huntStage}`}
+          aria-label="An interactive invitation to enter the project gallery"
+          onPointerMove={trackPanther}
+          onPointerDown={releaseGallery}
+          style={{ "--hunt-x": "76%", "--hunt-y": "48%", "--panther-x": "76%" } as CSSProperties}
+        >
+          <div className="hunt-field" aria-hidden="true"><i /><i /><i /><b /></div>
+          <div className="hunt-copy">
+            <p className="eyebrow"><span /> The curator&apos;s companion</p>
+            <h2>Follow the<br /><i>signal.</i></h2>
+            <p>Move through the room. Nocturne&apos;s panther reads your cursor as a living point of light—and unlocks the work when it reaches it.</p>
+            <button type="button" onClick={releaseGallery} className="hunt-button">
+              {huntStage === "waiting" ? "Begin the hunt" : huntStage === "tracking" ? "Signal acquired" : "Enter the exhibits"}
+              <ArrowDownRight size={17} />
+            </button>
+          </div>
+          <div className="hunt-stage" aria-hidden="true">
+            <div className="hunt-target"><img src="/manus-storage/nocturne-panther-crest_0afa36b3.png" alt="" /><span>cursor signal</span></div>
+            <div className="hunt-path"><i /><i /><i /><i /></div>
+            <img className="hunt-panther" src="/manus-storage/nocturne-panther-hunt_120785db.png" alt="" />
+            <div className="hunt-flash" />
+          </div>
+          <p className="hunt-status" aria-live="polite"><span>{huntStage === "waiting" ? "01" : huntStage === "tracking" ? "02" : "03"}</span>{huntStage === "waiting" ? "Move the cursor to begin" : huntStage === "tracking" ? "Nocturne is tracking the signal" : "The exhibits are ready"}</p>
+        </section>
+
+        <section id="work" className={`work-section ${huntStage === "revealed" ? "is-revealed" : ""}`}>
           <div className="section-head" data-reveal>
             <div>
               <p className="eyebrow"><span /> Selected independent work</p>
@@ -224,7 +286,7 @@ export default function Home() {
           </div>
           <div className="project-list">
             {projects.map((project, index) => (
-              <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent}`} data-reveal onPointerMove={tiltCard} onPointerLeave={resetCard} style={{ "--reveal-delay": `${index * 85}ms` } as CSSProperties}>
+              <Link key={project.slug} href={`/projects/${project.slug}`} className={`project-card ${project.accent} ${huntStage === "revealed" ? "is-visible" : ""}`} data-reveal onPointerMove={tiltCard} onPointerLeave={resetCard} style={{ "--reveal-delay": `${index * 85}ms` } as CSSProperties}>
                 <div className="project-card-top"><span>EXHIBIT / {project.number}</span><span className="status-dot">Independent demo</span></div>
                 <div className="project-visual" aria-hidden="true">
                   <span className="visual-orb orb-one" /><span className="visual-orb orb-two" /><span className="visual-line line-one" /><span className="visual-line line-two" />
@@ -243,7 +305,10 @@ export default function Home() {
         </section>
 
         <section id="approach" className="approach-section signal-method">
-          <div className="approach-image" data-reveal><div className="method-badge"><Compass size={16} /> From ambiguity to signal</div><span className="image-scan" /></div>
+          <div className="approach-image" data-reveal>
+            <div className="signal-illustration" aria-hidden="true"><i /><i /><i /><i /></div>
+            <div className="method-badge"><Compass size={16} /> From ambiguity to signal</div><span className="image-scan" />
+          </div>
           <div className="approach-copy" data-reveal>
             <p className="eyebrow"><span /> Behind the canvas</p>
             <h2>Design the decision,<br /><i>not just the screen.</i></h2>
@@ -261,6 +326,7 @@ export default function Home() {
         </section>
 
         <section id="evidence" className="evidence-section" data-reveal>
+          <span className="evidence-orb-landing" aria-hidden="true" />
           <div className="evidence-mark"><span>AV</span><i /></div>
           <div>
             <p className="eyebrow"><span /> The proof layer</p>

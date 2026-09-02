@@ -57,3 +57,19 @@ The first scroll test exposed an implementation issue: an ancestor’s overflow 
 Chapter 03 and 04 validation — 2026-09-01
 
 The completed corridor was tested through Guardrails and Handoff. Both chapters correctly advance the visible content, chapter index, and ambient composition while keeping the environment pinned. The Stage 03 and Stage 04 screenshots confirmed legible hierarchy, retained contrast, and a differentiated spatial arrangement rather than a static content swap. The scroll narrative exits into the portfolio’s proof ticker and actual project case studies, connecting visual craft to technical evidence.
+
+Nocturne Hunt interaction validation — 2026-09-02
+
+The standalone panther scene was loaded in the sandbox browser and rendered as a full gallery transition with a dark architectural field, amber-and-indigo light, status copy, a distinct target signal, and the custom panther asset. A real mouse-move test changed the interface state from “Begin the hunt” to “Signal acquired”; the target moved to the cursor position, concentric pulses appeared, and the panther advanced into the scene. The implementation was then adjusted so that the panther keeps to the image-led right portion of the scene when the visitor reads the left-side narrative.
+
+Autonomous panther and symbolic-sphere review — 2026-09-02
+
+A cold-load browser review confirmed the pre-interaction hunt state and the generated Nocturne assets. The panther now has an independent, looping patrol path before any cursor input. On user movement, the design shifts from autonomous patrol to a targeted tracking state. The symbolic hand artwork was rebuilt without a static orb so the blue signal can be animated independently: it lifts from the hand, follows a light trail, and reappears as a landing object in the proof layer when that section enters the viewport. The motion-reduced preference receives the same content with no nonessential animation.
+
+Symbolic-sphere test setup — 2026-09-02
+
+The browser was reset and the approach section was targeted directly for motion validation. The static source image has been replaced with an original hand-only version, preventing a duplicated orb while the animated signal sphere is active. The new implementation uses an intersection-triggered sequence rather than a looping decorative effect, so the launch is tied to the visitor reaching Amy’s method section.
+
+Illustration correction — 2026-09-02
+
+The requested correction is now implemented: the generated video was fully removed from the source. The method scene uses the original Nocturne artwork containing the same marble hand and the same faceted blue sphere. The animation is a web-native layered illustration treatment, not a video: an exact crop of the original sphere flies over the fixed original artwork along a blue light path while its source emits orbit rings and a final beam. The proof section receives the continuation signal on entry.
