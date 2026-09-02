@@ -73,3 +73,7 @@ The browser was reset and the approach section was targeted directly for motion 
 Illustration correction — 2026-09-02
 
 The requested correction is now implemented: the generated video was fully removed from the source. The method scene uses the original Nocturne artwork containing the same marble hand and the same faceted blue sphere. The animation is a web-native layered illustration treatment, not a video: an exact crop of the original sphere flies over the fixed original artwork along a blue light path while its source emits orbit rings and a final beam. The proof section receives the continuation signal on entry.
+
+Final implementation and Vercel deployment — 2026-09-02
+
+The implementation was corrected to match the requested interaction model: no video remains in the site source. The original hand-and-blue-orb artwork is the fixed visual anchor, while web-native layered animation creates an editorial scene around it. The flight overlay uses a crop from the same original sphere, so it does not introduce a substitute ball. All visual assets are now carried in Amy’s public GitHub repository; the Vercel version has no runtime dependency on Manus storage. TypeScript, production build, and Git diff validation completed without errors. The production Vercel deployment reported READY.
