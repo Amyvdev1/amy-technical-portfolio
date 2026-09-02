@@ -98,6 +98,7 @@ export default function Home() {
   const shellRef = useRef<HTMLDivElement>(null);
   const storyRef = useRef<HTMLElement>(null);
   const [booting, setBooting] = useState(true);
+  const [coreEngaged, setCoreEngaged] = useState(false);
   const progress = useScrollProgress(storyRef);
   const activeScene = Math.min(scenes.length - 1, Math.floor(progress * scenes.length));
   const scene = scenes[activeScene];
@@ -115,6 +116,8 @@ export default function Home() {
       if (!root || event.pointerType === "touch") return;
       root.style.setProperty("--engine-x", `${(event.clientX / window.innerWidth) * 100}%`);
       root.style.setProperty("--engine-y", `${(event.clientY / window.innerHeight) * 100}%`);
+      root.style.setProperty("--engine-drift-x", `${((event.clientX / window.innerWidth) - 0.5) * 2}`);
+      root.style.setProperty("--engine-drift-y", `${((event.clientY / window.innerHeight) - 0.5) * 2}`);
     };
     window.addEventListener("pointermove", setPointer, { passive: true });
     return () => {
@@ -123,8 +126,28 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const root = shellRef.current;
+    if (!root) return;
+    root.style.setProperty("--signal-progress", `${progress}`);
+    root.style.setProperty("--signal-scene", `${activeScene + 1}`);
+  }, [activeScene, progress]);
+
+  const jumpToScene = (index: number) => {
+    const story = storyRef.current;
+    if (!story) return;
+    const range = Math.max(story.offsetHeight - window.innerHeight, 1);
+    const destination = story.offsetTop + range * ((index + 0.04) / scenes.length);
+    window.scrollTo({ top: destination, behavior: "smooth" });
+  };
+
+  const activateCore = () => {
+    setCoreEngaged(true);
+    window.setTimeout(() => setCoreEngaged(false), 1150);
+  };
+
   return (
-    <div ref={shellRef} className={`engine-experience scene-${activeScene + 1} ${booting ? "engine-booting" : "engine-live"}`}>
+    <div ref={shellRef} className={`engine-experience scene-${activeScene + 1} ${coreEngaged ? "core-engaged" : ""} ${booting ? "engine-booting" : "engine-live"}`}>
       <div className="engine-preloader" aria-hidden="true">
         <div className="preloader-mark"><span>AV</span><i /><i /></div>
         <div className="preloader-copy"><span>INITIALIZING SIGNAL ENGINE</span><b>100%</b><i /></div>
@@ -145,7 +168,7 @@ export default function Home() {
               <div className="engine-grid" />
               <div className="engine-radar" />
               <div className="engine-beam beam-one" /><div className="engine-beam beam-two" />
-              <div className="engine-core-rings"><i /><i /><i /><i /><b /></div>
+              <button className="engine-core-rings" type="button" onClick={activateCore} aria-label="Activate the Signal Engine core"><i /><i /><i /><i /><b /></button>
               <div className="engine-scan-line" />
               <div className="engine-lens" />
               <div className="engine-noise" />
@@ -161,10 +184,12 @@ export default function Home() {
             <div className="engine-topline" aria-hidden="true"><span>LIVE SIGNAL</span><i /><b>{scene.label.toUpperCase()}</b><span>SCROLL TO SCRUB</span></div>
 
             <section className="engine-scene-copy" aria-live="polite">
-              <div className="scene-count"><span>{scene.id}</span><i /><small>{scene.label}</small></div>
-              <h1>{scene.title.split("\n").map((line) => <span key={line}>{line}</span>)}<em>{scene.emphasis}</em></h1>
-              <p>{scene.detail}</p>
-              <div className="scene-tags">{scene.telemetry.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              <div className="scene-message" key={scene.id}>
+                <div className="scene-count"><span>{scene.id}</span><i /><small>{scene.label}</small></div>
+                <h1>{scene.title.split("\n").map((line) => <span key={line}>{line}</span>)}<em>{scene.emphasis}</em></h1>
+                <p>{scene.detail}</p>
+                <div className="scene-tags">{scene.telemetry.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              </div>
             </section>
 
             <div className="engine-telemetry" aria-label="Live project telemetry">
@@ -174,11 +199,10 @@ export default function Home() {
             </div>
 
             <nav className="engine-chapter-nav" aria-label="Signal Engine chapters">
-              {scenes.map((item, index) => <a key={item.id} className={index === activeScene ? "active" : ""} href={`#scene-${item.id}`}><span>{item.id}</span><b>{item.short}</b></a>)}
+              {scenes.map((item, index) => <button type="button" key={item.id} className={index === activeScene ? "active" : ""} onClick={() => jumpToScene(index)} aria-label={`Go to scene ${item.id}: ${item.label}`}><span>{item.id}</span><b>{item.short}</b></button>)}
             </nav>
 
             <div className="engine-scroll-note"><span>SCROLL TO ADVANCE</span><ChevronDown size={16} /><span>{String(progressPercent).padStart(3, "0")}</span></div>
-            {scenes.map((item) => <span id={`scene-${item.id}`} className="engine-anchor" key={item.id} />)}
           </div>
         </section>
 

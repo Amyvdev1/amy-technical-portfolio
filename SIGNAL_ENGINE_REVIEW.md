@@ -15,3 +15,11 @@ The result uses the benchmark’s interaction category—scroll-driven scene pro
 ## Live scroll check
 
 In the interactive browser preview, the Signal Engine opened after its loader and retained the fixed cinematic stage while the page scrolled. At 22% scroll, the HUD’s live scroll data updated to `022%`, while the grid, scan layer, cursor-responsive lens, core object, chapter navigation, and content remained anchored as designed. The second scene begins just after 25% of the pinned chapter range; this confirms the scroll-dependent stage is using its full intended progression rather than behaving as a conventional scrolling hero.
+
+## Interactive refinement validation
+
+The revised chapter controls were verified in the browser. Selecting `03 / STEER` smoothly scrubbed the pinned Signal Engine to 51% progress, activated the third scene, updated the live labels to `HUMAN GUARDRAIL`, changed the telemetry to `CORE STATE / STEER`, and rendered the third chapter’s content. The visual transition also shifts the core treatment and background depth. The core is now a keyboard-accessible interactive control with a brief light-burst response, while cursor movement drives low-amplitude image, radar, core, and outro depth shifts.
+
+## Mobile refinement validation
+
+The refined mobile scene remains visually dense without losing the reading path: the physical signal core keeps its hierarchy in the upper visual field, the scene title and serif emphasis hold a clear lower-third composition, and the chapter selector stays available without taking over the view. The high-information HUD reduces to the essential visual controls at this breakpoint, preserving the cinematic rather than dashboard-like feel.
