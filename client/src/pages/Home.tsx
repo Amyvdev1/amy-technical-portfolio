@@ -254,7 +254,7 @@ export default function Home() {
 
         <section id="contact" className="engine-outro">
           <div className="outro-orbit" aria-hidden="true"><i /><i /><i /><b>AV</b></div>
-          <div className="outro-copy"><p className="engine-eyebrow"><i /> OPEN TO OPPORTUNITIES</p><h2>Let&apos;s build the<br /><em>next clear move.</em></h2><p>Open to software development, AI automation, technical operations, implementation, and product-supporting opportunities.</p><div className="outro-actions"><a href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={18} /></a><a href="https://www.linkedin.com/in/amy-villa-5830aa433/" target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={16} /></a></div></div>
+          <div className="outro-copy"><p className="engine-eyebrow"><i /> OPEN TO OPPORTUNITIES</p><h2>Let&apos;s build the<br /><em>next clear move.</em></h2><p>Open to software development, AI automation, technical operations, implementation, and product-supporting opportunities.</p><div className="outro-actions"><a href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={18} /></a><Link href="/recruiter-proof">Recruiter Fast Path <ArrowUpRight size={16} /></Link></div></div>
           <div className="outro-meta"><span>MIAMI, FL / REMOTE</span><span>US WORK AUTHORIZED</span><span>NATIVE ENGLISH / SPANISH</span><a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer"><Github size={15} /> PUBLIC GITHUB</a></div>
         </section>
       </main>

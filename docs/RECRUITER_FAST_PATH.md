@@ -39,5 +39,4 @@ Amy’s resume uses **3+ years of hands-on experience across digital systems, AI
 - **Portfolio:** [amy-villa-signal-gallery.vercel.app](https://amy-villa-signal-gallery.vercel.app/)
 - **Recruiter proof route:** [amy-villa-signal-gallery.vercel.app/recruiter-proof](https://amy-villa-signal-gallery.vercel.app/recruiter-proof)
 - **GitHub:** [github.com/Amyvdev1](https://github.com/Amyvdev1)
-- **LinkedIn:** [linkedin.com/in/amy-villa-5830aa433](https://www.linkedin.com/in/amy-villa-5830aa433/)
 - **Email:** [amyv.dev@gmail.com](mailto:amyv.dev@gmail.com)

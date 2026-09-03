@@ -2,7 +2,7 @@
 
 > **Software Developer · AI Automation · Workflow Systems**
 
-[Live portfolio](https://amy-villa-signal-gallery.vercel.app/) · [Recruiter Fast Path](https://amy-villa-signal-gallery.vercel.app/recruiter-proof) · [LinkedIn](https://www.linkedin.com/in/amy-v-5830aa433/) · [GitHub profile](https://github.com/Amyvdev1) · [Contact Amy](mailto:amyv.dev@gmail.com)
+[Live portfolio](https://amy-villa-signal-gallery.vercel.app/) · [Recruiter Fast Path](https://amy-villa-signal-gallery.vercel.app/recruiter-proof) · [GitHub profile](https://github.com/Amyvdev1) · [Contact Amy](mailto:amyv.dev@gmail.com)
 
 A cinematic **React + TypeScript** portfolio that presents four independent software studies. Each study focuses on a practical systems question: how to make state, ownership, review, accessibility, and the next action visible to the people using an interface.
 
@@ -75,4 +75,4 @@ Every exhibit is a **self-directed portfolio demonstration** using sample data. 
 
 Amy is open to software development, AI automation, implementation, technical operations, and product-supporting opportunities.
 
-**[amyv.dev@gmail.com](mailto:amyv.dev@gmail.com)** · [LinkedIn](https://www.linkedin.com/in/amy-v-5830aa433/) · [GitHub](https://github.com/Amyvdev1)
+**[amyv.dev@gmail.com](mailto:amyv.dev@gmail.com)** · [GitHub](https://github.com/Amyvdev1)
