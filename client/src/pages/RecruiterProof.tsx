@@ -20,7 +20,7 @@ const proofCards = [
     detail: "A focused workflow API demonstration organized around validation, constrained task states, role-gated demo transitions, and audit-friendly events.",
     source: "https://github.com/Amyvdev1/clearrout-api",
     action: "Open ClearRoute source",
-    proof: ["Versioned REST routes", "State-transition logic", "Three focused API tests"],
+    proof: ["Versioned REST routes", "Explicit legal transition graph", "Five focused API tests"],
   },
   {
     index: "03",
