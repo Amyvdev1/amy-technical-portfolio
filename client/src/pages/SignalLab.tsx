@@ -102,7 +102,7 @@ export default function SignalLab() {
         </section>
 
         <section className="lab-principles">
-          <div className="portrait-panel"><img src="/manus-storage/amy-operator-portrait_a5278320.png" alt="Amy Villa" /><div className="portrait-tag"><span>AMY VILLA</span><small>BUILDING FOR CLARITY</small></div></div>
+          <div className="portrait-panel"><img src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/amy-operator-portrait.png" alt="Amy Villa" /><div className="portrait-tag"><span>AMY VILLA</span><small>BUILDING FOR CLARITY</small></div></div>
           <div className="principles-copy">
             <p className="lab-eyebrow"><CircleDot size={12} /> The differentiator</p>
             <h2>Good systems make people feel <i>more capable.</i></h2>
