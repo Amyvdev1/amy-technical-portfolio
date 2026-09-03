@@ -44,39 +44,39 @@ const scenes = [
 const projects = [
   {
     id: "01",
-    kind: "WORKFLOW SURFACE",
-    name: "RelayOps",
-    description: "A focused workspace for making task ownership, approvals, and state changes easy to see.",
-    stack: "React · TypeScript · Workflow design",
-    href: "/projects/relayops",
-    code: "INTERACTIVE DEMO",
+    kind: "FULL-STACK WORKFLOW",
+    name: "ForgeFlow AI Automation",
+    description: "A personal full-stack code sample that makes workflow state, validation, optional AI use, fallback behavior, and human review visible.",
+    stack: "React · TypeScript · FastAPI · SQLite · Docker · CI",
+    href: "/projects/forgeflow-ai-automation",
+    code: "PUBLIC CODE SAMPLE",
   },
   {
     id: "02",
     kind: "SYSTEM FOUNDATION",
     name: "ClearRoute API",
-    description: "A role-aware task API organized around clear inputs, traceable events, and dependable handoffs.",
-    stack: "Python · FastAPI · Validation",
+    description: "A role-aware task API organized around typed inputs, explicit legal state transitions, traceable events, and dependable handoffs.",
+    stack: "Python · FastAPI · Pydantic · pytest · CI",
     href: "/projects/clearrout-api",
     code: "PUBLIC CODE SAMPLE",
   },
   {
     id: "03",
-    kind: "CUSTOMER FLOW",
-    name: "ClientFlow Studio",
-    description: "A lightweight operational interface for organizing leads, notes, next actions, and follow-through.",
-    stack: "React · TypeScript · Product UX",
-    href: "/projects/clientflow-studio",
-    code: "INTERACTIVE DEMO",
-  },
-  {
-    id: "04",
     kind: "ACCESSIBLE WORKFLOW",
     name: "AccessPath Console",
-    description: "A keyboard-first React workboard documenting semantic structure, form feedback, live status, and axe-based regression checks.",
+    description: "A keyboard-first React workboard documenting semantic structure, form feedback, live status, and targeted axe-based regression checks.",
     stack: "React · TypeScript · Accessibility practice",
     href: "/projects/accesspath-console",
     code: "PUBLIC CODE SAMPLE",
+  },
+  {
+    id: "04",
+    kind: "WORKFLOW SURFACE",
+    name: "RelayOps",
+    description: "A focused interactive study for making task ownership, approval moments, and state changes easy to understand.",
+    stack: "React · TypeScript · Workflow design",
+    href: "/projects/relayops",
+    code: "INTERACTIVE STUDY",
   },
 ];
 
@@ -227,8 +227,8 @@ export default function Home() {
         </section>
 
         <section id="work" className="systems-deck">
-          <div className="deck-topbar"><p><i /> SELECTED SYSTEMS</p><span>04 INDEPENDENT STUDIES</span></div>
-          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Each exhibit is an independently built product study. They show how I approach interface decisions, system boundaries, clear state, human-centered handoffs, and practical accessibility.</p></div>
+          <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>04 INDEPENDENT STUDIES</span></div>
+          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for an inspectable full-stack workflow sample, then follow the API and accessibility studies. Every code sample states its boundaries before a reviewer clicks into the work.</p></div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>
