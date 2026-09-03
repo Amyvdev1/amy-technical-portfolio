@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowUpRight, Check, ChevronRight, Clock3, Code2, FileCheck2, LockKeyhole, MoreHorizontal, Plus, ShieldCheck, Sparkles, UserRound } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams } from "wouter";
+import AccessPathCaseStudy from "../components/AccessPathCaseStudy";
 
 const projectData = {
   relayops: {
@@ -26,6 +27,14 @@ const projectData = {
     description: "An interactive personal demo for organizing incoming leads, relevant context, and human follow-up. It keeps the workflow lightweight while making ownership and next steps explicit.",
     stack: ["React", "TypeScript", "Product UX", "Customer operations"],
     question: "How can a lightweight workspace help a team follow up with context rather than just a status label?",
+  },
+  "accesspath-console": {
+    eyebrow: "04 / Accessibility practice",
+    title: "AccessPath Console",
+    subtitle: "A clear next step, for every user.",
+    description: "A self-directed React and TypeScript workboard built to practice semantic structure, keyboard-operable controls, visible focus, labelled forms, live status updates, responsive layouts, and automated accessibility checks.",
+    stack: ["React", "TypeScript", "Semantic HTML", "axe regression tests"],
+    question: "How can a small workflow interface keep status and recovery guidance available to people using keyboard and assistive technology?",
   },
 } as const;
 
@@ -71,5 +80,5 @@ export default function DemoPage() {
   const { slug } = useParams<{ slug: ProjectSlug }>();
   const project = projectData[slug as ProjectSlug];
   if (!project) return <Shell><main className="missing-page"><h1>Project not found.</h1><Link href="/">Return home</Link></main></Shell>;
-  return <Shell><main className="demo-page"><section className="demo-intro"><p className="eyebrow"><span /> {project.eyebrow}</p><h1>{project.title}</h1><h2>{project.subtitle}</h2><p>{project.description}</p><div className="demo-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></section><section className="showcase-wrap">{slug === "relayops" ? <RelayOpsDemo /> : slug === "clearrout-api" ? <ClearRouteDemo /> : <ClientFlowDemo />}</section><section className="project-rationale"><div><p className="eyebrow"><span /> Design question</p><h3>{project.question}</h3></div><div><p className="eyebrow"><span /> Evidence boundary</p><p>This is a self-directed portfolio demonstration. It does not represent client work, a public product, user data, or production outcomes.</p>{slug === "clearrout-api" && <a href="https://github.com/Amyvdev1/clearrout-api" target="_blank" rel="noreferrer">View source on GitHub <ArrowUpRight size={16} /></a>}<a href="mailto:amyv.dev@gmail.com">Request a walkthrough <ArrowUpRight size={16} /></a></div></section></main></Shell>;
+  return <Shell><main className="demo-page"><section className="demo-intro"><p className="eyebrow"><span /> {project.eyebrow}</p><h1>{project.title}</h1><h2>{project.subtitle}</h2><p>{project.description}</p><div className="demo-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></section><section className="showcase-wrap">{slug === "relayops" ? <RelayOpsDemo /> : slug === "clearrout-api" ? <ClearRouteDemo /> : slug === "accesspath-console" ? <AccessPathCaseStudy /> : <ClientFlowDemo />}</section><section className="project-rationale"><div><p className="eyebrow"><span /> Design question</p><h3>{project.question}</h3></div><div><p className="eyebrow"><span /> Evidence boundary</p><p>{slug === "accesspath-console" ? "This is a self-directed accessibility-practice code sample. It documents implementation patterns and automated regression checks; it does not claim federal Section 508 certification, formal WCAG conformance, client work, or production outcomes." : "This is a self-directed portfolio demonstration. It does not represent client work, a public product, user data, or production outcomes."}</p>{slug === "clearrout-api" && <a href="https://github.com/Amyvdev1/clearrout-api" target="_blank" rel="noreferrer">View source on GitHub <ArrowUpRight size={16} /></a>}{slug === "accesspath-console" && <a href="https://github.com/Amyvdev1/accessible-workflow-console" target="_blank" rel="noreferrer">View source on GitHub <ArrowUpRight size={16} /></a>}<a href="mailto:amyv.dev@gmail.com">Request a walkthrough <ArrowUpRight size={16} /></a></div></section></main></Shell>;
 }

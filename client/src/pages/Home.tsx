@@ -69,6 +69,15 @@ const projects = [
     href: "/projects/clientflow-studio",
     code: "INTERACTIVE DEMO",
   },
+  {
+    id: "04",
+    kind: "ACCESSIBLE WORKFLOW",
+    name: "AccessPath Console",
+    description: "A keyboard-first React workboard documenting semantic structure, form feedback, live status, and axe-based regression checks.",
+    stack: "React · TypeScript · Accessibility practice",
+    href: "/projects/accesspath-console",
+    code: "PUBLIC CODE SAMPLE",
+  },
 ];
 
 function useScrollProgress(reference: React.RefObject<HTMLElement | null>) {
@@ -218,8 +227,8 @@ export default function Home() {
         </section>
 
         <section id="work" className="systems-deck">
-          <div className="deck-topbar"><p><i /> SELECTED SYSTEMS</p><span>03 INDEPENDENT STUDIES</span></div>
-          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Each exhibit is an independently built product study. They show how I approach interface decisions, system boundaries, clear state, and human-centered handoffs.</p></div>
+          <div className="deck-topbar"><p><i /> SELECTED SYSTEMS</p><span>04 INDEPENDENT STUDIES</span></div>
+          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Each exhibit is an independently built product study. They show how I approach interface decisions, system boundaries, clear state, human-centered handoffs, and practical accessibility.</p></div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>
