@@ -1,0 +1,35 @@
+name: Verify Signal Engine Portfolio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Typecheck, proof checks, and production build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "10.4.1"
+          run_install: false
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm check
+      - name: Verify recruiter proof path
+        run: pnpm verify:recruiter-proof
+      - name: Build production portfolio
+        run: pnpm build

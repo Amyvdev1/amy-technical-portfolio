@@ -9,6 +9,7 @@
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
+    "verify:recruiter-proof": "node scripts/verify-recruiter-proof.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {
