@@ -165,7 +165,7 @@ export default function Home() {
       <header className="engine-header">
         <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>signal systems</em></a>
         <div className="engine-header-center"><i /><span>PERSONAL PORTFOLIO / 2026</span><i /></div>
-        <a href="mailto:amyv.dev@gmail.com" className="engine-contact">START A CONVERSATION <ArrowUpRight size={15} /></a>
+        <div className="engine-header-actions"><Link href="/recruiter-proof" className="engine-proof-link">RECRUITER PROOF</Link><a href="mailto:amyv.dev@gmail.com" className="engine-contact">START A CONVERSATION <ArrowUpRight size={15} /></a></div>
       </header>
 
       <main id="top">
