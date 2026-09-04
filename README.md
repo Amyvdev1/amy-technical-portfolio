@@ -16,7 +16,7 @@ This repository is the React + TypeScript portfolio shell around a set of public
 | **[ForgeFlow AI Automation](https://github.com/Amyvdev1/forgeflow-ai-automation)** | React/TypeScript dashboard, FastAPI, SQLite, Docker, tests, CI | Typed API contracts, persisted execution state, visible fallback behavior, explicit human review |
 | **[ClearRoute API](https://github.com/Amyvdev1/clearrout-api)** | FastAPI, Pydantic, task-state rules, audit events, API tests | Predictable contracts, explicit transitions, integration errors, traceability |
 | **[AccessPath Console](https://github.com/Amyvdev1/accessible-workflow-console)** | React/TypeScript, semantic HTML, keyboard behavior, axe/Vitest checks | Recovery, visible focus, validation feedback, live status, accessible product craft |
-| **Signal Engine portfolio** | `Home.tsx`, `RecruiterProof.tsx`, project studies, CI | Product storytelling, responsive interaction, recruiter evidence architecture |
+| **Signal Engine portfolio** | `Home.tsx`, `RecruiterProof.tsx`, product-state helpers, CI | Product storytelling, tested interaction math, responsive behavior, recruiter evidence architecture |
 
 If you have only a few minutes, open the **[Recruiter Fast Path](https://amy-villa-signal-gallery.vercel.app/recruiter-proof)** and start with ForgeFlow.
 
@@ -27,7 +27,7 @@ If you have only a few minutes, open the **[Recruiter Fast Path](https://amy-vil
 - **API UX** — validation, explicit state transitions, understandable errors, and consumer-oriented contracts across the linked backend samples.
 - **Failure and recovery** — visible degraded/fallback states instead of silent or misleading success paths.
 - **Accessibility practice** — keyboard-operable controls, semantic structure, focus treatment, validation recovery, and live status feedback.
-- **Verification discipline** — type checking, focused tests, recruiter-proof checks, production builds, and GitHub Actions.
+- **Verification discipline** — behavior tests, type checking, recruiter-proof checks, production builds, bundle budgets, and GitHub Actions.
 
 ## Architecture
 
@@ -53,13 +53,15 @@ React + TypeScript portfolio
 |---|---|
 | [`client/src/App.tsx`](client/src/App.tsx) | Application routing and resilience boundary |
 | [`client/src/lib/productEvidence.ts`](client/src/lib/productEvidence.ts) | Typed recruiter-facing candidate and project evidence — one source of truth |
+| [`client/src/lib/signalEngine.ts`](client/src/lib/signalEngine.ts) | Pure, tested scene/progress navigation math used by the cinematic home experience |
 | [`client/src/pages/Home.tsx`](client/src/pages/Home.tsx) | Signal Engine narrative, project catalog, and interactive product surface |
 | [`client/src/pages/RecruiterProof.tsx`](client/src/pages/RecruiterProof.tsx) | Fast technical review path for product/API conversations |
 | [`client/src/pages/DemoPage.tsx`](client/src/pages/DemoPage.tsx) | Interactive project-study surfaces |
 | [`client/src/pages/SignalLab.tsx`](client/src/pages/SignalLab.tsx) | Stateful workflow simulation |
 | [`client/src/components/ErrorBoundary.tsx`](client/src/components/ErrorBoundary.tsx) | User-safe recovery for unexpected render failures |
 | [`scripts/verify-product-engineering.mjs`](scripts/verify-product-engineering.mjs) | Repository hygiene and recruiter-signal regression checks |
-| [`.github/workflows/verify.yml`](.github/workflows/verify.yml) | Tests → hygiene checks → typecheck → recruiter verification → production build |
+| [`scripts/verify-build-budget.mjs`](scripts/verify-build-budget.mjs) | Production JS/CSS raw + gzip size budgets that guard against accidental re-bloat |
+| [`.github/workflows/verify.yml`](.github/workflows/verify.yml) | Tests → hygiene checks → typecheck → recruiter verification → production build → bundle budgets |
 
 ## Run locally
 
@@ -76,9 +78,10 @@ pnpm verify:product-engineering
 pnpm check
 pnpm verify:recruiter-proof
 pnpm build
+pnpm verify:bundle
 ```
 
-The pull-request workflow runs the same critical path before changes are considered ready to merge.
+The pull-request workflow runs the same critical path before changes are considered ready to merge. The bundle guard currently caps total production JavaScript at **300 KiB raw / 95 KiB gzip** and CSS at **180 KiB raw / 45 KiB gzip** so performance regressions become visible during review.
 
 ## Product decisions worth discussing
 
