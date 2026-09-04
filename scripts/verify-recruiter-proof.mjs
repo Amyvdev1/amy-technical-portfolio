@@ -11,8 +11,9 @@ const checks = [
   ["client/src/lib/productEvidence.ts", "https://github.com/Amyvdev1/forgeflow-ai-automation"],
   ["client/src/pages/RecruiterProof.tsx", "publicProjectEvidence"],
   ["client/src/pages/RecruiterProof.tsx", "CandidateSnapshot"],
-  ["client/src/pages/DemoPage.tsx", '"forgeflow-ai-automation"'],
+  ["client/src/pages/Home.tsx", "publicProjectEvidence"],
   ["client/src/pages/Home.tsx", "RECRUITER PROOF"],
+  ["client/src/pages/DemoPage.tsx", '"forgeflow-ai-automation"'],
   ["client/src/App.tsx", "RecruiterProof"],
   ["client/index.html", "Product Engineer · Developer Experience"],
 ];
@@ -39,4 +40,4 @@ if (html.includes("maximum-scale=") || html.includes("VITE_ANALYTICS")) {
   throw new Error("Portfolio entrypoint contains an accessibility or internal-runtime regression.");
 }
 
-console.log("Recruiter proof, product evidence, source links, and portability checks passed.");
+console.log("Recruiter proof, shared product evidence, source links, and portability checks passed.");
