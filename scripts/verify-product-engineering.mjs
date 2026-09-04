@@ -44,6 +44,30 @@ for (const stalePattern of [
   }
 }
 
+const app = read("client/src/App.tsx");
+for (const marker of [
+  "lazy(secondaryRouteLoaders.recruiterProof)",
+  "lazy(secondaryRouteLoaders.signalLab)",
+  "lazy(secondaryRouteLoaders.demoPage)",
+  "lazy(secondaryRouteLoaders.notFound)",
+  "<Suspense",
+]) {
+  if (!app.includes(marker)) {
+    throw new Error(`Secondary route loading optimization is missing: ${marker}`);
+  }
+}
+
+for (const eagerImport of [
+  'import RecruiterProof from "./pages/RecruiterProof"',
+  'import SignalLab from "./pages/SignalLab"',
+  'import DemoPage from "./pages/DemoPage"',
+  'import NotFound from "@/pages/NotFound"',
+]) {
+  if (app.includes(eagerImport)) {
+    throw new Error(`Secondary route became eager again: ${eagerImport}`);
+  }
+}
+
 const viteConfig = read("vite.config.ts");
 for (const marker of ["vitePluginManusRuntime", "vitePluginManusDebugCollector", "vitePluginStorageProxy"]) {
   if (viteConfig.includes(marker)) {
