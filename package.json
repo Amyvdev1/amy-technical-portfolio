@@ -8,8 +8,10 @@
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
+    "test:portfolio": "vitest run client/src/lib/productEvidence.test.ts",
     "check": "tsc --noEmit",
     "verify:recruiter-proof": "node scripts/verify-recruiter-proof.mjs",
+    "verify:product-engineering": "node scripts/verify-product-engineering.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {
