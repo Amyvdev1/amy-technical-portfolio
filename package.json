@@ -12,6 +12,7 @@
     "check": "tsc --noEmit",
     "verify:recruiter-proof": "node scripts/verify-recruiter-proof.mjs",
     "verify:product-engineering": "node scripts/verify-product-engineering.mjs",
+    "verify:bundle": "node scripts/verify-build-budget.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {
