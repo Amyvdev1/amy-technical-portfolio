@@ -1,6 +1,6 @@
 import { candidateProfile, publicProjectEvidence } from "@/lib/productEvidence";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, Check, ChevronDown, Github, Mail, MoveRight, Orbit, Sparkles } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Github, Mail, MoveRight } from "lucide-react";
 import { Link } from "wouter";
 
 const scenes = [
