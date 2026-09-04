@@ -10,6 +10,7 @@ const forbiddenArtifacts = [
   "SIGNAL_ARCHITECTURE_REVIEW.txt",
   "SIGNAL_ENGINE_REVIEW.md",
   "components.json",
+  "template.json",
   "patches/wouter@3.7.1.patch",
   "server/index.ts",
   "client/src/components/ui",
