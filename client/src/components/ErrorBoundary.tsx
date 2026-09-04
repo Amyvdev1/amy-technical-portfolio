@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { AlertTriangle, RotateCcw } from "lucide-react";
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
@@ -27,33 +26,25 @@ class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-background p-8">
-          <div className="flex w-full max-w-2xl flex-col items-center p-8">
-            <AlertTriangle
-              size={48}
-              className="mb-6 flex-shrink-0 text-destructive"
-              aria-hidden="true"
-            />
-            <h2 className="mb-4 text-xl">The interface hit an unexpected state.</h2>
-            <p className="mb-6 max-w-lg text-center text-sm text-muted-foreground">
-              Reload to start with a clean session. If the problem repeats, the public
-              source and verification commands provide a reproducible path for debugging
-              the failure without exposing internal error details in the interface.
+        <main className="flex min-h-screen items-center justify-center bg-[#07101f] p-8 text-slate-100">
+          <section aria-labelledby="render-error-title" className="flex w-full max-w-2xl flex-col items-center text-center">
+            <AlertTriangle size={48} className="mb-6 text-amber-300" aria-hidden="true" />
+            <h1 id="render-error-title" className="mb-4 text-2xl font-semibold">
+              The interface hit an unexpected state.
+            </h1>
+            <p className="mb-6 max-w-lg text-sm leading-6 text-slate-300">
+              Reload to start with a clean session. If the problem repeats, the public source and verification commands provide a reproducible debugging path without exposing internal error details in the interface.
             </p>
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className={cn(
-                "flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2",
-                "bg-primary text-primary-foreground",
-                "hover:opacity-90"
-              )}
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-blue-100"
             >
               <RotateCcw size={16} aria-hidden="true" />
               Reload page
             </button>
-          </div>
-        </div>
+          </section>
+        </main>
       );
     }
 
