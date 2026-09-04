@@ -27,7 +27,7 @@ describe("Signal Engine navigation math", () => {
     expect(getSceneIndex(1, 4)).toBe(3);
   });
 
-  it("calculates a stable destination for direct scene navigation", () => {
+  it("targets the center of a scene for direct navigation", () => {
     expect(
       getSceneDestination({
         storyTop: 120,
@@ -36,7 +36,7 @@ describe("Signal Engine navigation math", () => {
         sceneIndex: 2,
         sceneCount: 4,
       }),
-    ).toBe(882);
+    ).toBe(870);
   });
 
   it("rejects invalid scene counts instead of producing NaN", () => {
