@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   verify:
-    name: Tests, typecheck, proof checks, and production build
+    name: Tests, typecheck, proof checks, production build, and bundle budgets
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -35,3 +35,5 @@ jobs:
         run: pnpm verify:recruiter-proof
       - name: Build production portfolio
         run: pnpm build
+      - name: Enforce production bundle budgets
+        run: pnpm verify:bundle
