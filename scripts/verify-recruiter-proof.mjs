@@ -3,12 +3,18 @@ import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
 const read = (relativePath) => readFileSync(resolve(root, relativePath), "utf8");
+
 const checks = [
-  ["client/src/pages/RecruiterProof.tsx", "ForgeFlow AI Automation"],
-  ["client/src/pages/RecruiterProof.tsx", "https://github.com/Amyvdev1/forgeflow-ai-automation"],
+  ["client/src/lib/productEvidence.ts", "Product Engineer · Developer Experience"],
+  ["client/src/lib/productEvidence.ts", "Spain · CET/CEST · Remote"],
+  ["client/src/lib/productEvidence.ts", "ForgeFlow AI Automation"],
+  ["client/src/lib/productEvidence.ts", "https://github.com/Amyvdev1/forgeflow-ai-automation"],
+  ["client/src/pages/RecruiterProof.tsx", "publicProjectEvidence"],
+  ["client/src/pages/RecruiterProof.tsx", "CandidateSnapshot"],
   ["client/src/pages/DemoPage.tsx", '"forgeflow-ai-automation"'],
-  ["client/src/pages/Home.tsx", "ForgeFlow AI Automation"],
+  ["client/src/pages/Home.tsx", "RECRUITER PROOF"],
   ["client/src/App.tsx", "RecruiterProof"],
+  ["client/index.html", "Product Engineer · Developer Experience"],
 ];
 
 for (const [file, expected] of checks) {
@@ -17,9 +23,14 @@ for (const [file, expected] of checks) {
   }
 }
 
-for (const file of ["client/src/index.css", "client/src/pages/Home.tsx", "client/src/pages/SignalLab.tsx"]) {
+for (const file of [
+  "client/src/index.css",
+  "client/src/pages/Home.tsx",
+  "client/src/pages/SignalLab.tsx",
+  "vite.config.ts",
+]) {
   if (read(file).includes("/manus-storage/")) {
-    throw new Error(`Unportable Manus storage reference found in ${file}`);
+    throw new Error(`Unportable internal storage reference found in ${file}`);
   }
 }
 
@@ -28,4 +39,4 @@ if (html.includes("maximum-scale=") || html.includes("VITE_ANALYTICS")) {
   throw new Error("Portfolio entrypoint contains an accessibility or internal-runtime regression.");
 }
 
-console.log("Recruiter proof route, public-source links, and portable asset checks passed.");
+console.log("Recruiter proof, product evidence, source links, and portability checks passed.");
