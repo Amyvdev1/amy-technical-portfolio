@@ -28,6 +28,22 @@ if (recruiterProof.includes("Miami, FL / Remote")) {
   throw new Error("Recruiter proof still contains the old Miami location.");
 }
 
+const home = read("client/src/pages/Home.tsx");
+for (const helper of ["getScrollProgress", "getSceneIndex", "getSceneDestination"]) {
+  if (!home.includes(helper)) {
+    throw new Error(`Home no longer uses the tested Signal Engine helper: ${helper}`);
+  }
+}
+
+for (const stalePattern of [
+  "Math.floor(progress * scenes.length)",
+  "(index + 0.04) / scenes.length",
+]) {
+  if (home.includes(stalePattern)) {
+    throw new Error(`Home reintroduced duplicated Signal Engine math: ${stalePattern}`);
+  }
+}
+
 const viteConfig = read("vite.config.ts");
 for (const marker of ["vitePluginManusRuntime", "vitePluginManusDebugCollector", "vitePluginStorageProxy"]) {
   if (viteConfig.includes(marker)) {
