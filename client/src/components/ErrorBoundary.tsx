@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { AlertTriangle, RotateCcw } from "lucide-react";
-import { Component, ReactNode } from "react";
+import { Component, type ErrorInfo, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -8,47 +8,49 @@ interface Props {
 
 interface State {
   hasError: boolean;
-  error: Error | null;
 }
 
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+  static getDerivedStateFromError(): State {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error("Portfolio render failure", { error, componentStack: info.componentStack });
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex items-center justify-center min-h-screen p-8 bg-background">
-          <div className="flex flex-col items-center w-full max-w-2xl p-8">
+        <div className="flex min-h-screen items-center justify-center bg-background p-8">
+          <div className="flex w-full max-w-2xl flex-col items-center p-8">
             <AlertTriangle
               size={48}
-              className="text-destructive mb-6 flex-shrink-0"
+              className="mb-6 flex-shrink-0 text-destructive"
+              aria-hidden="true"
             />
-
-            <h2 className="text-xl mb-4">An unexpected error occurred.</h2>
-
-            <div className="p-4 w-full rounded bg-muted overflow-auto mb-6">
-              <pre className="text-sm text-muted-foreground whitespace-break-spaces">
-                {this.state.error?.stack}
-              </pre>
-            </div>
-
+            <h2 className="mb-4 text-xl">The interface hit an unexpected state.</h2>
+            <p className="mb-6 max-w-lg text-center text-sm text-muted-foreground">
+              Reload to start with a clean session. If the problem repeats, the public
+              source and verification commands provide a reproducible path for debugging
+              the failure without exposing internal error details in the interface.
+            </p>
             <button
+              type="button"
               onClick={() => window.location.reload()}
               className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg",
+                "flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2",
                 "bg-primary text-primary-foreground",
-                "hover:opacity-90 cursor-pointer"
+                "hover:opacity-90"
               )}
             >
-              <RotateCcw size={16} />
-              Reload Page
+              <RotateCcw size={16} aria-hidden="true" />
+              Reload page
             </button>
           </div>
         </div>
