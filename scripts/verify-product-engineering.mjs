@@ -14,6 +14,7 @@ const forbiddenArtifacts = [
   "patches/wouter@3.7.1.patch",
   "server/index.ts",
   "client/src/components/ui",
+  "docs/superpowers",
 ];
 
 for (const artifact of forbiddenArtifacts) {
