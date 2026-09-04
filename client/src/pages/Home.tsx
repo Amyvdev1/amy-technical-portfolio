@@ -1,4 +1,9 @@
 import { candidateProfile, publicProjectEvidence } from "@/lib/productEvidence";
+import {
+  getSceneDestination,
+  getSceneIndex,
+  getScrollProgress,
+} from "@/lib/signalEngine";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Check, ChevronDown, Github, Mail, MoveRight } from "lucide-react";
 import { Link } from "wouter";
@@ -67,19 +72,37 @@ function useScrollProgress(reference: React.RefObject<HTMLElement | null>) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const update = () => {
+    let frame = 0;
+
+    const readProgress = () => {
       const node = reference.current;
       if (!node) return;
       const rect = node.getBoundingClientRect();
-      const range = Math.max(node.offsetHeight - window.innerHeight, 1);
-      setProgress(Math.max(0, Math.min(1, -rect.top / range)));
+      setProgress(
+        getScrollProgress({
+          top: rect.top,
+          storyHeight: node.offsetHeight,
+          viewportHeight: window.innerHeight,
+        }),
+      );
     };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+
+    const scheduleUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        readProgress();
+      });
+    };
+
+    readProgress();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, [reference]);
 
@@ -89,17 +112,21 @@ function useScrollProgress(reference: React.RefObject<HTMLElement | null>) {
 export default function Home() {
   const shellRef = useRef<HTMLDivElement>(null);
   const storyRef = useRef<HTMLElement>(null);
+  const coreResetTimerRef = useRef<number | null>(null);
   const [booting, setBooting] = useState(true);
   const [coreEngaged, setCoreEngaged] = useState(false);
   const progress = useScrollProgress(storyRef);
-  const activeScene = Math.min(scenes.length - 1, Math.floor(progress * scenes.length));
+  const activeScene = getSceneIndex(progress, scenes.length);
   const scene = scenes[activeScene];
   const progressPercent = Math.round(progress * 100);
 
-  const runtime = useMemo(() => ({
-    journey: `${String(activeScene + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`,
-    coordinates: `${String(25 + activeScene * 13).padStart(3, "0")}.${String(76 - activeScene * 8).padStart(2, "0")}`,
-  }), [activeScene]);
+  const runtime = useMemo(
+    () => ({
+      journey: `${String(activeScene + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`,
+      coordinates: `${String(25 + activeScene * 13).padStart(3, "0")}.${String(76 - activeScene * 8).padStart(2, "0")}`,
+    }),
+    [activeScene],
+  );
 
   useEffect(() => {
     const timer = window.setTimeout(() => setBooting(false), 1650);
@@ -108,13 +135,16 @@ export default function Home() {
       if (!root || event.pointerType === "touch") return;
       root.style.setProperty("--engine-x", `${(event.clientX / window.innerWidth) * 100}%`);
       root.style.setProperty("--engine-y", `${(event.clientY / window.innerHeight) * 100}%`);
-      root.style.setProperty("--engine-drift-x", `${((event.clientX / window.innerWidth) - 0.5) * 2}`);
-      root.style.setProperty("--engine-drift-y", `${((event.clientY / window.innerHeight) - 0.5) * 2}`);
+      root.style.setProperty("--engine-drift-x", `${(event.clientX / window.innerWidth - 0.5) * 2}`);
+      root.style.setProperty("--engine-drift-y", `${(event.clientY / window.innerHeight - 0.5) * 2}`);
     };
     window.addEventListener("pointermove", setPointer, { passive: true });
     return () => {
       window.clearTimeout(timer);
       window.removeEventListener("pointermove", setPointer);
+      if (coreResetTimerRef.current !== null) {
+        window.clearTimeout(coreResetTimerRef.current);
+      }
     };
   }, []);
 
@@ -128,14 +158,25 @@ export default function Home() {
   const jumpToScene = (index: number) => {
     const story = storyRef.current;
     if (!story) return;
-    const range = Math.max(story.offsetHeight - window.innerHeight, 1);
-    const destination = story.offsetTop + range * ((index + 0.04) / scenes.length);
+    const destination = getSceneDestination({
+      storyTop: story.offsetTop,
+      storyHeight: story.offsetHeight,
+      viewportHeight: window.innerHeight,
+      sceneIndex: index,
+      sceneCount: scenes.length,
+    });
     window.scrollTo({ top: destination, behavior: "smooth" });
   };
 
   const activateCore = () => {
+    if (coreResetTimerRef.current !== null) {
+      window.clearTimeout(coreResetTimerRef.current);
+    }
     setCoreEngaged(true);
-    window.setTimeout(() => setCoreEngaged(false), 1150);
+    coreResetTimerRef.current = window.setTimeout(() => {
+      setCoreEngaged(false);
+      coreResetTimerRef.current = null;
+    }, 1150);
   };
 
   return (
@@ -191,7 +232,7 @@ export default function Home() {
             </div>
 
             <nav className="engine-chapter-nav" aria-label="Signal Engine chapters">
-              {scenes.map((item, index) => <button type="button" key={item.id} className={index === activeScene ? "active" : ""} onClick={() => jumpToScene(index)} aria-label={`Go to scene ${item.id}: ${item.label}`}><span>{item.id}</span><b>{item.short}</b></button>)}
+              {scenes.map((item, index) => <button type="button" key={item.id} className={index === activeScene ? "active" : ""} onClick={() => jumpToScene(index)} aria-current={index === activeScene ? "step" : undefined} aria-label={`Go to scene ${item.id}: ${item.label}`}><span>{item.id}</span><b>{item.short}</b></button>)}
             </nav>
 
             <div className="engine-scroll-note"><span>SCROLL TO ADVANCE</span><ChevronDown size={16} /><span>{String(progressPercent).padStart(3, "0")}</span></div>
