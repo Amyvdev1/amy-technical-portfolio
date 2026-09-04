@@ -1,3 +1,4 @@
+import { candidateProfile, publicProjectEvidence } from "@/lib/productEvidence";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown, ArrowUpRight, Check, ChevronDown, Github, Mail, MoveRight, Orbit, Sparkles } from "lucide-react";
 import { Link } from "wouter";
@@ -42,33 +43,15 @@ const scenes = [
 ];
 
 const projects = [
-  {
-    id: "01",
-    kind: "FULL-STACK WORKFLOW",
-    name: "ForgeFlow AI Automation",
-    description: "A personal full-stack code sample that makes workflow state, validation, optional AI use, fallback behavior, and human review visible.",
-    stack: "React · TypeScript · FastAPI · SQLite · Docker · CI",
-    href: "/projects/forgeflow-ai-automation",
+  ...publicProjectEvidence.map((project) => ({
+    id: project.index,
+    kind: project.type,
+    name: project.name,
+    description: project.detail,
+    stack: project.stack,
+    href: `/projects/${project.slug}`,
     code: "PUBLIC CODE SAMPLE",
-  },
-  {
-    id: "02",
-    kind: "SYSTEM FOUNDATION",
-    name: "ClearRoute API",
-    description: "A role-aware task API organized around typed inputs, explicit legal state transitions, traceable events, and dependable handoffs.",
-    stack: "Python · FastAPI · Pydantic · pytest · CI",
-    href: "/projects/clearrout-api",
-    code: "PUBLIC CODE SAMPLE",
-  },
-  {
-    id: "03",
-    kind: "ACCESSIBLE WORKFLOW",
-    name: "AccessPath Console",
-    description: "A keyboard-first React workboard documenting semantic structure, form feedback, live status, and targeted axe-based regression checks.",
-    stack: "React · TypeScript · Accessibility practice",
-    href: "/projects/accesspath-console",
-    code: "PUBLIC CODE SAMPLE",
-  },
+  })),
   {
     id: "04",
     kind: "WORKFLOW SURFACE",
@@ -163,8 +146,8 @@ export default function Home() {
       </div>
 
       <header className="engine-header">
-        <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>signal systems</em></a>
-        <div className="engine-header-center"><i /><span>PERSONAL PORTFOLIO / 2026</span><i /></div>
+        <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>product systems</em></a>
+        <div className="engine-header-center"><i /><span>PRODUCT ENGINEERING PORTFOLIO / 2026</span><i /></div>
         <div className="engine-header-actions"><Link href="/recruiter-proof" className="engine-proof-link">RECRUITER PROOF</Link><a href="mailto:amyv.dev@gmail.com" className="engine-contact">START A CONVERSATION <ArrowUpRight size={15} /></a></div>
       </header>
 
@@ -187,7 +170,7 @@ export default function Home() {
               <div className="hud-unit"><span>AMY VILLA</span><b>AV / 01</b></div>
               <div className="hud-rule" />
               <div className="hud-stack"><span>SCENE</span><b>{runtime.journey}</b><span>AXIS</span><b>{runtime.coordinates}</b></div>
-              <div className="hud-vertical">SIGNAL ENGINE · INDEPENDENT SYSTEMS</div>
+              <div className="hud-vertical">SIGNAL ENGINE · PRODUCT SYSTEMS</div>
             </aside>
 
             <div className="engine-topline" aria-hidden="true"><span>LIVE SIGNAL</span><i /><b>{scene.label.toUpperCase()}</b><span>SCROLL TO SCRUB</span></div>
@@ -221,14 +204,14 @@ export default function Home() {
           <div className="manifesto-copy">
             <p className="engine-eyebrow"><i /> WHAT THIS WORK IS ABOUT</p>
             <h2>Built for the moment<br />a team needs to <em>move.</em></h2>
-            <p>I build technical portfolio studies around a simple belief: a useful system makes what matters visible. It respects context, turns fuzzy work into a clear path, and helps the next person act with confidence.</p>
-            <div className="manifesto-signature"><span>01</span><p>Systems thinking<br />made tangible.</p><MoveRight size={21} /></div>
+            <p>I build product engineering studies around a simple belief: a useful interface should make system state, failure behavior, and the next action understandable without forcing the user to reconstruct the context.</p>
+            <div className="manifesto-signature"><span>01</span><p>Product judgment<br />made inspectable.</p><MoveRight size={21} /></div>
           </div>
         </section>
 
         <section id="work" className="systems-deck">
           <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>04 INDEPENDENT STUDIES</span></div>
-          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for an inspectable full-stack workflow sample, then follow the API and accessibility studies. Every code sample states its boundaries before a reviewer clicks into the work.</p></div>
+          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for an inspectable full-stack product sample, then follow the API and accessibility studies. Shared typed evidence keeps this catalog aligned with the recruiter review path.</p></div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>
@@ -249,17 +232,17 @@ export default function Home() {
 
         <section className="capability-matrix">
           <div className="matrix-sidebar"><p>OPERATING<br />CAPABILITIES</p><span>02 / 02</span></div>
-          <div className="matrix-main"><div className="matrix-heading"><p className="engine-eyebrow"><i /> THE BUILD LAYER</p><h2>Capability is more<br />than a <em>tool list.</em></h2></div><div className="matrix-grid"><article><span>01</span><h3>Product surfaces</h3><p>Responsive React and TypeScript interfaces that make a complicated next move easier to understand.</p></article><article><span>02</span><h3>Workflow logic</h3><p>Ownership, state, review points, and handoffs designed into the product instead of added after.</p></article><article><span>03</span><h3>API foundations</h3><p>Structured validation, explicit contracts, traceable events, and dependable system boundaries.</p></article><article><span>04</span><h3>AI with guardrails</h3><p>Practical AI-assisted workflows designed for review, clarity, and thoughtful control.</p></article><article><span>05</span><h3>Quality signals</h3><p>Testable flows, documented boundaries, and details built for confident collaboration.</p></article><article><span>06</span><h3>Bilingual delivery</h3><p>Native English and Spanish communication in technical, operational, and customer-facing settings.</p></article></div></div>
+          <div className="matrix-main"><div className="matrix-heading"><p className="engine-eyebrow"><i /> THE BUILD LAYER</p><h2>Capability is more<br />than a <em>tool list.</em></h2></div><div className="matrix-grid"><article><span>01</span><h3>Product surfaces</h3><p>Responsive React and TypeScript interfaces that make a complicated next move easier to understand.</p></article><article><span>02</span><h3>Workflow logic</h3><p>Ownership, state, review points, and handoffs designed into the product instead of added after.</p></article><article><span>03</span><h3>API foundations</h3><p>Structured validation, explicit contracts, traceable events, and dependable system boundaries.</p></article><article><span>04</span><h3>Failure & recovery</h3><p>Fallback state, validation feedback, and recovery paths designed so users can understand what happened and what to do next.</p></article><article><span>05</span><h3>Quality signals</h3><p>Testable flows, documented boundaries, and details built for confident collaboration.</p></article><article><span>06</span><h3>Bilingual delivery</h3><p>Native English and Spanish communication in technical, operational, and customer-facing settings.</p></article></div></div>
         </section>
 
         <section id="contact" className="engine-outro">
           <div className="outro-orbit" aria-hidden="true"><i /><i /><i /><b>AV</b></div>
-          <div className="outro-copy"><p className="engine-eyebrow"><i /> OPEN TO OPPORTUNITIES</p><h2>Let&apos;s build the<br /><em>next clear move.</em></h2><p>Open to software development, AI automation, technical operations, implementation, and product-supporting opportunities.</p><div className="outro-actions"><a href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={18} /></a><Link href="/recruiter-proof">Recruiter Fast Path <ArrowUpRight size={16} /></Link></div></div>
-          <div className="outro-meta"><span>MIAMI, FL / REMOTE</span><span>US WORK AUTHORIZED</span><span>NATIVE ENGLISH / SPANISH</span><a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer"><Github size={15} /> PUBLIC GITHUB</a></div>
+          <div className="outro-copy"><p className="engine-eyebrow"><i /> OPEN TO OPPORTUNITIES</p><h2>Let&apos;s build the<br /><em>next clear move.</em></h2><p>Open to product engineering, developer experience, frontend, and full-stack product roles where interface craft and system behavior both matter.</p><div className="outro-actions"><a href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={18} /></a><Link href="/recruiter-proof">Recruiter Fast Path <ArrowUpRight size={16} /></Link></div></div>
+          <div className="outro-meta"><span>{candidateProfile.location.toUpperCase()}</span><span>US WORK AUTHORIZED</span><span>NATIVE ENGLISH / SPANISH</span><a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer"><Github size={15} /> PUBLIC GITHUB</a></div>
         </section>
       </main>
 
-      <footer className="engine-footer"><span>© 2026 AMY VILLA</span><span>SIGNAL ENGINE / PERSONAL PORTFOLIO</span><a href="mailto:amyv.dev@gmail.com"><Mail size={13} /> CONTACT</a></footer>
+      <footer className="engine-footer"><span>© 2026 AMY VILLA</span><span>PRODUCT ENGINEERING / PERSONAL PORTFOLIO</span><a href="mailto:amyv.dev@gmail.com"><Mail size={13} /> CONTACT</a></footer>
     </div>
   );
 }
