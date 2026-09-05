@@ -1,7 +1,5 @@
 export type CandidateProfile = {
-  location: string;
   languages: string;
-  authorization: string;
   focus: string;
 };
 
@@ -24,9 +22,7 @@ export type LiveReviewTopic = {
 };
 
 export const candidateProfile: CandidateProfile = {
-  location: "Spain · CET/CEST · Remote",
   languages: "Native English + Spanish",
-  authorization: "U.S. work authorized · no employer sponsorship required",
   focus: "Product Engineer · Developer Experience",
 };
 
