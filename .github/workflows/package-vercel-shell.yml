@@ -1,0 +1,75 @@
+name: Package Vercel Shell
+
+on:
+  push:
+    branches: [deploy/rebuild-vercel-shell]
+    paths:
+      - .github/workflows/package-vercel-shell.yml
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Build current portfolio into vercel-shell
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out deployment branch
+        uses: actions/checkout@v4
+        with:
+          ref: deploy/rebuild-vercel-shell
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+          run_install: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify portfolio before packaging
+        run: |
+          pnpm test:portfolio
+          pnpm verify:product-engineering
+          pnpm check
+          pnpm verify:recruiter-proof
+
+      - name: Build production portfolio
+        run: pnpm build
+
+      - name: Package build for Vercel root directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf vercel-shell
+          mkdir -p vercel-shell
+          cp -R dist/public/. vercel-shell/
+          cat > vercel-shell/vercel.json <<'JSON'
+          {
+            "rewrites": [
+              { "source": "/(.*)", "destination": "/index.html" }
+            ]
+          }
+          JSON
+
+      - name: Commit generated Vercel shell
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A vercel-shell
+          if git diff --cached --quiet; then
+            echo "No generated shell changes."
+            exit 0
+          fi
+          git commit -m "chore: rebuild Vercel shell from current portfolio"
+          git push origin HEAD:deploy/rebuild-vercel-shell
