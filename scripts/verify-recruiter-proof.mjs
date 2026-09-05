@@ -6,13 +6,14 @@ const read = (relativePath) => readFileSync(resolve(root, relativePath), "utf8")
 
 const checks = [
   ["client/src/lib/productEvidence.ts", "Product Engineer · Developer Experience"],
-  ["client/src/lib/productEvidence.ts", "Spain · CET/CEST · Remote"],
+  ["client/src/lib/productEvidence.ts", "Native English + Spanish"],
   ["client/src/lib/productEvidence.ts", "ForgeFlow AI Automation"],
   ["client/src/lib/productEvidence.ts", "https://github.com/Amyvdev1/forgeflow-ai-automation"],
   ["client/src/pages/RecruiterProof.tsx", "publicProjectEvidence"],
   ["client/src/pages/RecruiterProof.tsx", "CandidateSnapshot"],
   ["client/src/pages/Home.tsx", "publicProjectEvidence"],
   ["client/src/pages/Home.tsx", "RECRUITER PROOF"],
+  ["client/src/pages/Home.tsx", "REMOTE COLLABORATION"],
   ["client/src/pages/DemoPage.tsx", '"forgeflow-ai-automation"'],
   ["client/src/App.tsx", "RecruiterProof"],
   ["client/index.html", "Product Engineer · Developer Experience"],
