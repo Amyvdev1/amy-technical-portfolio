@@ -3,9 +3,8 @@
 This is the shortest route through Amy Villa’s public work for a product-engineering, developer-experience, frontend, API, or customer-facing technical conversation.
 
 **Candidate:** Amy Villa  
-**Location:** Spain · CET/CEST · Remote  
-**Languages:** Native English + Spanish  
-**U.S. eligibility:** Work authorized; no employer sponsorship required
+**Work format:** Remote  
+**Languages:** Native English + Spanish
 
 ## 1. Start with ForgeFlow
 
