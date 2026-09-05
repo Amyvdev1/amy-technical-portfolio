@@ -11,12 +11,12 @@ import { Link } from "wouter";
 const scenes = [
   {
     id: "01",
-    label: "Signal intake",
-    title: "Listen for the\nright question.",
-    emphasis: "before the interface.",
-    detail: "Every useful build starts by locating the real decision, the people affected, and the information that cannot be lost.",
-    telemetry: ["INPUT / HUMAN", "CONTEXT / CAPTURED", "MODE / DISCOVERY"],
-    short: "READ",
+    label: "AI Automation & Technical Solutions",
+    title: "Build systems that\nmake work clearer.",
+    emphasis: "from API to handoff.",
+    detail: "I build API-driven automation and developer-facing systems that make complex workflows easier to implement, debug, and operate.",
+    telemetry: ["APIS / DRIVEN", "AUTOMATION / GUARDED", "DX / INSPECTABLE"],
+    short: "BUILD",
   },
   {
     id: "02",
@@ -187,8 +187,8 @@ export default function Home() {
       </div>
 
       <header className="engine-header">
-        <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>product systems</em></a>
-        <div className="engine-header-center"><i /><span>PRODUCT ENGINEERING PORTFOLIO / 2026</span><i /></div>
+        <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>automation systems</em></a>
+        <div className="engine-header-center"><i /><span>AI AUTOMATION & TECHNICAL SOLUTIONS / 2026</span><i /></div>
         <div className="engine-header-actions"><Link href="/recruiter-proof" className="engine-proof-link">RECRUITER PROOF</Link><a href="mailto:amyv.dev@gmail.com" className="engine-contact">START A CONVERSATION <ArrowUpRight size={15} /></a></div>
       </header>
 
@@ -211,7 +211,7 @@ export default function Home() {
               <div className="hud-unit"><span>AMY VILLA</span><b>AV / 01</b></div>
               <div className="hud-rule" />
               <div className="hud-stack"><span>SCENE</span><b>{runtime.journey}</b><span>AXIS</span><b>{runtime.coordinates}</b></div>
-              <div className="hud-vertical">SIGNAL ENGINE · PRODUCT SYSTEMS</div>
+              <div className="hud-vertical">SIGNAL ENGINE · AUTOMATION SYSTEMS</div>
             </aside>
 
             <div className="engine-topline" aria-hidden="true"><span>LIVE SIGNAL</span><i /><b>{scene.label.toUpperCase()}</b><span>SCROLL TO SCRUB</span></div>
@@ -221,6 +221,13 @@ export default function Home() {
                 <div className="scene-count"><span>{scene.id}</span><i /><small>{scene.label}</small></div>
                 <h1>{scene.title.split("\n").map((line) => <span key={line}>{line}</span>)}<em>{scene.emphasis}</em></h1>
                 <p>{scene.detail}</p>
+                {activeScene === 0 && (
+                  <div className="hero-actions career-evidence-actions">
+                    <a href="#work" className="button-primary">VIEW TECHNICAL WORK <MoveRight size={16} /></a>
+                    <Link href="/recruiter-proof" className="button-quiet">REVIEW ENGINEERING EVIDENCE <ArrowUpRight size={15} /></Link>
+                    <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer" className="button-quiet">EXPLORE GITHUB <Github size={15} /></a>
+                  </div>
+                )}
                 <div className="scene-tags">{scene.telemetry.map((tag) => <span key={tag}>{tag}</span>)}</div>
               </div>
             </section>
@@ -232,7 +239,7 @@ export default function Home() {
             </div>
 
             <nav className="engine-chapter-nav" aria-label="Signal Engine chapters">
-              {scenes.map((item, index) => <button type="button" key={item.id} className={index === activeScene ? "active" : ""} onClick={() => jumpToScene(index)} aria-current={index === activeScene ? "step" : undefined} aria-label={`Go to scene ${item.id}: ${item.label}`}><span>{item.id}</span><b>{item.short}</b></button>)}
+              {scenes.map((item, index) => <button type="button" key={item.id} className={index === activeScene ? "active":""} onClick={() => jumpToScene(index)} aria-current={index === activeScene ? "step" : undefined} aria-label={`Go to scene ${item.id}: ${item.label}`}><span>{item.id}</span><b>{item.short}</b></button>)}
             </nav>
 
             <div className="engine-scroll-note"><span>SCROLL TO ADVANCE</span><ChevronDown size={16} /><span>{String(progressPercent).padStart(3, "0")}</span></div>
@@ -245,14 +252,14 @@ export default function Home() {
           <div className="manifesto-copy">
             <p className="engine-eyebrow"><i /> WHAT THIS WORK IS ABOUT</p>
             <h2>Built for the moment<br />a team needs to <em>move.</em></h2>
-            <p>I build product engineering studies around a simple belief: a useful interface should make system state, failure behavior, and the next action understandable without forcing the user to reconstruct the context.</p>
+            <p>I build automation and technical solutions around a simple belief: a useful system should make its state, failure behavior, and next action understandable without forcing the user to reconstruct the context.</p>
             <div className="manifesto-signature"><span>01</span><p>Product judgment<br />made inspectable.</p><MoveRight size={21} /></div>
           </div>
         </section>
 
         <section id="work" className="systems-deck">
           <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>04 INDEPENDENT STUDIES</span></div>
-          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for an inspectable full-stack product sample, then follow the API and accessibility studies. Shared typed evidence keeps this catalog aligned with the recruiter review path.</p></div>
+          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for an inspectable AI automation system, then follow the API and accessibility studies. Shared typed evidence keeps this catalog aligned with the recruiter review path.</p></div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>
@@ -273,17 +280,24 @@ export default function Home() {
 
         <section className="capability-matrix">
           <div className="matrix-sidebar"><p>OPERATING<br />CAPABILITIES</p><span>02 / 02</span></div>
-          <div className="matrix-main"><div className="matrix-heading"><p className="engine-eyebrow"><i /> THE BUILD LAYER</p><h2>Capability is more<br />than a <em>tool list.</em></h2></div><div className="matrix-grid"><article><span>01</span><h3>Product surfaces</h3><p>Responsive React and TypeScript interfaces that make a complicated next move easier to understand.</p></article><article><span>02</span><h3>Workflow logic</h3><p>Ownership, state, review points, and handoffs designed into the product instead of added after.</p></article><article><span>03</span><h3>API foundations</h3><p>Structured validation, explicit contracts, traceable events, and dependable system boundaries.</p></article><article><span>04</span><h3>Failure & recovery</h3><p>Fallback state, validation feedback, and recovery paths designed so users can understand what happened and what to do next.</p></article><article><span>05</span><h3>Quality signals</h3><p>Testable flows, documented boundaries, and details built for confident collaboration.</p></article><article><span>06</span><h3>Bilingual delivery</h3><p>Native English and Spanish communication in technical, operational, and customer-facing settings.</p></article></div></div>
+          <div className="matrix-main"><div className="matrix-heading"><p className="engine-eyebrow"><i /> THE BUILD LAYER</p><h2>Capability is more<br />than a <em>tool list.</em></h2></div><div className="matrix-grid">
+            <article><span>01</span><h3>Product surfaces</h3><p>Responsive React and TypeScript interfaces that make a complicated next move easier to understand.</p></article>
+            <article><span>02</span><h3>Workflow logic</h3><p>Ownership, state, review points, and handoffs designed into the product instead of added after.</p></article>
+            <article><span>03</span><h3>API foundations</h3><p>Structured validation, explicit contracts, traceable events, and dependable system boundaries.</p></article>
+            <article><span>04</span><h3>Failure & recovery</h3><p>Fallback state, validation feedback, and recovery paths designed so users can understand what happened and what to do next.</p></article>
+            <article><span>05</span><h3>Quality signals</h3><p>Testable flows, documented boundaries, and details built for confident collaboration.</p></article>
+            <article><span>06</span><h3>Bilingual delivery</h3><p>Native English and Spanish communication in technical, operational, and customer-facing settings.</p></article>
+          </div></div>
         </section>
 
         <section id="contact" className="engine-outro">
           <div className="outro-orbit" aria-hidden="true"><i /><i /><i /><b>AV</b></div>
-          <div className="outro-copy"><p className="engine-eyebrow"><i /> OPEN TO OPPORTUNITIES</p><h2>Let&apos;s build the<br /><em>next clear move.</em></h2><p>Open to product engineering, developer experience, frontend, and full-stack product roles where interface craft and system behavior both matter.</p><div className="outro-actions"><a href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={18} /></a><Link href="/recruiter-proof">Recruiter Fast Path <ArrowUpRight size={16} /></Link></div></div>
+          <div className="outro-copy"><p className="engine-eyebrow"><i /> OPEN TO OPPORTUNITIES</p><h2>Let's build the<br /><em>next clear move.</em></h2><p>Open to AI automation, technical solutions, developer experience, frontend, and full-stack product roles where interface craft and system behavior both matter.</p><div className="outro-actions"><a href="mailto:amyv.dev@gmail.com">amyv.dev@gmail.com <ArrowUpRight size={18} /></a><Link href="/recruiter-proof">Recruiter Fast Path <ArrowUpRight size={16} /></Link></div></div>
           <div className="outro-meta"><span>REMOTE COLLABORATION</span><span>NATIVE ENGLISH / SPANISH</span><a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer"><Github size={15} /> PUBLIC GITHUB</a></div>
         </section>
       </main>
 
-      <footer className="engine-footer"><span>© 2026 AMY VILLA</span><span>PRODUCT ENGINEERING / PERSONAL PORTFOLIO</span><a href="mailto:amyv.dev@gmail.com"><Mail size={13} /> CONTACT</a></footer>
+      <footer className="engine-footer"><span>© 2026 AMY VILLA</span><span>AI AUTOMATION / TECHNICAL SOLUTIONS</span><a href="mailto:amyv.dev@gmail.com"><Mail size={13} /> CONTACT</a></footer>
     </div>
   );
 }
