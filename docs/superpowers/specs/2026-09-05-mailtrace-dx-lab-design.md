@@ -61,7 +61,6 @@ The product should feel like a small developer tool, not a marketing site.
 - Vitest unit/integration tests
 - Playwright end-to-end tests
 - GitHub Actions CI
-- local Docker support if it remains simple and reproducible
 - concise technical documentation and code tour
 
 ### Out of scope
@@ -73,6 +72,7 @@ The product should feel like a small developer tool, not a marketing site.
 - multi-user authentication
 - production infrastructure
 - external monitoring vendors
+- Docker in v1; ForgeFlow already demonstrates container delivery and MailTrace should stay focused on developer debugging
 - claims of production reliability, throughput, or deliverability
 
 This keeps the project reviewable in one sitting.
@@ -218,14 +218,17 @@ The response exposes identifiers clearly because the product is designed for deb
 
 The route:
 
-1. validates the schema,
-2. verifies an HMAC signature,
-3. rejects stale timestamps,
-4. checks idempotency using provider event ID,
-5. finds the trace by message ID,
-6. stores the raw and normalized event,
-7. updates the trace status,
-8. returns a structured result describing whether the event was accepted, duplicate, or rejected.
+1. rejects request bodies larger than **64 KiB** before parsing,
+2. validates the schema,
+3. verifies an HMAC signature,
+4. rejects webhook timestamps more than **5 minutes** away from server time,
+5. checks idempotency using provider event ID,
+6. finds the trace by message ID,
+7. stores the raw and normalized event,
+8. updates the trace status,
+9. returns a structured result describing whether the event was accepted or duplicate.
+
+A duplicate webhook is an idempotent success: return HTTP `200` with `{ status: "duplicate" }` and do not create a second event.
 
 ### 3. Inspect an event timeline
 
@@ -252,7 +255,7 @@ The UI must make these states explicit:
 - malformed payload,
 - unsupported event type.
 
-Each failure should include a developer-facing next action.
+Each failure should include a developer-facing next action. Duplicate events are displayed as a non-destructive informational state, not an error.
 
 ### 5. Diagnose domain configuration
 
@@ -282,16 +285,30 @@ type ApiError = {
 };
 ```
 
-Expected codes include:
+Expected error codes include:
 
 - `INVALID_REQUEST`
 - `INVALID_SIGNATURE`
 - `STALE_WEBHOOK`
-- `DUPLICATE_EVENT`
+- `PAYLOAD_TOO_LARGE`
 - `TRACE_NOT_FOUND`
 - `UNSUPPORTED_EVENT`
 
+Duplicate events do **not** use `ApiError`; they return HTTP `200` with a structured duplicate result.
+
 The UI should render the code, readable explanation, and recovery guidance where appropriate.
+
+## Status transition rules
+
+The trace status is derived from persisted events using these explicit rules:
+
+- `queued` → `sent`, `failed`, or `bounced`
+- `sent` → `delivered`, `failed`, or `bounced`
+- `delivered` → `complained`
+- `failed`, `bounced`, and `complained` are terminal
+- late events remain visible in the timeline even when they do not replace a terminal trace status
+
+This makes out-of-order event handling inspectable instead of hiding it inside route code.
 
 ## Security boundaries
 
@@ -299,13 +316,13 @@ The project demonstrates practical defensive patterns without claiming productio
 
 Required:
 
-- HMAC verification with constant-time comparison,
-- timestamp tolerance for replay resistance,
+- HMAC-SHA256 verification with `timingSafeEqual`,
+- **5-minute** timestamp tolerance for replay resistance,
 - no secret committed to the repository,
 - `.env.example`,
-- bounded payload sizes where practical,
+- **64 KiB** maximum webhook request body,
 - Zod validation before business logic,
-- no HTML rendering of raw webhook payloads,
+- raw payloads rendered as escaped text only, never injected as HTML,
 - clear local-demo boundary in documentation.
 
 ## Observability model
@@ -351,20 +368,22 @@ Follow test-driven development.
 
 - HMAC verification accepts valid signature.
 - HMAC verification rejects invalid signature.
-- stale timestamp is rejected.
+- stale timestamp beyond 5 minutes is rejected.
 - event normalization maps each supported event type.
 - duplicate provider event ID returns duplicate result without creating another event.
-- status transition rules preserve the intended final state.
+- status transition rules preserve terminal status and allow `delivered` → `complained`.
 - domain diagnostic fixtures return expected check status and next action.
 
 ### API integration tests
 
 - creating a trace persists IDs and initial state.
 - valid webhook stores an event and updates the trace.
-- duplicate webhook is idempotent.
+- duplicate webhook returns HTTP `200` with duplicate status and remains idempotent.
 - unknown message ID returns `TRACE_NOT_FOUND`.
+- request body over 64 KiB returns `PAYLOAD_TOO_LARGE`.
 - invalid payload returns `INVALID_REQUEST`.
 - invalid signature returns `INVALID_SIGNATURE`.
+- stale webhook returns `STALE_WEBHOOK`.
 
 ### Component tests
 
@@ -372,6 +391,7 @@ Follow test-driven development.
 - timeline marks late/out-of-order arrival.
 - raw payload inspector is collapsed by default and accessible by keyboard.
 - error card shows code and next action.
+- duplicate state is informative rather than styled as destructive failure.
 
 ### Playwright E2E
 
