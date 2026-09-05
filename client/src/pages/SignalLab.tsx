@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowUpRight, BrainCircuit, CheckCircle2, ChevronRight, CircleDot, LockKeyhole, Mail, Play, RotateCcw, ShieldCheck, SlidersHorizontal, Sparkles, Terminal } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, BrainCircuit, CheckCircle2, CircleDot, LockKeyhole, Mail, Play, RotateCcw, ShieldCheck, SlidersHorizontal, Sparkles, Terminal } from "lucide-react";
 import { Link } from "wouter";
 
 const scenarios = [

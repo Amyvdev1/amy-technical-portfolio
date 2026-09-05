@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   verify:
-    name: Typecheck, proof checks, and production build
+    name: Tests, typecheck, proof checks, production build, and bundle budgets
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -25,9 +25,15 @@ jobs:
           run_install: false
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
+      - name: Run portfolio evidence tests
+        run: pnpm test:portfolio
+      - name: Verify product engineering hygiene
+        run: pnpm verify:product-engineering
       - name: Typecheck
         run: pnpm check
       - name: Verify recruiter proof path
         run: pnpm verify:recruiter-proof
       - name: Build production portfolio
         run: pnpm build
+      - name: Enforce production bundle budgets
+        run: pnpm verify:bundle
