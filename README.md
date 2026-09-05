@@ -96,9 +96,8 @@ A technical conversation can go deeper than a tool list. Useful review prompts i
 
 ## Candidate context
 
-**Spain · CET/CEST · Remote**  
-**Native English + Spanish**  
-**U.S. work authorized · no employer sponsorship required**
+**Remote collaboration**  
+**Native English + Spanish**
 
 My paid freelance experience includes digital systems, AI-assisted workflows, process organization, bilingual delivery, and remote operational handoffs. The software repositories here are self-directed public engineering work; I do not present that freelance history as years of formal full-stack employment.
 
