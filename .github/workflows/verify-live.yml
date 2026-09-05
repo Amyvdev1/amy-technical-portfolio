@@ -1,0 +1,61 @@
+name: Verify Live Portfolio
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-live:
+    name: Verify Vercel public bundle privacy markers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployed portfolio bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base="https://amy-villa-signal-gallery.vercel.app"
+          forbidden=(
+            "Spain · CET/CEST · Remote"
+            "based in Spain"
+            "Based in Spain"
+            "Spain-based"
+            "U.S. work authorized"
+            "US WORK AUTHORIZED"
+            "Work authorized; no employer sponsorship required"
+            "no employer sponsorship required"
+            "no sponsorship required"
+            "MIAMI, FL / REMOTE"
+          )
+
+          for attempt in $(seq 1 30); do
+            html="$(curl -fsSL --max-time 20 "$base/" || true)"
+            asset="$(printf '%s' "$html" | grep -oE '/assets/[^"[:space:]]+\.js' | head -n 1 || true)"
+
+            if [[ -n "$asset" ]]; then
+              bundle="$(curl -fsSL --max-time 30 "$base$asset" || true)"
+
+              if [[ -n "$bundle" ]] && grep -Fq "REMOTE COLLABORATION" <<< "$bundle"; then
+                found_forbidden=0
+                for marker in "${forbidden[@]}"; do
+                  if grep -Fq "$marker" <<< "$bundle"; then
+                    echo "::error::Forbidden recruiter-facing marker remains in deployed bundle: $marker"
+                    found_forbidden=1
+                  fi
+                done
+
+                if [[ "$found_forbidden" -eq 0 ]]; then
+                  echo "Live Vercel bundle is current and contains no forbidden location/work-authorization markers."
+                  exit 0
+                fi
+              fi
+            fi
+
+            sleep 10
+          done
+
+          echo "::error::Live Vercel bundle did not reach the expected privacy-safe state."
+          exit 1
