@@ -23,9 +23,39 @@ for (const artifact of forbiddenArtifacts) {
   }
 }
 
-const recruiterProof = read("client/src/pages/RecruiterProof.tsx");
-if (recruiterProof.includes("Miami, FL / Remote")) {
-  throw new Error("Recruiter proof still contains the old Miami location.");
+const recruiterFacingFiles = [
+  "README.md",
+  "docs/RECRUITER_FAST_PATH.md",
+  "client/src/lib/productEvidence.ts",
+  "client/src/components/CandidateSnapshot.tsx",
+  "client/src/pages/Home.tsx",
+  "client/src/pages/RecruiterProof.tsx",
+];
+
+const forbiddenCandidateMarkers = [
+  "Spain · CET/CEST · Remote",
+  "based in Spain",
+  "Based in Spain",
+  "Spain-based",
+  "U.S. work authorized",
+  "US WORK AUTHORIZED",
+  "Work authorized; no employer sponsorship required",
+  "no employer sponsorship required",
+  "no sponsorship required",
+];
+
+for (const relativePath of recruiterFacingFiles) {
+  const content = read(relativePath);
+  for (const marker of forbiddenCandidateMarkers) {
+    if (content.includes(marker)) {
+      throw new Error(`Recruiter-facing file still contains location/eligibility metadata: ${relativePath} -> ${marker}`);
+    }
+  }
+}
+
+const candidateSnapshot = read("client/src/components/CandidateSnapshot.tsx");
+if (candidateSnapshot.includes('"AUTHORIZATION"') || candidateSnapshot.includes("candidateProfile.authorization")) {
+  throw new Error("Candidate snapshot still exposes personal work-authorization metadata.");
 }
 
 const home = read("client/src/pages/Home.tsx");
