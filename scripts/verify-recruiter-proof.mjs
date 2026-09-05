@@ -5,7 +5,7 @@ const root = resolve(import.meta.dirname, "..");
 const read = (relativePath) => readFileSync(resolve(root, relativePath), "utf8");
 
 const checks = [
-  ["client/src/lib/productEvidence.ts", "Product Engineer · Developer Experience"],
+  ["client/src/lib/productEvidence.ts", "AI Automation & Technical Solutions Engineer"],
   ["client/src/lib/productEvidence.ts", "Native English + Spanish"],
   ["client/src/lib/productEvidence.ts", "ForgeFlow AI Automation"],
   ["client/src/lib/productEvidence.ts", "https://github.com/Amyvdev1/forgeflow-ai-automation"],
@@ -16,7 +16,7 @@ const checks = [
   ["client/src/pages/Home.tsx", "REMOTE COLLABORATION"],
   ["client/src/pages/DemoPage.tsx", '"forgeflow-ai-automation"'],
   ["client/src/App.tsx", "RecruiterProof"],
-  ["client/index.html", "Product Engineer · Developer Experience"],
+  ["client/index.html", "AI Automation & Technical Solutions Engineer"],
 ];
 
 for (const [file, expected] of checks) {
