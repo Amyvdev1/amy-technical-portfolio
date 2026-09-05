@@ -65,6 +65,18 @@ for (const helper of ["getScrollProgress", "getSceneIndex", "getSceneDestination
   }
 }
 
+for (const marker of [
+  "AI Automation & Technical Solutions",
+  "I build API-driven automation and developer-facing systems that make complex workflows easier to implement, debug, and operate.",
+  "VIEW TECHNICAL WORK",
+  "REVIEW ENGINEERING EVIDENCE",
+  "EXPLORE GITHUB",
+]) {
+  if (!home.includes(marker)) {
+    throw new Error(`Homepage career-evidence marker is missing: ${marker}`);
+  }
+}
+
 for (const stalePattern of [
   "Math.floor(progress * scenes.length)",
   "(index + 0.04) / scenes.length",
