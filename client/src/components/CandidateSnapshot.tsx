@@ -1,9 +1,7 @@
 import { candidateProfile } from "@/lib/productEvidence";
 
 const rows = [
-  ["LOCATION", candidateProfile.location],
   ["LANGUAGES", candidateProfile.languages],
-  ["AUTHORIZATION", candidateProfile.authorization],
   ["FOCUS", candidateProfile.focus],
 ] as const;
 
