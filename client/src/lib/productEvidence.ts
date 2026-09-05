@@ -23,7 +23,7 @@ export type LiveReviewTopic = {
 
 export const candidateProfile: CandidateProfile = {
   languages: "Native English + Spanish",
-  focus: "Product Engineer · Developer Experience",
+  focus: "AI Automation & Technical Solutions Engineer",
 };
 
 export const publicProjectEvidence: readonly PublicProjectEvidence[] = [
@@ -31,10 +31,10 @@ export const publicProjectEvidence: readonly PublicProjectEvidence[] = [
     index: "01",
     slug: "forgeflow-ai-automation",
     name: "ForgeFlow AI Automation",
-    type: "PRODUCT + FULL-STACK CODE SAMPLE",
+    type: "AI AUTOMATION SYSTEM",
     stack: "React · TypeScript · FastAPI · SQLite · Docker · CI",
     detail:
-      "A reviewable workflow product that makes validated inputs, execution state, persisted history, fallback behavior, and the human decision point visible instead of hiding them behind a black box.",
+      "A reviewable automation system that makes validated inputs, execution state, persisted history, fallback behavior, and the human decision point visible instead of hiding them behind a black box.",
     source: "https://github.com/Amyvdev1/forgeflow-ai-automation",
     action: "Inspect ForgeFlow source",
     signals: [
@@ -50,7 +50,7 @@ export const publicProjectEvidence: readonly PublicProjectEvidence[] = [
     index: "02",
     slug: "clearrout-api",
     name: "ClearRoute API",
-    type: "API EXPERIENCE CODE SAMPLE",
+    type: "API DESIGN + WORKFLOW STATE",
     stack: "Python · FastAPI · Pydantic · REST · pytest",
     detail:
       "A focused API sample built around typed validation, explicit task-state transitions, predictable error contracts, and audit-friendly events for an interface or integration consumer.",
@@ -68,7 +68,7 @@ export const publicProjectEvidence: readonly PublicProjectEvidence[] = [
     index: "03",
     slug: "accesspath-console",
     name: "AccessPath Console",
-    type: "PRODUCT CRAFT + ACCESSIBILITY",
+    type: "PRODUCT ENGINEERING + ACCESSIBILITY",
     stack: "React · TypeScript · Semantic HTML · Vitest · axe",
     detail:
       "A keyboard-first workboard focused on recovery: semantic structure, visible focus, labelled validation, live status feedback, responsive layouts, and targeted accessibility regression checks.",
