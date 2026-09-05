@@ -60,7 +60,7 @@ export default function RecruiterProof() {
         <Link href="/" className="proof-back">
           <ArrowLeft size={16} /> Portfolio home
         </Link>
-        <span>AMY VILLA / PRODUCT ENGINEERING REVIEW</span>
+        <span>AMY VILLA / AI AUTOMATION & TECHNICAL SOLUTIONS</span>
         <a href="mailto:amyv.dev@gmail.com">
           Contact <ArrowUpRight size={14} />
         </a>
@@ -75,26 +75,26 @@ export default function RecruiterProof() {
               <i /> RECRUITER FAST PATH
             </p>
             <h1>
-              Product signals before
+              Engineering evidence before
               <br />
               <em>assumptions.</em>
             </h1>
             <p className="proof-intro">
-              A concise path through public React, TypeScript, and API work.
-              Start with the code, inspect how system state and failure behavior
-              are communicated, then use a live conversation to test product
-              judgment and engineering tradeoffs.
+              A concise path through API-driven automation, developer-facing
+              systems, and product engineering. Start with the code, inspect how
+              state and failure behavior are communicated, then use a technical
+              conversation to test implementation judgment and tradeoffs.
             </p>
             <div className="proof-hero-actions">
               <a href="#samples">
-                Review code samples <ChevronRight size={16} />
+                Review engineering evidence <ChevronRight size={16} />
               </a>
               <a
                 href="https://github.com/Amyvdev1"
                 target="_blank"
                 rel="noreferrer"
               >
-                <Github size={16} /> GitHub profile
+                <Github size={16} /> Explore GitHub
               </a>
             </div>
           </div>
@@ -103,19 +103,19 @@ export default function RecruiterProof() {
 
         <section className="proof-context">
           <p className="proof-eyebrow">
-            <i /> PRODUCT ENGINEERING CONTEXT
+            <i /> AI AUTOMATION & TECHNICAL SOLUTIONS
           </p>
           <div>
             <h2>
-              Build the interface.
+              Build the workflow.
               <br />
               Make the system <em>explain itself.</em>
             </h2>
             <p>
-              My strongest public work sits where product craft meets system
-              behavior: responsive interfaces, typed API boundaries, explicit
-              state, useful failure feedback, accessible recovery paths, and
-              verification that keeps the experience reviewable as it changes.
+              My strongest public work sits where automation meets system
+              behavior: typed API boundaries, explicit state, useful failure
+              feedback, human review points, accessible recovery paths, and
+              verification that keeps implementation choices inspectable.
             </p>
           </div>
           <div className="proof-context-note">
@@ -133,7 +133,7 @@ export default function RecruiterProof() {
         <section id="samples" className="proof-samples">
           <div className="proof-section-heading">
             <p className="proof-eyebrow">
-              <i /> INSPECTABLE PRODUCT ENGINEERING
+              <i /> INSPECTABLE TECHNICAL SYSTEMS
             </p>
             <h2>
               Start where the
@@ -141,11 +141,11 @@ export default function RecruiterProof() {
               <em>signal is strongest.</em>
             </h2>
             <p>
-              ForgeFlow is the fastest route into my full-stack thinking: typed
-              requests, persisted execution state, visible fallback behavior,
-              human review, tests, and CI. ClearRoute goes deeper on API
-              contracts; AccessPath focuses on recovery and accessible product
-              feedback.
+              ForgeFlow is the fastest route into my AI automation thinking:
+              typed requests, persisted execution state, visible fallback
+              behavior, human review, tests, and CI. ClearRoute goes deeper on
+              API contracts; AccessPath focuses on recovery and accessible
+              product feedback.
             </p>
           </div>
           <div className="proof-card-grid">
@@ -173,9 +173,10 @@ export default function RecruiterProof() {
               <em>walk through live.</em>
             </h2>
             <p>
-              A useful engineering screen should reveal how someone thinks, not
-              just what tools appear on a resume. These are concrete review paths
-              through the public code.
+              A useful technical screen should reveal how someone reasons about
+              implementation, failure, and system state—not just what tools
+              appear on a resume. These are concrete review paths through the
+              public code.
             </p>
           </div>
           <div className="proof-live-grid">
@@ -216,10 +217,10 @@ export default function RecruiterProof() {
               <h3>Production hardening, not portfolio claims</h3>
               <p>
                 Real identity and authorization, durable multi-user storage,
-                migrations, secrets, idempotency, retries, rate limits,
-                logs/metrics/traces, health checks, cloud delivery, and
-                operational monitoring are the next production concerns I would
-                design for based on the system requirements.
+                migrations, secrets, idempotency, retries, queues, rate limits,
+                logs/metrics/traces, cloud delivery, and operational monitoring
+                are production concerns I would design for based on system
+                requirements rather than claim without evidence.
               </p>
             </article>
           </div>
@@ -235,10 +236,10 @@ export default function RecruiterProof() {
             <em>Ask the hard questions.</em>
           </h2>
           <p>
-            I am looking for product-engineering work where developer experience,
-            API behavior, clear failure states, and careful interface craft all
-            matter. The public samples are built to make that conversation
-            concrete.
+            I am looking for AI automation and technical-solutions work where API
+            behavior, developer experience, clear failure states, and careful
+            interface craft all matter. The public samples are built to make that
+            conversation concrete.
           </p>
           <div>
             <a
