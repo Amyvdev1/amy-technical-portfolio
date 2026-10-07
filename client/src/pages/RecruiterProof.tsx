@@ -1,3 +1,4 @@
+import "./recruiter-proof-layout.css";
 import FibreSignal from "@/components/FibreSignal";
 import CandidateSnapshot from "@/components/CandidateSnapshot";
 import {

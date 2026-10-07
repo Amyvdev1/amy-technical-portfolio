@@ -1,5 +1,4 @@
 import { publicProjectEvidence } from "@/lib/productEvidence";
-import FibreSignal from "@/components/FibreSignal";
 import {
   getSceneDestination,
   getSceneIndex,
@@ -188,7 +187,6 @@ export default function Home() {
       <main id="top">
         <section ref={storyRef} className="signal-engine-story" aria-label="Signal Engine scroll experience">
           <div className="signal-engine-sticky">
-            <FibreSignal variant="hero" />
             <div className="engine-visual">
               <div className="engine-image" />
               <div className="engine-vignette" />
