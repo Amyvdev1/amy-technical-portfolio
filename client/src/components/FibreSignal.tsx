@@ -1,9 +1,9 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, memo, Suspense, useEffect, useRef, useState } from "react";
 import "./fibre-signal.css";
 
 const FibreArc = lazy(() => import("./originkit/fibre-arc"));
 
-export default function FibreSignal() {
+function FibreSignal({ variant = "hero" }: { variant?: "hero" | "proof" }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(true);
@@ -24,12 +24,14 @@ export default function FibreSignal() {
       document.removeEventListener("visibilitychange", updateVisibility);
     };
   }, []);
-  return <div ref={ref} className="fibre-signal">
-    {visible && pageVisible && !reduced && <>
+  return <div ref={ref} className={`fibre-signal fibre-signal--${variant}`}>
+    {visible && pageVisible && <>
       <div className="fibre-signal-canvas" aria-hidden="true"><Suspense fallback={null}>
-        <FibreArc background="#070706" baseColor="#1767ff" accentColor="#dfb975" highlight="#f5db9e" density={22} speed={32} hover={90} reach={28} bundle={{curve:150,spread:100,thickness:65,comb:130}} style={{minWidth:0,minHeight:0,width:"100%",height:"100%"}} paused={paused}/>
+        <FibreArc background="#070706" baseColor="#1767ff" accentColor="#dfb975" highlight="#f5db9e" density={22} speed={32} hover={90} reach={28} bundle={{curve:150,spread:100,thickness:65,comb:130}} style={{minWidth:0,minHeight:0,width:"100%",height:"100%"}} paused={paused || reduced}/>
       </Suspense></div>
-      <button className="fibre-motion-control" type="button" onClick={() => setPaused(value => !value)} aria-pressed={paused}>{paused ? "RESUME MOTION" : "PAUSE MOTION"}</button>
+      {!reduced && <button className="fibre-motion-control" type="button" onClick={() => setPaused(value => !value)} aria-pressed={paused}>{paused ? "RESUME MOTION" : "PAUSE MOTION"}</button>}
     </>}
   </div>;
 }
+
+export default memo(FibreSignal);

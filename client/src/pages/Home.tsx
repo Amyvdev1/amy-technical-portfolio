@@ -114,7 +114,6 @@ export default function Home() {
   const shellRef = useRef<HTMLDivElement>(null);
   const storyRef = useRef<HTMLElement>(null);
   const coreResetTimerRef = useRef<number | null>(null);
-  const [booting, setBooting] = useState(true);
   const [coreEngaged, setCoreEngaged] = useState(false);
   const progress = useScrollProgress(storyRef);
   const activeScene = getSceneIndex(progress, scenes.length);
@@ -130,7 +129,6 @@ export default function Home() {
   );
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setBooting(false), 1650);
     const root = shellRef.current;
     const setPointer = (event: PointerEvent) => {
       if (!root || event.pointerType === "touch") return;
@@ -141,7 +139,6 @@ export default function Home() {
     };
     window.addEventListener("pointermove", setPointer, { passive: true });
     return () => {
-      window.clearTimeout(timer);
       window.removeEventListener("pointermove", setPointer);
       if (coreResetTimerRef.current !== null) {
         window.clearTimeout(coreResetTimerRef.current);
@@ -181,12 +178,7 @@ export default function Home() {
   };
 
   return (
-    <div ref={shellRef} className={`engine-experience scene-${activeScene + 1} ${coreEngaged ? "core-engaged" : ""} ${booting ? "engine-booting" : "engine-live"}`}>
-      <div className="engine-preloader" aria-hidden="true">
-        <div className="preloader-mark"><span>AV</span><i /><i /></div>
-        <div className="preloader-copy"><span>INITIALIZING SIGNAL ENGINE</span><b>100%</b><i /></div>
-      </div>
-
+    <div ref={shellRef} className={`engine-experience scene-${activeScene + 1} ${coreEngaged ? "core-engaged" : ""} engine-live`}>
       <header className="engine-header">
         <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>automation systems</em></a>
         <div className="engine-header-center"><i /><span>AI AUTOMATION & TECHNICAL SOLUTIONS / 2026</span><i /></div>
@@ -196,7 +188,8 @@ export default function Home() {
       <main id="top">
         <section ref={storyRef} className="signal-engine-story" aria-label="Signal Engine scroll experience">
           <div className="signal-engine-sticky">
-            <div className="engine-visual" aria-hidden="true">
+            <FibreSignal variant="hero" />
+            <div className="engine-visual">
               <div className="engine-image" />
               <div className="engine-vignette" />
               <div className="engine-grid" />
@@ -249,7 +242,7 @@ export default function Home() {
 
         <section className="signal-manifesto">
           <div className="manifesto-marquee" aria-hidden="true"><div><span>FROM AMBIGUITY TO SIGNAL</span><i>✦</i><span>FROM AMBIGUITY TO SIGNAL</span><i>✦</i><span>FROM AMBIGUITY TO SIGNAL</span></div></div>
-          <div className="manifesto-visual"><img src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/signal-engine-interface.jpg" alt="" /><FibreSignal /><div className="manifesto-reticle"><i /><i /><i /><b>AV</b></div></div>
+          <div className="manifesto-visual"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/signal-engine-interface.jpg" alt="" /><div className="manifesto-reticle"><i /><i /><i /><b>AV</b></div></div>
           <div className="manifesto-copy">
             <p className="engine-eyebrow"><i /> WHAT THIS WORK IS ABOUT</p>
             <h2>Built for the moment<br />a team needs to <em>move.</em></h2>
@@ -276,7 +269,7 @@ export default function Home() {
         <section className="panther-protocol">
           <div className="protocol-noise" aria-hidden="true" />
           <div className="protocol-copy"><p className="engine-eyebrow"><i /> THE PANTHER PROTOCOL</p><h2>Move with precision.<br /><em>Not just speed.</em></h2><p>A product is strongest when it can respond without losing its place. That means clear state, intentional guardrails, and a visible path forward.</p><div className="protocol-list"><span><Check size={15} /> Human judgment remains visible</span><span><Check size={15} /> Ownership stays clear</span><span><Check size={15} /> Systems communicate their next move</span></div></div>
-          <div className="protocol-visual" aria-hidden="true"><div className="protocol-grid" /><div className="protocol-target"><i /><i /><i /><b /></div><img src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/nocturne-panther-hunt.png" alt="" /><span>TRACKING / SYSTEM INTENT</span></div>
+          <div className="protocol-visual" aria-hidden="true"><div className="protocol-grid" /><div className="protocol-target"><i /><i /><i /><b /></div><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/nocturne-panther-hunt.png" alt="" /><span>TRACKING / SYSTEM INTENT</span></div>
         </section>
 
         <section className="capability-matrix">

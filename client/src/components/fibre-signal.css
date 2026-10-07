@@ -1,5 +1,31 @@
-.fibre-signal{position:absolute;inset:0;z-index:2}
-.fibre-signal-canvas{position:absolute;inset:0;mix-blend-mode:screen}
-.fibre-motion-control{position:absolute;bottom:20px;right:20px;z-index:5;color:#efe8dc;background:#070706d9;border:1px solid #dfb97566;padding:12px;cursor:pointer;font:9px "DM Mono",monospace;letter-spacing:.08em}
-.fibre-motion-control:focus-visible{outline:2px solid #dfb975;outline-offset:4px}
-.manifesto-reticle{pointer-events:none}
+/* Fibre Arc sits in the opening composition, with controls outside the text layer. */
+.fibre-signal { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+.fibre-signal-canvas { position:absolute; inset:0 0 0 32%; mix-blend-mode:screen; mask-image:linear-gradient(90deg,transparent,#000 30%); }
+.fibre-signal--hero .fibre-signal-canvas { top:9%; bottom:8%; }
+.fibre-motion-control { position:absolute; top:112px; right:28px; bottom:auto; z-index:5; pointer-events:auto; color:#efe8dc; background:#070706e8; border:1px solid #dfb97566; border-radius:2px; min-height:44px; padding:12px 16px; cursor:pointer; font:10px "DM Mono",monospace; letter-spacing:.1em; }
+.fibre-motion-control:hover { border-color:#dfb975; background:#1c1c22; }
+.fibre-motion-control:focus-visible { outline:2px solid #dfb975; outline-offset:4px; }
+.proof-hero { overflow:hidden; }
+.proof-hero-copy,.proof-hero .proof-eligibility { z-index:2; }
+.proof-hero-copy { text-shadow:0 2px 28px #050a15; }
+.fibre-signal--proof .fibre-signal-canvas { inset:0 0 0 20%; opacity:.8; }
+.fibre-signal--proof .fibre-motion-control { top:22px; }
+.engine-scene-copy .scene-message > p { max-width:470px; margin:24px 0; color:#d1cabe; font:clamp(14px,1.1vw,17px)/1.65 "DM Sans",Arial,sans-serif; }
+.system-card { transition:background .25s ease,border-color .25s ease; }
+.system-card:hover,.system-card:focus-visible { background:#10121a; border-color:#dfb975; }
+.system-card:focus-visible { outline:2px solid #dfb975; outline-offset:-3px; }
+.proof-hero .proof-eligibility { background:linear-gradient(145deg,#10203beF,#070d1af5); border-top:2px solid #dcb26e; box-shadow:0 24px 65px #0005; }
+@media (min-width:1100px) {
+ .system-card:first-child { grid-column:span 2; }
+ .system-card:first-child .card-field { height:280px; }
+ .system-card:first-child .card-copy h3 { font-size:42px; }
+}
+@media (max-width:820px) {
+ .fibre-signal--hero .fibre-signal-canvas { inset:0 -15% 35% 0; mask-image:linear-gradient(#000 35%,transparent); opacity:.85; }
+ .fibre-motion-control { top:110px; right:18px; font-size:8px; padding:10px; }
+ .fibre-signal--proof .fibre-signal-canvas { inset:0 -30% 30% 0; opacity:.45; }
+ .engine-scene-copy .scene-message > p { font-size:14px; margin:18px 0; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .system-card { transition:none; }
+}

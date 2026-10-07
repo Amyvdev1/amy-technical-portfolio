@@ -169,8 +169,10 @@ export default function FibreArc(props: Props) {
     const bundle_ = { ...BUNDLE_DEFAULTS, ...(bundle || {}) }
 
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const scheduleRef = useRef<(() => void) | null>(null)
     const pausedRef = useRef(paused)
     pausedRef.current = paused
+    useEffect(() => { scheduleRef.current?.() }, [paused])
     const sizeRef = useRef({ w: 0, h: 0 })
     sizeRef.current = { w: num(width, 0), h: num(height, 0) }
 
@@ -237,7 +239,8 @@ export default function FibreArc(props: Props) {
         let drawn = false
 
         const render = (now: number) => {
-            if (pausedRef.current && drawn) { last = now; raf = requestAnimationFrame(render); return }
+            raf = 0
+            if (pausedRef.current && drawn) return
             const dt = Math.min(0.05, (now - last) / 1000)
             last = now
             const v = vRef.current
@@ -250,7 +253,7 @@ export default function FibreArc(props: Props) {
             ptr.x += ((ptr.onTarget > 0 ? ptr.tx : 0.5) - ptr.x) * k
             ptr.y += ((ptr.onTarget > 0 ? ptr.ty : 0.5) - ptr.y) * k
 
-            const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR)
+            const dpr = Math.min(window.devicePixelRatio || 1, canvas.clientWidth < 640 ? 1 : MAX_DPR)
             const cw = sizeRef.current.w || canvas.clientWidth || 1200
             const ch = sizeRef.current.h || canvas.clientHeight || 800
             const bw = Math.max(1, Math.round(cw * dpr))
@@ -283,8 +286,18 @@ export default function FibreArc(props: Props) {
 
             gl.drawArrays(gl.TRIANGLES, 0, 3)
             drawn = true
+            if (!pausedRef.current) raf = requestAnimationFrame(render)
+        }
+
+        const schedule = () => {
+            cancelAnimationFrame(raf)
+            last = performance.now()
+            drawn = false
             raf = requestAnimationFrame(render)
         }
+        scheduleRef.current = schedule
+        const resizeObserver = new ResizeObserver(schedule)
+        resizeObserver.observe(canvas)
 
         const track = (e: PointerEvent) => {
             const r = canvas.getBoundingClientRect()
@@ -304,6 +317,8 @@ export default function FibreArc(props: Props) {
 
         return () => {
             cancelAnimationFrame(raf)
+            scheduleRef.current = null
+            resizeObserver.disconnect()
             canvas.removeEventListener("pointermove", track)
             canvas.removeEventListener("pointerenter", track)
             canvas.removeEventListener("pointerleave", onLeave)

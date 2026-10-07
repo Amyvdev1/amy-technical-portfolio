@@ -1,3 +1,4 @@
+import FibreSignal from "@/components/FibreSignal";
 import CandidateSnapshot from "@/components/CandidateSnapshot";
 import {
   liveReviewTopics,
@@ -68,6 +69,7 @@ export default function RecruiterProof() {
 
       <main>
         <section className="proof-hero">
+          <FibreSignal variant="proof" />
           <div className="proof-orbit proof-orbit-one" aria-hidden="true" />
           <div className="proof-orbit proof-orbit-two" aria-hidden="true" />
           <div className="proof-hero-copy">
