@@ -1,0 +1,5 @@
+.fibre-signal{position:absolute;inset:0;z-index:2}
+.fibre-signal-canvas{position:absolute;inset:0;mix-blend-mode:screen}
+.fibre-motion-control{position:absolute;bottom:20px;right:20px;z-index:5;color:#efe8dc;background:#070706d9;border:1px solid #dfb97566;padding:12px;cursor:pointer;font:9px "DM Mono",monospace;letter-spacing:.08em}
+.fibre-motion-control:focus-visible{outline:2px solid #dfb975;outline-offset:4px}
+.manifesto-reticle{pointer-events:none}

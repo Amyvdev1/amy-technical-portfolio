@@ -1,4 +1,5 @@
 import { publicProjectEvidence } from "@/lib/productEvidence";
+import FibreSignal from "@/components/FibreSignal";
 import {
   getSceneDestination,
   getSceneIndex,
@@ -248,7 +249,7 @@ export default function Home() {
 
         <section className="signal-manifesto">
           <div className="manifesto-marquee" aria-hidden="true"><div><span>FROM AMBIGUITY TO SIGNAL</span><i>✦</i><span>FROM AMBIGUITY TO SIGNAL</span><i>✦</i><span>FROM AMBIGUITY TO SIGNAL</span></div></div>
-          <div className="manifesto-visual"><img src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/signal-engine-interface.jpg" alt="" /><div className="manifesto-reticle"><i /><i /><i /><b>AV</b></div></div>
+          <div className="manifesto-visual"><img src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/signal-engine-interface.jpg" alt="" /><FibreSignal /><div className="manifesto-reticle"><i /><i /><i /><b>AV</b></div></div>
           <div className="manifesto-copy">
             <p className="engine-eyebrow"><i /> WHAT THIS WORK IS ABOUT</p>
             <h2>Built for the moment<br />a team needs to <em>move.</em></h2>

@@ -88,3 +88,4 @@ temp/
 # Local project tooling
 .webdev/
 .project-config.json
+.originkit/
