@@ -2,6 +2,8 @@ import { ArrowLeft, ArrowUpRight, Check, ChevronRight, Clock3, Code2, FileCheck2
 import { useState } from "react";
 import { Link, useParams } from "wouter";
 import AccessPathCaseStudy from "../components/AccessPathCaseStudy";
+import DeveloperToolStudy from "../components/DeveloperToolStudy";
+import { developerTools } from "@/lib/productEvidence";
 
 const projectData = {
   "forgeflow-ai-automation": {
@@ -105,6 +107,8 @@ function ForgeFlowStudy() {
 
 export default function DemoPage() {
   const { slug } = useParams<{ slug: ProjectSlug }>();
+  const developerTool = developerTools.find(project => project.slug === slug);
+  if (developerTool) return <Shell><DeveloperToolStudy project={developerTool} /></Shell>;
   const project = projectData[slug as ProjectSlug];
   if (!project) return <Shell><main className="missing-page"><h1>Project not found.</h1><Link href="/">Return home</Link></main></Shell>;
   return <Shell><main className="demo-page"><section className="demo-intro"><p className="eyebrow"><span /> {project.eyebrow}</p><h1>{project.title}</h1><h2>{project.subtitle}</h2><p>{project.description}</p><div className="demo-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></section><section className="showcase-wrap">{slug === "forgeflow-ai-automation" ? <ForgeFlowStudy /> : slug === "relayops" ? <RelayOpsDemo /> : slug === "clearrout-api" ? <ClearRouteDemo /> : slug === "accesspath-console" ? <AccessPathCaseStudy /> : <ClientFlowDemo />}</section><section className="project-rationale"><div><p className="eyebrow"><span /> Design question</p><h3>{project.question}</h3></div><div><p className="eyebrow"><span /> Evidence boundary</p><p>{slug === "accesspath-console" ? "This is a self-directed accessibility-practice code sample. It documents implementation patterns and automated regression checks; it does not claim federal Section 508 certification, formal WCAG conformance, client work, or production outcomes." : "This is a self-directed portfolio demonstration. It does not represent client work, a public product, user data, or production outcomes."}</p>{slug === "forgeflow-ai-automation" && <a href="https://github.com/Amyvdev1/forgeflow-ai-automation" target="_blank" rel="noreferrer">View ForgeFlow source on GitHub <ArrowUpRight size={16} /></a>}{slug === "clearrout-api" && <a href="https://github.com/Amyvdev1/clearrout-api" target="_blank" rel="noreferrer">View source on GitHub <ArrowUpRight size={16} /></a>}{slug === "accesspath-console" && <a href="https://github.com/Amyvdev1/accessible-workflow-console" target="_blank" rel="noreferrer">View source on GitHub <ArrowUpRight size={16} /></a>}<a href="mailto:amyv.dev@gmail.com">Request a walkthrough <ArrowUpRight size={16} /></a></div></section></main></Shell>;

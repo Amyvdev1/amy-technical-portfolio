@@ -27,6 +27,22 @@ This repository is the evidence interface around a set of public engineering stu
 | **[ClearRoute API](https://github.com/Amyvdev1/clearrout-api)** | API design · workflow state | Pydantic validation, explicit transitions, role rules, audit events, predictable error contracts |
 | **[AccessPath Console](https://github.com/Amyvdev1/accessible-workflow-console)** | Product engineering · accessibility | Keyboard UX, semantic HTML, validation recovery, live feedback, axe/Vitest checks |
 
+## Developer Experience & Agent Tools
+
+Five public Python/FastAPI projects extend the portfolio's engineering evidence:
+
+| Project | Review focus | Source |
+| --- | --- | --- |
+| DX Orbit | Explainable OpenAPI scorecards, revision comparison, and report export | [Repository](https://github.com/Amyvdev1/dx-orbit) |
+| ToolTrust | JSON Schema argument validation, permissions, and confirmation traces | [Repository](https://github.com/Amyvdev1/tooltrust) |
+| DevStart | API onboarding scenarios and explicit recovery guidance | [Repository](https://github.com/Amyvdev1/devstart) |
+| HookForge | Duplicate delivery, stale-event rejection, and webhook failure simulation | [Repository](https://github.com/Amyvdev1/hookforge) |
+| SignalDesk | Actionable documentation feedback and issue draft export | [Repository](https://github.com/Amyvdev1/signaldesk) |
+
+The website includes source-backed case studies at `/projects/<project-name>`.
+The Python applications run locally; the site does not claim to host their APIs.
+Each case study documents its limitations and links to tests and CI results.
+
 ## Portfolio architecture
 
 ```text

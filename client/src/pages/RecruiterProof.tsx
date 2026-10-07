@@ -145,7 +145,9 @@ export default function RecruiterProof() {
               typed requests, persisted execution state, visible fallback
               behavior, human review, tests, and CI. ClearRoute goes deeper on
               API contracts; AccessPath focuses on recovery and accessible
-              product feedback.
+              product feedback. The Developer Experience &amp; Agent Tools collection
+              adds API quality analysis, tool-call validation, onboarding recovery,
+              webhook simulation, and documentation feedback triage.
             </p>
           </div>
           <div className="proof-card-grid">
