@@ -30,10 +30,10 @@ class ErrorBoundary extends Component<Props, State> {
           <section aria-labelledby="render-error-title" className="flex w-full max-w-2xl flex-col items-center text-center">
             <AlertTriangle size={48} className="mb-6 text-amber-300" aria-hidden="true" />
             <h1 id="render-error-title" className="mb-4 text-2xl font-semibold">
-              The interface hit an unexpected state.
+              This page could not finish loading.
             </h1>
             <p className="mb-6 max-w-lg text-sm leading-6 text-slate-300">
-              Reload to start with a clean session. If the problem repeats, the public source and verification commands provide a reproducible debugging path without exposing internal error details in the interface.
+              Please reload to get the latest version. You can also explore my work on GitHub or contact me directly.
             </p>
             <button
               type="button"
@@ -43,6 +43,7 @@ class ErrorBoundary extends Component<Props, State> {
               <RotateCcw size={16} aria-hidden="true" />
               Reload page
             </button>
+            <div className="mt-6 flex gap-6 text-sm underline"><a href="https://github.com/Amyvdev1">Explore my work</a><a href="mailto:amyv.dev@gmail.com">Contact Amy</a></div>
           </section>
         </main>
       );

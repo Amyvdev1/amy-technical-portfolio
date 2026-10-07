@@ -1,7 +1,14 @@
-import { lazy, memo, Suspense, useEffect, useRef, useState } from "react";
+import { Component, type ReactNode, lazy, memo, Suspense, useEffect, useRef, useState } from "react";
 import "./fibre-signal.css";
 
 const FibreArc = lazy(() => import("./originkit/fibre-arc"));
+
+export class FibreBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch(error: Error) { console.warn("Optional Fibre Arc unavailable", error); }
+  render() { return this.state.failed ? null : this.props.children; }
+}
 
 function FibreSignal({ variant = "hero" }: { variant?: "hero" | "proof" }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -34,4 +41,6 @@ function FibreSignal({ variant = "hero" }: { variant?: "hero" | "proof" }) {
   </div>;
 }
 
-export default memo(FibreSignal);
+export default memo(function SafeFibreSignal(props: { variant?: "hero" | "proof" }) {
+  return <FibreBoundary><FibreSignal {...props} /></FibreBoundary>;
+});
