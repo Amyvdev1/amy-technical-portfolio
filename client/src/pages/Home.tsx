@@ -1,3 +1,4 @@
+import "./home-typography.css";
 import { publicProjectEvidence } from "@/lib/productEvidence";
 import {
   getSceneDestination,

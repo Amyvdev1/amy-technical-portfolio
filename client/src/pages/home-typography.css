@@ -1,0 +1,74 @@
+/* Scale the headline against its copy column, not the entire viewport. */
+.engine-experience .engine-scene-copy {
+  container-type: inline-size;
+  width: min(640px, 64vw);
+  max-width: none;
+  bottom: clamp(72px, 10vh, 110px);
+}
+
+.engine-experience .engine-scene-copy h1 {
+  font-size: clamp(36px, 10.5cqw, 72px);
+  line-height: 1.02;
+  letter-spacing: -.055em;
+}
+
+.engine-experience .engine-scene-copy h1 em {
+  font-size: .68em;
+  line-height: 1.12;
+  margin: 14px 0 0;
+  letter-spacing: -.035em;
+}
+
+.engine-experience .scene-message > p {
+  max-width: 52ch;
+  margin: 24px 0 22px;
+  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+  color: rgba(239, 232, 220, .86);
+}
+
+.engine-experience .career-evidence-actions {
+  gap: 16px 22px;
+  margin-bottom: 20px;
+  text-shadow: none;
+}
+
+.engine-experience .career-evidence-actions .button-primary {
+  color: #0b1730;
+  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (max-width: 820px) {
+  .engine-experience .engine-scene-copy {
+    width: calc(100% - 44px);
+    bottom: 76px;
+  }
+
+  .engine-experience .engine-scene-copy h1 {
+    font-size: clamp(32px, 10.5cqw, 62px);
+  }
+
+  .engine-experience .scene-message > p {
+    max-width: 48ch;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+
+  .engine-experience .engine-chapter-nav {
+    top: 108px;
+    left: 22px;
+    right: 22px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 821px) {
+  .engine-experience .engine-scene-copy h1 {
+    font-size: clamp(36px, 8.5cqw, 56px);
+  }
+}
