@@ -3,10 +3,8 @@ import { lazy, Suspense } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
-import "./editorial.css";
 
 const RecruiterProof = lazy(secondaryRouteLoaders.recruiterProof);
-const EngineeringNotes = lazy(secondaryRouteLoaders.engineeringNotes);
 const SignalLab = lazy(secondaryRouteLoaders.signalLab);
 const DemoPage = lazy(secondaryRouteLoaders.demoPage);
 const NotFound = lazy(secondaryRouteLoaders.notFound);
@@ -29,8 +27,6 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/recruiter-proof" component={RecruiterProof} />
-        <Route path="/notes" component={EngineeringNotes} />
-        <Route path="/notes/:slug" component={EngineeringNotes} />
         <Route path="/signal-lab" component={SignalLab} />
         <Route path="/projects/:slug" component={DemoPage} />
         <Route path="/404" component={NotFound} />

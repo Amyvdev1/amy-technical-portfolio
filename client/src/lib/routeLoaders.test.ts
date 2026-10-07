@@ -5,7 +5,6 @@ describe("secondary route loaders", () => {
   it("loads each secondary page as an independent module", async () => {
     const modules = await Promise.all([
       secondaryRouteLoaders.recruiterProof(),
-      secondaryRouteLoaders.engineeringNotes(),
       secondaryRouteLoaders.signalLab(),
       secondaryRouteLoaders.demoPage(),
       secondaryRouteLoaders.notFound(),

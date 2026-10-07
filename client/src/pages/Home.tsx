@@ -1,5 +1,4 @@
 import { publicProjectEvidence } from "@/lib/productEvidence";
-import { engineeringNotes } from "@/lib/engineeringNotes";
 import {
   getSceneDestination,
   getSceneIndex,
@@ -190,7 +189,7 @@ export default function Home() {
       <header className="engine-header">
         <a href="#top" className="engine-brand" aria-label="Amy Villa homepage"><span>AV</span><b>Amy Villa</b><em>automation systems</em></a>
         <div className="engine-header-center"><i /><span>AI AUTOMATION & TECHNICAL SOLUTIONS / 2026</span><i /></div>
-        <div className="engine-header-actions"><Link href="/notes" className="engine-notes-link">FIELD NOTES</Link><Link href="/recruiter-proof" className="engine-proof-link">RECRUITER PROOF</Link><a href="mailto:amyv.dev@gmail.com" className="engine-contact">START A CONVERSATION <ArrowUpRight size={15} /></a></div>
+        <div className="engine-header-actions"><Link href="/recruiter-proof" className="engine-proof-link">RECRUITER PROOF</Link><a href="mailto:amyv.dev@gmail.com" className="engine-contact">START A CONVERSATION <ArrowUpRight size={15} /></a></div>
       </header>
 
       <main id="top">
@@ -261,10 +260,6 @@ export default function Home() {
         <section id="work" className="systems-deck">
           <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>{String(projects.length).padStart(2, "0")} INDEPENDENT STUDIES</span></div>
           <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for AI automation, then explore Developer Experience &amp; Agent Tools: DX Orbit, ToolTrust, DevStart, HookForge, and SignalDesk. Each study links to source, tests, and explicit implementation boundaries.</p></div>
-          <div className="featured-system">
-            <div className="featured-system-copy"><p className="journal-kicker">SELECTED SYSTEM / 01</p><h3>Automation.<br /><em>With the decisions<br />left visible.</em></h3><p>ForgeFlow connects validated requests, persisted execution history, and human review. Follow one workflow from interface to API—and inspect what happens when it fails.</p><Link href="/projects/forgeflow-ai-automation">EXPLORE FORGEFLOW <ArrowUpRight size={18}/></Link></div>
-            <div className="featured-system-map" aria-label="ForgeFlow workflow: request, validation, execution, human review"><div className="map-orbit" aria-hidden="true"><i/><i/><b>AV</b></div><ol><li><span>01 / INPUT</span>Typed request</li><li><span>02 / CONTRACT</span>Validate &amp; explain</li><li><span>03 / STATE</span>Execute &amp; persist</li><li><span>04 / JUDGMENT</span>Human review</li></ol><p>INTERFACE → API → HISTORY → HANDOFF</p></div>
-          </div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>
@@ -281,11 +276,6 @@ export default function Home() {
           <div className="protocol-noise" aria-hidden="true" />
           <div className="protocol-copy"><p className="engine-eyebrow"><i /> THE PANTHER PROTOCOL</p><h2>Move with precision.<br /><em>Not just speed.</em></h2><p>A product is strongest when it can respond without losing its place. That means clear state, intentional guardrails, and a visible path forward.</p><div className="protocol-list"><span><Check size={15} /> Human judgment remains visible</span><span><Check size={15} /> Ownership stays clear</span><span><Check size={15} /> Systems communicate their next move</span></div></div>
           <div className="protocol-visual" aria-hidden="true"><div className="protocol-grid" /><div className="protocol-target"><i /><i /><i /><b /></div><img src="https://cdn.jsdelivr.net/gh/Amyvdev1/amy-villa-portfolio-assets@main/public-assets/nocturne-panther-hunt.png" alt="" /><span>TRACKING / SYSTEM INTENT</span></div>
-        </section>
-
-        <section className="notes-feature" aria-labelledby="notes-title">
-          <div className="notes-feature-heading"><div><p className="journal-kicker">THE THINKING BEHIND THE BUILD</p><h2 id="notes-title">Engineering,<br /><em>in the margins.</em></h2></div><div><p>Small implementation details. Consequential design decisions. Notes from the work, with the source left open.</p><Link href="/notes">READ ALL FIELD NOTES <ArrowUpRight size={17}/></Link></div></div>
-          <div className="notes-feature-list">{engineeringNotes.map(note => <Link key={note.slug} href={`/notes/${note.slug}`} className="note-preview"><span className="note-preview-number">{note.number}</span><div><p className="journal-kicker">{note.category} / {note.project}</p><h3>{note.title}</h3><p>{note.summary}</p></div><ArrowUpRight size={24} aria-hidden="true"/></Link>)}</div>
         </section>
 
         <section className="capability-matrix">

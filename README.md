@@ -102,17 +102,9 @@ The pull-request workflow runs the same critical path. The production bundle gua
 
 ## Deployment status
 
-The Vercel project `amy-villa-signal-gallery` is connected to this repository. Pushes to `main` build the source at the repository root using `pnpm build`, with output in `dist/public` and SPA rewrites from `vercel.json`. The legacy `vercel-shell` directory is not the deployment source. Check the Vercel status on the exact commit before claiming a change is live.
+The current source and generated Vercel-ready shell are maintained in this repository. The existing public Vercel domain was previously deployed through a manual shell and is **not treated as current execution evidence until it is refreshed from this source**.
 
-## Engineering notes
-
-The `/notes` collection extends the existing AV visual identity with long-form implementation essays. Each article has a decision diagram, source and test links, keyboard-accessible contents navigation, and explicit distinctions between lab behavior and production requirements.
-
-- `/notes/valid-is-not-authorized`: ToolTrust's schema, permission, and confirmation boundaries.
-- `/notes/webhooks-out-of-order`: HookForge's separate duplicate and stale-event protections.
-- `/notes/errors-that-explain`: actionable API errors through DX Orbit and DevStart.
-
-Article metadata lives in `client/src/lib/engineeringNotes.ts`; content and reading layout live in `client/src/pages/EngineeringNotes.tsx`. The article route is loaded separately from the homepage.
+That distinction is intentional: a deployed URL is useful evidence only when the running version can be tied back to the reviewed source and verification path.
 
 ## Run locally
 
