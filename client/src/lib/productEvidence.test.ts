@@ -4,6 +4,7 @@ import {
   publicProjectEvidence,
   developerTools,
   decisionSystems,
+  flagshipProjects,
 } from "./productEvidence";
 
 describe("career evidence positioning", () => {
@@ -21,7 +22,7 @@ describe("career evidence positioning", () => {
     expect(
       new Set(publicProjectEvidence.map(project => project.index)).size
     ).toBe(publicProjectEvidence.length);
-    for (const project of [...developerTools, ...decisionSystems]) {
+    for (const project of [...developerTools, ...decisionSystems, ...flagshipProjects]) {
       expect(project.source).toBe(
         `https://github.com/Amyvdev1/${project.slug}`
       );

@@ -15,7 +15,7 @@ export default function DeveloperToolStudy({
         <p className="eyebrow">
           <span /> {project.index} /{" "}
           {node
-            ? "AI Economics & Decision Systems"
+            ? project.name === "SignalOS" ? "Developer Experience Reliability" : "AI Economics & Decision Systems"
             : "Developer Experience & Agent Tools"}
         </p>
 

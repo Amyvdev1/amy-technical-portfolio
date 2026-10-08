@@ -49,7 +49,7 @@ const scenes = [
 ];
 
 const projects = [
-  ...publicProjectEvidence.map((project) => ({
+  ...[...publicProjectEvidence.filter(p => p.name === "SignalOS"), ...publicProjectEvidence.filter(p => p.name !== "SignalOS")].map((project) => ({
     id: project.index,
     kind: project.type,
     name: project.name,
@@ -252,7 +252,7 @@ export default function Home() {
 
         <section id="work" className="systems-deck">
           <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>{String(projects.length).padStart(2, "0")} INDEPENDENT STUDIES</span></div>
-          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow, then explore API developer tools and five new AI Economics &amp; Decision Systems: AgentLedger, TrustBoundary, EvidenceGraph, WorkflowROI, and DeveloperJourney Observatory. Each study connects the product question to code, tests, and inspectable evidence.</p></div>
+          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Start with SignalOS: contract review, recovery, agent approval and one evidence trail. Explore API tooling, economics, research provenance and onboarding below. Each study links to code, tests and implementation boundaries.</p></div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>

@@ -174,6 +174,18 @@ export const developerTools: readonly DeveloperToolEvidence[] = [
   },
 ] as const;
 
+export const flagshipProjects: readonly DeveloperToolEvidence[] = [{
+ index: "14", slug: "signalos-developer-experience-platform", name: "SignalOS", type: "DEVELOPER EXPERIENCE RELIABILITY",
+ stack: "React · TypeScript · Node 24 · SQLite",
+ detail: "One payment-launch investigation connects contract gaps, HTTP recovery, agent approval and exportable evidence.",
+ source: "https://github.com/Amyvdev1/signalos-developer-experience-platform", action: "Inspect SignalOS source",
+ signals: ["44 behavioral tests", "Timeout + idempotent recovery", "Bound approval + policy replay", "Persistent evidence", "Four report formats"],
+ question: "Can one evidence trail explain the whole integration?",
+ boundary: "Finished local MVP. Payments and agents are fixtures; HTTP and persistence are observed. Costs are estimates. The full eight-module platform remains a roadmap.",
+ workflow: ["Inspect contract and quickstart gaps", "Recover the timeout and review the agent action", "Replay policy and export the evidence"],
+ runtime: "node", port: 4320, preview: "/project-previews/signalos.png", articleTitle: "Preserve the path to the decision"
+}];
+
 export const decisionSystems: readonly DeveloperToolEvidence[] = [
   {
     index: "09",
@@ -388,6 +400,7 @@ export const publicProjectEvidence: readonly PublicProjectEvidence[] = [
   },
   ...developerTools,
   ...decisionSystems,
+  ...flagshipProjects,
 ] as const;
 
 export const liveReviewTopics: readonly LiveReviewTopic[] = [

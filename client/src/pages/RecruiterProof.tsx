@@ -3,6 +3,7 @@ import FibreSignal from "@/components/FibreSignal";
 import CandidateSnapshot from "@/components/CandidateSnapshot";
 import {
   decisionSystems,
+  flagshipProjects,
   liveReviewTopics,
   publicProjectEvidence,
   type PublicProjectEvidence,
@@ -137,6 +138,11 @@ export default function RecruiterProof() {
           </div>
         </section>
 
+        <section id="signalos" className="proof-samples">
+          <div className="proof-section-heading"><p className="proof-eyebrow"><i /> FLAGSHIP / SIGNALOS</p><h2>One journey.<br /><em>Connected evidence.</em></h2><p>{flagshipProjects[0].detail} Inspect the MVP, its tests and its roadmap.</p></div>
+          <div className="proof-card-grid" style={{gridTemplateColumns: "minmax(0,1fr)"}}>{flagshipProjects.map(card => <ProofCard key={card.slug} card={card} />)}</div>
+        </section>
+
         <section id="samples" className="proof-samples">
           <div className="proof-section-heading">
             <p className="proof-eyebrow">
@@ -162,7 +168,7 @@ export default function RecruiterProof() {
             {publicProjectEvidence
               .filter(
                 card =>
-                  !decisionSystems.some(project => project.slug === card.slug)
+                  ![...decisionSystems, ...flagshipProjects].some(project => project.slug === card.slug)
               )
               .map(card => (
                 <ProofCard key={card.name} card={card} />
