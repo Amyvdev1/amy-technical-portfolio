@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useParams } from "wouter";
 import AccessPathCaseStudy from "../components/AccessPathCaseStudy";
 import DeveloperToolStudy from "../components/DeveloperToolStudy";
-import { developerTools } from "@/lib/productEvidence";
+import { developerTools, decisionSystems } from "@/lib/productEvidence";
 
 const projectData = {
   "forgeflow-ai-automation": {
@@ -107,7 +107,7 @@ function ForgeFlowStudy() {
 
 export default function DemoPage() {
   const { slug } = useParams<{ slug: ProjectSlug }>();
-  const developerTool = developerTools.find(project => project.slug === slug);
+  const developerTool = [...developerTools, ...decisionSystems].find(project => project.slug === slug);
   if (developerTool) return <Shell><DeveloperToolStudy project={developerTool} /></Shell>;
   const project = projectData[slug as ProjectSlug];
   if (!project) return <Shell><main className="missing-page"><h1>Project not found.</h1><Link href="/">Return home</Link></main></Shell>;

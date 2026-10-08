@@ -2,6 +2,7 @@ import "./recruiter-proof-layout.css";
 import FibreSignal from "@/components/FibreSignal";
 import CandidateSnapshot from "@/components/CandidateSnapshot";
 import {
+  decisionSystems,
   liveReviewTopics,
   publicProjectEvidence,
   type PublicProjectEvidence,
@@ -37,7 +38,7 @@ function ProofCard({ card }: { card: PublicProjectEvidence }) {
       </div>
       <p className="proof-card-detail">{card.detail}</p>
       <ul>
-        {card.signals.map((signal) => (
+        {card.signals.map(signal => (
           <li key={signal}>
             <Check size={14} /> {signal}
           </li>
@@ -51,6 +52,9 @@ function ProofCard({ card }: { card: PublicProjectEvidence }) {
       >
         {card.action} <ExternalLink size={15} />
       </a>
+      <Link href={`/projects/${card.slug}`} className="proof-card-link">
+        Explore the case study <ArrowUpRight size={15} />
+      </Link>
     </article>
   );
 }
@@ -148,14 +152,45 @@ export default function RecruiterProof() {
               typed requests, persisted execution state, visible fallback
               behavior, human review, tests, and CI. ClearRoute goes deeper on
               API contracts; AccessPath focuses on recovery and accessible
-              product feedback. The Developer Experience &amp; Agent Tools collection
-              adds API quality analysis, tool-call validation, onboarding recovery,
-              webhook simulation, and documentation feedback triage.
+              product feedback. The Developer Experience &amp; Agent Tools
+              collection adds API quality analysis, tool-call validation,
+              onboarding recovery, webhook simulation, and documentation
+              feedback triage.
             </p>
           </div>
           <div className="proof-card-grid">
-            {publicProjectEvidence.map((card) => (
-              <ProofCard key={card.name} card={card} />
+            {publicProjectEvidence
+              .filter(
+                card =>
+                  !decisionSystems.some(project => project.slug === card.slug)
+              )
+              .map(card => (
+                <ProofCard key={card.name} card={card} />
+              ))}
+          </div>
+        </section>
+
+        <section id="decision-systems" className="proof-samples">
+          <div className="proof-section-heading">
+            <p className="proof-eyebrow">
+              <i /> AI ECONOMICS &amp; DECISION SYSTEMS
+            </p>
+            <h2>
+              Make the decision.
+              <br />
+              <em>Show the evidence.</em>
+            </h2>
+            <p>
+              Five interactive local systems explore agent economics, permission
+              boundaries, research provenance, automation value, and developer
+              onboarding. Inspect the dashboards, reproduce the scenarios, and
+              follow each conclusion back to its inputs. Estimates and synthetic
+              results remain explicitly labelled.
+            </p>
+          </div>
+          <div className="proof-card-grid">
+            {decisionSystems.map(card => (
+              <ProofCard key={card.slug} card={card} />
             ))}
           </div>
         </section>
@@ -165,7 +200,8 @@ export default function RecruiterProof() {
             <TerminalSquare size={28} />
             <span>
               LIVE
-              <br />SCREEN
+              <br />
+              SCREEN
             </span>
           </div>
           <div>
@@ -185,7 +221,7 @@ export default function RecruiterProof() {
             </p>
           </div>
           <div className="proof-live-grid">
-            {liveReviewTopics.map((topic) => (
+            {liveReviewTopics.map(topic => (
               <article key={topic.label}>
                 <span>{topic.label}</span>
                 <h3>{topic.title}</h3>
@@ -241,10 +277,10 @@ export default function RecruiterProof() {
             <em>Ask the hard questions.</em>
           </h2>
           <p>
-            I am looking for AI automation and technical-solutions work where API
-            behavior, developer experience, clear failure states, and careful
-            interface craft all matter. The public samples are built to make that
-            conversation concrete.
+            I am looking for AI automation and technical-solutions work where
+            API behavior, developer experience, clear failure states, and
+            careful interface craft all matter. The public samples are built to
+            make that conversation concrete.
           </p>
           <div>
             <a

@@ -59,7 +59,7 @@ const projects = [
     code: "PUBLIC CODE SAMPLE",
   })),
   {
-    id: "09",
+    id: String(publicProjectEvidence.length + 1).padStart(2, "0"),
     kind: "WORKFLOW SURFACE",
     name: "RelayOps",
     description: "A focused interactive study for making task ownership, approval moments, and state changes easy to understand.",
@@ -252,7 +252,7 @@ export default function Home() {
 
         <section id="work" className="systems-deck">
           <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>{String(projects.length).padStart(2, "0")} INDEPENDENT STUDIES</span></div>
-          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow for AI automation, then explore Developer Experience &amp; Agent Tools: DX Orbit, ToolTrust, DevStart, HookForge, and SignalDesk. Each study links to source, tests, and explicit implementation boundaries.</p></div>
+          <div className="deck-heading"><h2>Work that makes<br /><em>the signal useful.</em></h2><p>Begin with ForgeFlow, then explore API developer tools and five new AI Economics &amp; Decision Systems: AgentLedger, TrustBoundary, EvidenceGraph, WorkflowROI, and DeveloperJourney Observatory. Each study connects the product question to code, tests, and inspectable evidence.</p></div>
           <div className="system-cards">
             {projects.map((project, index) => (
               <Link href={project.href} className={`system-card card-${index + 1}`} key={project.name}>
