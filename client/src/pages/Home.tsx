@@ -1,4 +1,5 @@
 import "./home-typography.css";
+import ReviewPaths from "@/components/ReviewPaths";
 import { publicProjectEvidence } from "@/lib/productEvidence";
 import {
   getSceneDestination,
@@ -249,6 +250,8 @@ export default function Home() {
             <div className="manifesto-signature"><span>01</span><p>Product judgment<br />made inspectable.</p><MoveRight size={21} /></div>
           </div>
         </section>
+
+        <ReviewPaths />
 
         <section id="work" className="systems-deck">
           <div className="deck-topbar"><p><i /> INSPECTABLE TECHNICAL WORK</p><span>{String(projects.length).padStart(2, "0")} INDEPENDENT STUDIES</span></div>

@@ -1,4 +1,5 @@
 import "./recruiter-proof-layout.css";
+import ReviewPaths from "@/components/ReviewPaths";
 import FibreSignal from "@/components/FibreSignal";
 import CandidateSnapshot from "@/components/CandidateSnapshot";
 import {
@@ -108,6 +109,8 @@ export default function RecruiterProof() {
           </div>
           <CandidateSnapshot />
         </section>
+
+        <ReviewPaths />
 
         <section className="proof-context">
           <p className="proof-eyebrow">

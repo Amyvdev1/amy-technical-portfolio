@@ -5,6 +5,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 
 const RecruiterProof = lazy(secondaryRouteLoaders.recruiterProof);
+const ReviewPath = lazy(secondaryRouteLoaders.reviewPath);
 const SignalLab = lazy(secondaryRouteLoaders.signalLab);
 const DemoPage = lazy(secondaryRouteLoaders.demoPage);
 const ReliabilityStudy = lazy(secondaryRouteLoaders.reliabilityStudy);
@@ -28,6 +29,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/recruiter-proof" component={RecruiterProof} />
+        <Route path="/explore/:slug" component={ReviewPath} />
         <Route path="/signal-lab" component={SignalLab} />
         <Route path="/projects/webhook-trust-lab" component={ReliabilityStudy} />
         <Route path="/projects/olostep-integration-reliability-lab" component={ReliabilityStudy} />

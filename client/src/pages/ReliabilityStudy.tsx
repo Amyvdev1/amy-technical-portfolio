@@ -55,7 +55,7 @@ const studies = {
 
 export default function ReliabilityStudy() {
   const [, params] = useRoute("/projects/:slug");
-  const slug = params?.slug === "olostep-integration-reliability-lab" ? params.slug : "webhook-trust-lab";
+  const slug = params?.slug === "olostep-integration-reliability-lab" ? "olostep-integration-reliability-lab" : "webhook-trust-lab";
   const study = studies[slug];
   const base = `/project-media/${slug}/`;
   useEffect(() => {

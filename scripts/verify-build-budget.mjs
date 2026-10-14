@@ -12,9 +12,9 @@ if (!existsSync(assetsDir) || !existsSync(indexPath)) {
 }
 
 const budgets = {
-  // Two case studies share one lazy route (~8 KiB raw / 3.2 KiB gzip).
-  // This aggregate allowance does not change the initial-page budget below.
-  ".js": { raw: 310 * 1024, gzip: 100 * 1024, label: "JavaScript" },
+  // Case studies and the three curated paths are separate lazy routes.
+  // The paths add ~8 KiB raw / 3.3 KiB gzip; initial-page limits stay unchanged.
+  ".js": { raw: 320 * 1024, gzip: 105 * 1024, label: "JavaScript" },
   ".css": { raw: 180 * 1024, gzip: 45 * 1024, label: "CSS" },
 };
 

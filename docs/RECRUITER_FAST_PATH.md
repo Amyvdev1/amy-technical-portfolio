@@ -6,6 +6,14 @@ This is the shortest route through Amy Villa’s public work for a product-engin
 **Work format:** Remote  
 **Languages:** Native English + Spanish
 
+## Choose a focused review path
+
+- **[API Documentation](https://amy-villa-signal-gallery.vercel.app/explore/api-documentation):** first request → recovery → contract review.
+- **[Security Writing](https://amy-villa-signal-gallery.vercel.app/explore/security-writing):** reproducible claim → threat model and evidence → tool permissions.
+- **[Developer Education](https://amy-villa-signal-gallery.vercel.app/explore/developer-education):** small runnable lessons → guided recovery → synthetic onboarding analysis.
+
+Each path includes a sequence, public source links, expected evidence, and implementation boundaries. The homepage and engineering-evidence page both link to these paths. The broader product-engineering route follows below.
+
 ## 1. Start with ForgeFlow
 
 **[ForgeFlow AI Automation](https://github.com/Amyvdev1/forgeflow-ai-automation)** is the strongest first sample because it connects product behavior to system behavior.
