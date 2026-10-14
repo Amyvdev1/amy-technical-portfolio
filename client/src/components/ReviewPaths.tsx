@@ -24,7 +24,7 @@ const reviewPaths = [
 
 export default function ReviewPaths() {
   return (
-    <section className="review-paths" aria-labelledby="review-paths-heading">
+    <section id="review-paths" className="review-paths" aria-labelledby="review-paths-heading">
       <div className="path-section-heading">
         <p className="path-eyebrow">THREE WAYS INTO THE WORK</p>
         <h2 id="review-paths-heading">

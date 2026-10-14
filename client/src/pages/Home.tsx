@@ -217,7 +217,7 @@ export default function Home() {
                 <p>{scene.detail}</p>
                 {activeScene === 0 && (
                   <div className="hero-actions career-evidence-actions">
-                    <a href="#work" className="button-primary">VIEW TECHNICAL WORK <MoveRight size={16} /></a>
+                    <a href="#review-paths" className="button-primary">VIEW TECHNICAL WORK <MoveRight size={16} /></a>
                     <Link href="/recruiter-proof" className="button-quiet">REVIEW ENGINEERING EVIDENCE <ArrowUpRight size={15} /></Link>
                     <a href="https://github.com/Amyvdev1" target="_blank" rel="noreferrer" className="button-quiet">EXPLORE GITHUB <Github size={15} /></a>
                   </div>
