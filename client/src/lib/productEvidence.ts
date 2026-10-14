@@ -401,6 +401,24 @@ export const publicProjectEvidence: readonly PublicProjectEvidence[] = [
   ...developerTools,
   ...decisionSystems,
   ...flagshipProjects,
+  {
+    index: "15", slug: "webhook-trust-lab", name: "Webhook Trust Lab",
+    type: "APPLICATION SECURITY + DEVELOPER EDUCATION",
+    stack: "Python · HMAC · SQLite · Deterministic tests",
+    detail: "A runnable security case study following signed webhook bytes through freshness, duplicate detection, and a transactional local effect. Includes a threat model, recorded evidence, and a guided video walkthrough.",
+    source: "https://github.com/Amyvdev1/webhook-trust-lab",
+    action: "Inspect Webhook Trust Lab",
+    signals: ["Raw-body authentication", "Signed timestamp window", "Persistent event identity", "Rollback + concurrency tests", "39 local tests", "Walkthrough with original music"],
+  },
+  {
+    index: "16", slug: "olostep-integration-reliability-lab", name: "Olostep Integration Reliability Lab",
+    type: "API RELIABILITY + DEVELOPER EXPERIENCE",
+    stack: "Python · REST · SQLite · Windows/Linux CI",
+    detail: "An independent asynchronous integration workflow covering polling, pagination, retrieval, partial results, and deliberate recovery. Nine offline scenarios accompany one documented two-URL live compatibility check.",
+    source: "https://github.com/Amyvdev1/olostep-integration-reliability-lab",
+    action: "Inspect the Olostep reference workflow",
+    signals: ["Bounded polling + read retries", "Checkpoint-based recovery", "Partial-result reconciliation", "Nine offline scenarios", "Sanitized live evidence", "Recorded walkthrough"],
+  },
 ] as const;
 
 export const liveReviewTopics: readonly LiveReviewTopic[] = [

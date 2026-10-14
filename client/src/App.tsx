@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 const RecruiterProof = lazy(secondaryRouteLoaders.recruiterProof);
 const SignalLab = lazy(secondaryRouteLoaders.signalLab);
 const DemoPage = lazy(secondaryRouteLoaders.demoPage);
+const ReliabilityStudy = lazy(secondaryRouteLoaders.reliabilityStudy);
 const NotFound = lazy(secondaryRouteLoaders.notFound);
 
 function RouteLoading() {
@@ -28,6 +29,8 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/recruiter-proof" component={RecruiterProof} />
         <Route path="/signal-lab" component={SignalLab} />
+        <Route path="/projects/webhook-trust-lab" component={ReliabilityStudy} />
+        <Route path="/projects/olostep-integration-reliability-lab" component={ReliabilityStudy} />
         <Route path="/projects/:slug" component={DemoPage} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
