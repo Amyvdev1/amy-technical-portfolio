@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>When Completed Is Not Complete — Amy V</title><meta name="author" content="Amy V"><style>body{margin:0;background:#f6f4ef;color:#172c42;font:18px/1.8 system-ui,sans-serif}header,main,footer{max-width:800px;margin:auto;padding:28px}header{border-bottom:1px solid #bac5d1;font:13px/1.6 system-ui}a{color:#20558e;text-underline-offset:4px}h1{font:clamp(34px,5vw,58px)/1.12 Georgia,serif;letter-spacing:-1px}h2{font:30px/1.25 Georgia,serif;margin-top:48px}h3{font-size:22px}pre{background:#102337;color:#e2efff;padding:20px;overflow:auto;font:14px/1.7 monospace}code{overflow-wrap:anywhere}table{display:block;overflow:auto;border-collapse:collapse;font-size:15px}td,th{padding:12px;border:1px solid #bec9d5;text-align:left}blockquote{margin:24px 0;padding:5px 24px;border-left:3px solid #397ab4}nav{display:flex;gap:20px;flex-wrap:wrap}img{max-width:100%}footer{border-top:1px solid #bac5d1;font-size:14px}*:focus-visible{outline:3px solid #bd8625;outline-offset:4px}@media(max-width:600px){body{font-size:17px}header,main,footer{padding:22px}h2{font-size:26px}}</style></head><body><header><nav><a href="/projects/olostep-integration-reliability-lab#articles">← Project &amp; walkthrough</a><a href="when-completed-is-not-complete.pdf">Read the designed PDF</a><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab">Source &amp; tests</a></nav></header><main><article><h1>When Completed Is Not Complete</h1>
+<h2>The last mile of an asynchronous API integration</h2>
+<p>Amy V | October 14, 2026</p>
+<p>A completed batch is a useful signal, but a consumer still has to establish what came back, what is missing, and whether the result is ready to use. An independent Olostep reference implementation turns those questions into explicit decisions.</p>
+<p>The result is only as trustworthy as the explanation of what remains unknown.</p>
+<h2>A status is not a dataset.</h2>
+<p>A developer submits a set of URLs, waits for a batch to finish, and sends the returned text into a downstream workflow. The integration looks successful. Yet there are several different things the application might have proved: that the service finished processing, that every expected item was accounted for, or that every source produced useful content. Treating these as one claim makes a convenient demo and a fragile explanation.</p>
+<p>I built the Olostep Integration Reliability Lab to keep those claims separate. It follows one narrow journey: known URLs become a batch; the client polls, enumerates completed and failed items, retrieves Markdown, and exports an evidence report. Olostep documents the underlying batch lifecycle. The additional outcome model and recovery rules are decisions made by this independent client, not new provider guarantees. [1, 2]</p>
+<h3>Three outcomes, three next steps</h3>
+<table>
+<thead>
+<tr>
+<th>Client outcome</th>
+<th>What it means</th>
+<th>What the reader should do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete</td>
+<td>Enumeration and reconciliation finished; all content passed the local check.</td>
+<td>Evaluate whether the content meets the downstream task.</td>
+</tr>
+<tr>
+<td>Partial</td>
+<td>Enumeration finished, but an item failed or content remains unresolved.</td>
+<td>Inspect the affected identities before accepting a subset.</td>
+</tr>
+<tr>
+<td>Incomplete</td>
+<td>The client could not finish determining the result.</td>
+<td>Preserve evidence and investigate or resume.</td>
+</tr>
+</tbody>
+</table>
+<p>The local content check is deliberately narrow: a nonempty Markdown string, without an unresolved hosted-content condition. It does not establish extraction accuracy, factual correctness, or relevance. A report can therefore be complete under the integration policy while still needing a separate content-quality review.</p>
+<blockquote>
+<p>Define what success means before teaching a developer how to print it.</p>
+</blockquote>
+<p>That distinction belongs in documentation as well as code. It gives a developer language for discussing a result with support, a teammate, or a customer without reducing every imperfect outcome to the same generic error.</p>
+<h2>Recover without creating uncertainty.</h2>
+<p>The most consequential retry happens before the client has a reliable identifier. If a creation request loses its response, the service may have accepted the work. This lab makes one creation attempt and exposes an ambiguous outcome instead of automatically submitting another batch. A local request ID would not make a repeated creation safe unless the endpoint supplied corresponding idempotency guarantees. [2]</p>
+<p>After acceptance, the CLI saves the batch ID, execution mode, and original item identities before polling. A checkpoint lets the client resume reads against existing work. It does not remove the crash window between remote acceptance and local persistence. The documentation makes that remaining uncertainty explicit.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Client policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Creation accepted</td>
+<td>Save the batch ID and original identity manifest.</td>
+</tr>
+<tr>
+<td>Creation outcome unknown</td>
+<td>Reconcile before attempting another creation.</td>
+</tr>
+<tr>
+<td>Polling budget expires</td>
+<td>Keep the resume ID and incomplete evidence.</td>
+</tr>
+<tr>
+<td>Transient read failure</td>
+<td>Retry within the attempt limit and remaining deadline.</td>
+</tr>
+<tr>
+<td>Repeated cursor or wrong identities</td>
+<td>Stop; do not present the inventory as verified.</td>
+</tr>
+<tr>
+<td>Usage is null</td>
+<td>Keep usage unknown; do not infer zero cost.</td>
+</tr>
+</tbody>
+</table>
+<h3>Reconcile identities, not positions</h3>
+<p>In the recorded live run, page-2 arrived before page-1. Both identities matched the submitted manifest. Matching by position would have assigned content incorrectly; matching only counts would not have detected a different pair of items. The first URL was also normalized with a trailing slash. Stable custom IDs avoided dependence on either order or raw URL equality. [3]</p>
+<p>This is a small observation with a useful teaching consequence: show the original identities alongside the returned inventory. Developers should see why the client trusts the mapping, rather than simply receiving a green completion indicator.</p>
+<h2>A useful sample makes its limits visible.</h2>
+<p>The project contains 42 offline tests and nine reproducible scenarios. A fresh local run on October 14, 2026 passed all 42 tests. Those tests exercise client behavior, including partial completion, bounded retries, checkpoint recovery, cursor loops, and unknown usage. They are not evidence that Olostep experienced those failures. [2, 4]</p>
+<p>A separate, previously recorded live check used one batch containing two public URLs. It observed four polling reads, real cursor traversal, two nonempty Markdown retrievals, and no retries or failed or unresolved items. Batch information returned null usage fields. That establishes compatibility for this limited lifecycle; it supplies neither a billing measurement nor a production reliability benchmark. The walkthrough remains an offline demonstration. [3]</p>
+<h3>What this suggests for developer documentation</h3>
+<p>The most useful companion to an endpoint reference is a guide that helps readers make decisions after their first successful request. For this workflow, that means naming partial results, preserving a resume path, checking item identities, and explaining when a retry would increase uncertainty. The existing reference remains the source for the API contract; the companion teaches a consumer policy around it.</p>
+<p>I would start with this bounded tutorial and ask an unfamiliar developer to explain a partial result and recover from an interrupted read. Their hesitation would guide the next revision. Faster onboarding and lower support demand are plausible goals, not outcomes measured by this project. The immediate contribution is concrete: working examples whose explanations, tests, and evidence agree.</p>
+<ul>
+<li>
+<p><a href="https://docs.olostep.com/features/batches">1. Olostep batch workflow - public documentation reviewed October 14, 2026.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab/blob/0d989efe3c8e5cfd4fdcbea99dccd867caa22ab2/lab/runner.py">2. Reference implementation and recovery model - reviewed revision 0d989ef.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab/blob/0d989efe3c8e5cfd4fdcbea99dccd867caa22ab2/docs/live-compatibility.md">3. Bounded live-compatibility record - October 14, 2026.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab/blob/0d989efe3c8e5cfd4fdcbea99dccd867caa22ab2/docs/verification.md">4. Offline test suite and verification record.</a></p>
+</li>
+</ul>
+<p>Independent portfolio work. Not commissioned by, affiliated with, or endorsed by Olostep.</p></article></main><footer>Independent technical writing by Amy V · Evidence reviewed October 14, 2026. <a href="https://medium.com/@amyv.dev">More writing on Medium</a></footer></body></html>

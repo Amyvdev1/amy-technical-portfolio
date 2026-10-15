@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>From Signed Request to Safe Processing — Amy V</title><meta name="author" content="Amy V"><style>body{margin:0;background:#f6f4ef;color:#172c42;font:18px/1.8 system-ui,sans-serif}header,main,footer{max-width:800px;margin:auto;padding:28px}header{border-bottom:1px solid #bac5d1;font:13px/1.6 system-ui}a{color:#20558e;text-underline-offset:4px}h1{font:clamp(34px,5vw,58px)/1.12 Georgia,serif;letter-spacing:-1px}h2{font:30px/1.25 Georgia,serif;margin-top:48px}h3{font-size:22px}pre{background:#102337;color:#e2efff;padding:20px;overflow:auto;font:14px/1.7 monospace}code{overflow-wrap:anywhere}table{display:block;overflow:auto;border-collapse:collapse;font-size:15px}td,th{padding:12px;border:1px solid #bec9d5;text-align:left}blockquote{margin:24px 0;padding:5px 24px;border-left:3px solid #397ab4}nav{display:flex;gap:20px;flex-wrap:wrap}img{max-width:100%}footer{border-top:1px solid #bac5d1;font-size:14px}*:focus-visible{outline:3px solid #bd8625;outline-offset:4px}@media(max-width:600px){body{font-size:17px}header,main,footer{padding:22px}h2{font-size:26px}}</style></head><body><header><nav><a href="/projects/webhook-trust-lab#articles">← Project &amp; walkthrough</a><a href="from-signed-request-to-safe-processing.pdf">Read the designed PDF</a><a href="https://github.com/Amyvdev1/webhook-trust-lab">Source &amp; tests</a></nav></header><main><article><h1>From Signed Request to Safe Processing</h1>
+<h2>An evidence-led review of a webhook consumer's trust boundaries</h2>
+<p>By Amy V. | Independent application-security research brief</p>
+<h2>Research question</h2>
+<p>What must a receiver establish before an authenticated webhook changes application state?</p>
+<p>The question deliberately begins after a request reaches the application. It avoids implying that one verifier can secure DNS, TLS, the sender's infrastructure, the shared secret, and the downstream business system. The reference implementation examines message integrity, freshness, event identity, and one local transaction. Each conclusion is tied to a defined behavior rather than a general security score.</p>
+<h2>System and adversary</h2>
+<p>A fictional sender emits <code>invoice.paid</code> events. The receiver knows one shared key and owns one SQLite database. An observer can capture and replay a request. An active adversary can alter the request but cannot recompute its HMAC without the key. Separately, a legitimate sender can retry or reuse an ID incorrectly. The latter is modeled with a correctly signed conflicting payload.</p>
+<p>The primary asset is the receiver's state: the event record and the simulated business effect. Secondary assets include the secret and the meaning of diagnostic output. An ambiguous success label is itself a reliability risk because it can make an incomplete action look complete to an operator.</p>
+<p>No live sender, public endpoint, or real invoice system was tested. The fixture key is deliberately public test data. A compromised key, malicious authorized sender, or incorrectly authorized business operation is not prevented by the demonstrated HMAC check.</p>
+<h2>Trust boundaries</h2>
+<p>The first boundary is between raw input and an authenticated message. The receiver restricts timestamp and event-ID formats, caps the body at 64 KiB, and compares the expected signature before JSON parsing. The second boundary is time: the signed timestamp must fall within the stated interval. The third is meaning: strict JSON and the fictional business schema reject inputs that are authentic but unusable.</p>
+<p>The final boundary is state. The SQLite consumer inspects the event identity and digest, then commits its event record and local simulated effect together. This is where the design moves beyond a stateless cryptographic example.</p>
+<h2>Observation 1: valid authentication is repeatable</h2>
+<p>The same valid fixture passes the stateless verifier twice. This is the expected result for unchanged bytes under the same key. It reproduces a familiar failure mode in integration design; it is not a new cryptographic vulnerability.</p>
+<p>The freshness tests use signatures calculated for their old and future timestamps. Consequently, an <code>outside_window</code> result actually tests a time decision on an authenticated message. Separate tampering tests alter signed metadata without re-signing and expect authentication failure.</p>
+<p>The distinction matters for diagnostic writing. “Invalid webhook” conceals which boundary failed. Internally, structured reason codes make the test and its intended control inspectable. A deployed service would still need to decide which diagnostics to expose to an untrusted caller and which to retain in protected logs.</p>
+<h2>Observation 2: event identity needs a content contract</h2>
+<p>An identical event ID and body digest produces <code>duplicate_completed</code> after an earlier local completion. The same ID with changed, correctly signed content produces <code>event_conflict</code>. The original database record is preserved.</p>
+<p>The implementation intentionally treats byte changes as content changes. That includes JSON whitespace changes under the same ID. Whether that is appropriate for a provider depends on its stable-payload and retry contract; the lab does not assume all vendors preserve identical serialization. A real adapter must define identity and conflict semantics before adopting this policy.</p>
+<p>One database is scoped to one sender. Another sender cannot safely share the same event-ID namespace without an authenticated namespace extension. Likewise, two different event IDs for one business object remain two events. Domain-level uniqueness is an additional rule, not a property of event-ID deduplication.</p>
+<h2>Observation 3: completion must be earned</h2>
+<p>The event and effect rows share an SQLite transaction. Failure injection before the effect and after its insertion verifies that an exception before commit leaves neither row committed. A subsequent attempt can then complete. Sixteen simultaneous deliveries produce one local effect in the tested execution.</p>
+<p>The important qualification is “local.” The effect is an SQLite row, so it participates in the transaction. Sending an email or creating a payment would cross another system boundary. This implementation does not make that remote operation atomic with its local event record.</p>
+<pre><code class="language-text">Authentication -&gt; Freshness -&gt; Schema -&gt; Transaction
+                                          | event row
+                                          | local effect row
+                                          + commit together
+
+Remote API call: outside the demonstrated transaction
+</code></pre>
+<p>Reopening a consumer object is tested. Operating-system crashes, power interruption, distributed workers, and storage faults are not established by those tests. SQLite's own durability behavior has filesystem and hardware assumptions; the local experiment should not be presented as independently validating them.</p>
+<h2>Evidence map</h2>
+<ul>
+<li>Exact bytes: whitespace and key-order tampering tests.</li>
+<li>Verification order: parser spy test for an invalid signature.</li>
+<li>Freshness: validly signed stale/future fixtures and inclusive boundary tests.</li>
+<li>Parsing: malformed UTF-8, duplicate keys, non-object JSON, and non-finite constants.</li>
+<li>Identity: identical retry, conflicting reuse, and newly signed retry.</li>
+<li>State: reopened database, simultaneous connections, and rollback around the local effect.</li>
+</ul>
+<p>Run <code>python -m unittest -v</code> and <code>python demo.py</code>. The evidence directory records the tested source hashes, environment, raw test output, and scenario outcomes. This map describes the implemented checks; it does not imply exhaustive security coverage.</p>
+<h2>Questions before a provider integration</h2>
+<p>Ask what bytes the provider signs, whether timestamps are regenerated on retry, and how event IDs are scoped. Establish whether identical logical events can have different serialization. Determine the maximum retry horizon, skew allowance, and consequences of deleting old records. Identify the business effect that must be idempotent and what evidence exists after an ambiguous response.</p>
+<p>Then test those answers against the provider's current contract. The custom newline-delimited envelope in this lab is intentionally explicit; it is not a drop-in adapter or RFC 9421 implementation.</p>
+<h2>Conclusion</h2>
+<p>The useful finding is a separation of responsibilities. A signature establishes message integrity under a shared-key assumption. A timestamp constrains age. An event record supplies history. A transaction defines which local changes succeed together. None substitutes for authorization or establishes exactly-once remote behavior.</p>
+<p>This separation is also a writing method: state the boundary, reproduce the behavior, identify the remaining risk, and tell the reader what decision to make next.</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html">OWASP Webhook Security Cheat Sheet</a></li>
+<li><a href="https://docs.python.org/3/library/hmac.html">Python hmac documentation</a></li>
+<li><a href="https://www.sqlite.org/lang_transaction.html">SQLite transactions</a></li>
+<li><a href="https://www.sqlite.org/atomiccommit.html">SQLite atomic commit and assumptions</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9421.html">RFC 9421: HTTP Message Signatures</a></li>
+</ul></article></main><footer>Independent technical writing by Amy V · Evidence reviewed October 14, 2026. <a href="https://medium.com/@amyv.dev">More writing on Medium</a></footer></body></html>

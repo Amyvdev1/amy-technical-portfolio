@@ -1,0 +1,154 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Document the Decision — Amy V</title><meta name="author" content="Amy V"><style>body{margin:0;background:#f6f4ef;color:#172c42;font:18px/1.8 system-ui,sans-serif}header,main,footer{max-width:800px;margin:auto;padding:28px}header{border-bottom:1px solid #bac5d1;font:13px/1.6 system-ui}a{color:#20558e;text-underline-offset:4px}h1{font:clamp(34px,5vw,58px)/1.12 Georgia,serif;letter-spacing:-1px}h2{font:30px/1.25 Georgia,serif;margin-top:48px}h3{font-size:22px}pre{background:#102337;color:#e2efff;padding:20px;overflow:auto;font:14px/1.7 monospace}code{overflow-wrap:anywhere}table{display:block;overflow:auto;border-collapse:collapse;font-size:15px}td,th{padding:12px;border:1px solid #bec9d5;text-align:left}blockquote{margin:24px 0;padding:5px 24px;border-left:3px solid #397ab4}nav{display:flex;gap:20px;flex-wrap:wrap}img{max-width:100%}footer{border-top:1px solid #bac5d1;font-size:14px}*:focus-visible{outline:3px solid #bd8625;outline-offset:4px}@media(max-width:600px){body{font-size:17px}header,main,footer{padding:22px}h2{font-size:26px}}</style></head><body><header><nav><a href="/projects/olostep-integration-reliability-lab#articles">← Project &amp; walkthrough</a><a href="document-the-decision.pdf">Read the designed PDF</a><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab">Source &amp; tests</a></nav></header><main><article><h1>Document the Decision</h1>
+<h2>Turning an API reliability lab into developer education</h2>
+<p>Amy V | October 14, 2026</p>
+<p>An endpoint reference answers what a request accepts and returns. A companion tutorial can teach what a developer should do when the workflow is partial, interrupted, or uncertain. This article proposes a practical teaching and review process around an existing Olostep reference project.</p>
+<p>A useful tutorial leaves the reader able to make the next decision without guessing.</p>
+<h2>Choose a journey small enough to finish.</h2>
+<p>A technical article can be correct line by line and still leave the reader unable to finish a task. The missing ingredient is often a decision: which workflow to choose, what an unexpected result means, or when it is safe to continue. For developer education, I would organize the material around those moments rather than reproduce an endpoint catalogue.</p>
+<p>The Olostep Integration Reliability Lab starts with known public URLs and follows them through an asynchronous batch. This removes source discovery from the first lesson. Finding the right pages and processing a known list are different problems; combining them would make a failure harder for a new reader to diagnose. Olostep already documents batching and related capabilities. This is a proposed companion learning path, not a claim that its documentation is absent or defective. [1]</p>
+<h3>A learning objective a reader can demonstrate</h3>
+<p>After the tutorial, a developer should be able to account for every expected item, explain a partial result, and resume a known operation without automatically recreating it. That objective is more useful than "understand the API": it describes observable behavior and tells the author what the exercise must contain.</p>
+<table>
+<thead>
+<tr>
+<th>Reader question</th>
+<th>Teaching artifact</th>
+<th>Evidence to inspect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Did every source return?</td>
+<td>An identity-reconciliation explanation.</td>
+<td>Expected, observed, missing, and unexpected IDs.</td>
+</tr>
+<tr>
+<td>Can I try again?</td>
+<td>A creation-versus-read decision table.</td>
+<td>Recorded attempt policy and retained batch ID.</td>
+</tr>
+<tr>
+<td>Why is content missing?</td>
+<td>A partial-result walkthrough.</td>
+<td>Failed or unresolved item and next action.</td>
+</tr>
+<tr>
+<td>Was this a live result?</td>
+<td>A visible evidence label.</td>
+<td>Fixture mode or bounded live report.</td>
+</tr>
+</tbody>
+</table>
+<p>This table also defines an editorial test. If a page provides an impressive diagram but cannot answer one of these questions, the diagram is not doing enough work. If a code snippet only prints success, it needs either a narrower promise or a richer explanation of the result.</p>
+<blockquote>
+<p>Teach one complete journey, then add breadth where reader evidence justifies it.</p>
+</blockquote>
+<h2>Teach the failure before it becomes a ticket.</h2>
+<p>I would publish the learning path in three layers. First, a short orientation describes the task and evidence boundaries. Second, an executable tutorial leads from a partial fixture to checkpoint recovery. Third, a reference section explains individual errors and links to the provider contract. A reader can choose the depth needed without losing the underlying model.</p>
+<h3>A support answer inside the tutorial</h3>
+<p>A vague message such as "something went wrong" forces the developer to reconstruct the system. A useful explanation names the observation, its implication, and the next action. The following is proposed documentation copy for the existing timeout fixture; it is not a report of a live Olostep incident. [2]</p>
+<blockquote>
+<p>The polling budget expired before this client could finish verifying the batch. Keep the saved checkpoint and resume reads against that batch. Do not submit another batch solely because this read timed out. The current report is incomplete, not proof that the remote operation failed.</p>
+</blockquote>
+<p>That paragraph works because each sentence resolves a different uncertainty. It identifies a local deadline, limits the inference about the provider, preserves an existing operation, and explains the report status. It gives the reader a safe next move without burying the cause in implementation details.</p>
+<h3>Match the format to the question</h3>
+<p>The article explains why counts are insufficient. The runnable example shows the manifest and returned IDs. The walkthrough makes a partial result visible. A troubleshooting entry provides a concise recovery instruction. These are different presentations of one verified behavior, not four unrelated content ideas.</p>
+<p>I would keep the walkthrough in fixture mode so reviewers can replay a failure without credentials or credits. The article would link separately to the recorded live check. A polished demonstration should never require the reader to infer whether its behavior was simulated.</p>
+<h2>Give every important claim a home.</h2>
+<p>Technical accuracy is easier to maintain when each material claim points to a source or an executable assertion. For this project, I separate provider documentation, observed live responses, fixture behavior, and client policy. Unknowns remain a fifth category rather than being forced into one of the others. [3, 4]</p>
+<table>
+<thead>
+<tr>
+<th>Evidence category</th>
+<th>Example</th>
+<th>Permitted claim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documented</td>
+<td>Batch items and retrieval IDs in the public reference.</td>
+<td>The reference describes this interface.</td>
+</tr>
+<tr>
+<td>Observed live</td>
+<td>Two URLs retrieved; returned order differed.</td>
+<td>This bounded run behaved this way.</td>
+</tr>
+<tr>
+<td>Fixture-tested</td>
+<td>Cursor loop or transient read failure.</td>
+<td>The client handled this synthetic condition.</td>
+</tr>
+<tr>
+<td>Client policy</td>
+<td>One creation attempt and bounded read retries.</td>
+<td>This implementation chooses this behavior.</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>Null usage and untested production delivery.</td>
+<td>No measured cost or production guarantee follows.</td>
+</tr>
+</tbody>
+</table>
+<p>These labels are editorial tools as much as interface labels. They prevent a synthetic latency number from becoming a performance claim, or a successful local deduplication test from becoming a promise about remote side effects. They also make review faster: an engineer can challenge the source of a statement without first debating its wording.</p>
+<h3>A concrete review loop with engineers</h3>
+<p>For a new guide, I would submit the intended reader outcome, the runnable example, and a short claim-to-evidence table together. An engineer reviews contract accuracy and failure boundaries. The writer checks terminology, sequence, and whether each error has an actionable next step. A final clean run confirms that the published commands still produce the described result.</p>
+<p>The reference includes 42 offline tests, but a passing suite does not automatically validate every paragraph. Editorial review still needs to catch outdated names, incorrect test counts, links to earlier revisions, and claims that go beyond the fixture. Record the reviewed revision with the writing sample so a later code change does not silently invalidate the explanation. Contract changes and client-policy changes should trigger separate review questions.</p>
+<p>For future maintenance, I would propose a small documentation check for commands, expected report fields, and link targets. That automation is a recommendation, not a new CI capability claimed by this writing sample.</p>
+<h2>Measure whether the reader can recover.</h2>
+<p>Page views can show reach, but they do not establish comprehension. The next useful experiment would be a small formative study with developers unfamiliar with the project. Give them the same offline scenario and ask them to explain the result and choose the next action. Record uncertainty as well as completion. No such study has been performed for this sample.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Observable measure</th>
+<th>Interpretation boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explain a partial result</td>
+<td>Correctly identify failed and unresolved items.</td>
+<td>Shows understanding in this exercise only.</td>
+</tr>
+<tr>
+<td>Resume after timeout</td>
+<td>Use the existing checkpoint without new creation.</td>
+<td>Does not establish production recovery skill.</td>
+</tr>
+<tr>
+<td>Interpret null usage</td>
+<td>State that cost is unknown.</td>
+<td>Does not validate billing or account balance.</td>
+</tr>
+<tr>
+<td>Locate supporting evidence</td>
+<td>Find the live report and distinguish fixtures.</td>
+<td>Shows discoverability, not general trust.</td>
+</tr>
+</tbody>
+</table>
+<p>A first study could involve a few participants and short think-aloud sessions. Keep the task and environment stable; record where people hesitate, whether they need a hint, and which instruction resolves the hesitation. Report raw observations rather than treating a small sample as statistically representative. If a revised guide is compared later, account for learning effects from repeating the same task.</p>
+<h3>A contribution that can be reviewed today</h3>
+<p>The immediate package is already concrete: working source, a reproducible offline tutorial, a bounded live-compatibility record, and a short walkthrough. The proposed study would evaluate the teaching, not rescue an unfinished implementation. [2, 4, 5]</p>
+<p>For Olostep, this is the contribution I would want to make: connect the API contract to the decisions developers face when operating an integration. Start with a specific journey, make uncertainty legible, give readers an executable recovery path, and improve the explanation using evidence from their experience. That approach supports technical writing and developer education without claiming support savings or adoption before measuring either.</p>
+<ul>
+<li>
+<p><a href="https://docs.olostep.com/features/batches">1. Olostep batch workflow - provider documentation.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab">2. Local quickstart, fixture modes, and recovery commands.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab/blob/0d989efe3c8e5cfd4fdcbea99dccd867caa22ab2/docs/reliability-model.md">3. Reference reliability model and evidence vocabulary.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Amyvdev1/olostep-integration-reliability-lab/blob/0d989efe3c8e5cfd4fdcbea99dccd867caa22ab2/docs/live-compatibility.md">4. Bounded live-compatibility record and untested areas.</a></p>
+</li>
+<li>
+<p><a href="https://amy-villa-signal-gallery.vercel.app/projects/olostep-integration-reliability-lab">5. Portfolio overview and recorded fixture walkthrough.</a></p>
+</li>
+</ul>
+<p>Independent portfolio work. Not commissioned by, affiliated with, or endorsed by Olostep.</p></article></main><footer>Independent technical writing by Amy V · Evidence reviewed October 14, 2026. <a href="https://medium.com/@amyv.dev">More writing on Medium</a></footer></body></html>
